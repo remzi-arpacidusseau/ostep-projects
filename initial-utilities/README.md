@@ -76,6 +76,31 @@ if (fp == NULL) {
 }
 ```
 
+A couple of points here. First, note that **fopen()** takes two arguments: the
+*name* of the file and the *mode*. The latter just indicates what we plan to
+do with the file. In this case, because we wish to read the file, we pass "r"
+as the second argument. Read the man pages to see what other options are
+available. 
+
+Second, note the *critical* checking of whether the **fopen()** actually
+succeeded. This is not Java where an exception will be thrown when things goes
+wrong; rather, it is C, and it is expected (in good programs, you know, the
+only kind you'd want to write) that you always will check if the call
+succeeded. Reading the man page tells you the details of what is returned when
+an error is encountered; in this case, the macOS man page says:
+
+```
+Upon successful completion fopen(), fdopen(), freopen() and fmemopen() return
+a FILE pointer.  Otherwise, NULL is returned and the global variable errno is
+set to indicate the error. 
+```
+
+You can use the functions **perror()** or **strerror()** to print out more
+about *why* the error occurred; learn about those on your own (using ... you
+guessed it ... the man pages!).
+
+
+
 
 
 
