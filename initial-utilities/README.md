@@ -127,7 +127,7 @@ To print out file contents, just use **printf()**. For example, after reading
 in a line with **fgets()** into a variable **buffer**, you can just print out
 the buffer as follows:
 
-```
+```c
 printf("%s", buffer);
 ```
 
@@ -143,30 +143,28 @@ file (thus indicating you no longer need to read from it).
 
 
 
-### my-cat: Error Conditions
+### my-cat: Details
 
-There are XXX error conditions you should worry about when running **my-cat**.
+* Your program **my-cat** can be invoked with one or more files on the command
+  line; it should just print out each in turn.
 
+* If *no files* are specified on the command line, **my-cat** should instead
+  read from *standard input*. That is, you can read from the already opened
+  FILE pointer called **stdin** instead of reading from **fp** that you got by
+  opening a file. Note: you do not need to open anything in this case.
 
-exit(1).
+* If the program tries to **fopen()** a file and fails, it should print the
+  exact message "my-cat: cannot open file" and exit with status code 1.
 
-
-### my-cat: What To Turn In
-
-Just turn in the single source file, **my-cat.c**. To grade this, we will
-compile it as follows:
-
-```
-prompt> gcc -o my-cat my-cat.c -Wall -Werror
-```
-
-If your code has warnings of any kind, it will not compile, and thus will not
-pass any tests.
-
-
+* In all other cases, **my-cat** should exit with status code 0, usually by
+  returning a 0 from **main()**.
 
 
 ## my-grep
+
+The second utility you will build is called **my-grep**. 
+
+
 
 ## my-zip and my-unzip
 
