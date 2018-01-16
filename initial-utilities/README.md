@@ -31,7 +31,25 @@ can call to implement your program. Learn more about the C library
 [here](https://en.wikipedia.org/wiki/C_standard_library) and perhaps
 [here](https://www-s.acm.illinois.edu/webmonkeys/book/c_guide/)<sup>[1](#myfootnote1)</sup>.  
 
+For this project, we recommend using the following routines to do file input
+and output: **fopen()**, **fgets()**, and **fclose()**. Whenever you use a new
+function like this, the first thing you should do is read about it -- how else
+will you learn to use it properly?
 
+On UNIX systems, the best way to read about such functions is to use what are
+called the **man** pages (short for **manual**). In our HTML/web-driven world,
+the man pages feel a bit antiquated, but they are useful and informative and
+generally quite easy to use.
+
+To access the man page for **fopen()**, for example, just type the following
+at your UNIX shell prompt: 
+```
+prompt> man fopen
+```
+
+
+
+The **fopen()** function opens a file 
 
 
 
