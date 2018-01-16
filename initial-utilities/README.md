@@ -19,6 +19,12 @@ UNIX-based systems (e.g., Linux or macOS), how to use an editor such as emacs,
 and of course a basic understanding of C programming. If you **do not** have
 these skills already, this is not the right place to start.
 
+Summary of what gets turned in:
+* A bunch of single .c files for each of the utilities below: **my-cat.c**,
+  **my-grep.c**, **my-zip.c**, **my-unzip.c**, **my-sort.c**, **my-uniq.c**.
+* Each should compile successfully when compiled with the **-Wall** and
+**-Werror** flags.
+
 ## my-cat
 
 The program **my-cat** is a simple program. Generally, it reads a file as
