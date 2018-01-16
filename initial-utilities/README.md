@@ -8,8 +8,16 @@ you'll be implementing **my-cat**.
 
 Objectives:
 * Re-familiarize yourself with the C programming language
-* Learn a little about how UNIX utilities are implemented
+* Re-familiarize yourself with a shell / terminal / command-line of UNIX
 * Learn (as a side effect) how to use a proper code editor such as emacs
+* Learn a little about how UNIX utilities are implemented
+
+While the project focuses upon writing simple C programs, you can see from the
+above that even that requires a bunch of other previous knowledge, including a
+basic idea of what a shell is and how to use the command line on some
+UNIX-based systems (e.g., Linux or macOS), how to use an editor such as emacs,
+and of course a basic understanding of C programming. If you **do not** have
+these skills already, this is not the right place to start.
 
 ## my-cat
 
@@ -47,9 +55,12 @@ at your UNIX shell prompt:
 prompt> man fopen
 ```
 
+Then, read! Reading man pages effectively takes practice; why not start
+learning now?
 
-
-The **fopen()** function opens a file 
+We will also give a simple overview here. The **fopen()** function "opens" a
+file, which is a common way in UNIX systems to begin the process of file
+access. 
 
 
 
