@@ -48,10 +48,14 @@ can call to implement your program. Learn more about the C library
 
 ### Footnotes
 
+
+<small>
 <a name="myfootnote1">1</a>: Unfortunately, there is a lot to learn about the
 C library, but at some point, you've just got to **read documentation** to
 learn what is available. Why not now, when you are young? Or, if you are old,
 why not now, before it's ... ahem ... too late?
+
+</small>
 
 
 
