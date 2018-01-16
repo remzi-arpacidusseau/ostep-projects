@@ -24,6 +24,7 @@ Summary of what gets turned in:
   **my-grep.c**, **my-zip.c**, **my-unzip.c**, **my-sort.c**, **my-uniq.c**.
 * Each should compile successfully when compiled with the **-Wall** and
 **-Werror** flags.
+* Each should (hopefully) pass the tests we supply to you.
 
 ## my-cat
 
