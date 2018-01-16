@@ -22,14 +22,16 @@ these skills already, this is not the right place to start.
 ## my-cat
 
 The program **my-cat** is a simple program. Generally, it reads a file as
-specified by the user and prints its contents. A typical usage is as follows: 
+specified by the user and prints its contents. A typical usage is as follows,
+in which the user wants to see the contents of main.c, and thus types: 
 
 ```
-my-cat main.c
+prompt> my-cat main.c
+#include <stdio.h>
+...
 ```
 
-In this case, **my-cat** will read the file **main.c** and print out its
-contents. 
+As shown, **my-cat** reads the file **main.c** and prints out its contents. 
 
 You'll need to learn how to use a few library routines from the C standard
 library (often called **libc**) to implement the source code for this program,
@@ -60,7 +62,23 @@ learning now?
 
 We will also give a simple overview here. The **fopen()** function "opens" a
 file, which is a common way in UNIX systems to begin the process of file
-access. 
+access. In this case, opening a file just gives you back a pointer to a
+structure of type **FILE**, which can then be passed to other routines to
+read, write, etc. 
+
+Here is a typical usage of **fopen()**:
+
+```c
+FILE *fp = fopen("main.c", "r");
+if (fp == NULL) {
+    printf("cannot open file\n");
+    exit(1);
+}
+```
+
+
+
+
 
 
 
