@@ -23,9 +23,15 @@ my-cat main.c
 In this case, **my-cat** will read the file **main.c** and print out its
 contents. 
 
-You'll need to learn how to use a few library routines from the C library to
-implement the source code for this program, which we'll assume is in a file
-called **my-cat.c**. 
+You'll need to learn how to use a few library routines from the C standard
+library (often called **libc**) to implement the source code for this program,
+which we'll assume is in a file called **my-cat.c**. All C code is
+automatically linked with the C library, which is full of useful functions you
+can call to implement your program. Learn more about the C library
+[here](https://en.wikipedia.org/wiki/C_standard_library) and perhaps
+[here](https://www-s.acm.illinois.edu/webmonkeys/book/c_guide/)<sup>[1](#myfootnote1)</sup>.  
+
+
 
 
 
@@ -38,6 +44,14 @@ called **my-cat.c**.
 
 ## my-uniq
 
+
+
+### Footnotes
+
+<a name="myfootnote1">1</a>: Unfortunately, there is a lot to learn about the
+C library, but at some point, you've just got to **read documentation** to
+learn what is available. Why not now, when you are young? Or, if you are old,
+why not now, before it's ... ahem ... too late?
 
 
 
