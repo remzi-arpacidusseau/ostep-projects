@@ -95,15 +95,66 @@ a FILE pointer.  Otherwise, NULL is returned and the global variable errno is
 set to indicate the error. 
 ```
 
-You can use the functions **perror()** or **strerror()** to print out more
-about *why* the error occurred; learn about those on your own (using ... you
-guessed it ... the man pages!).
+Thus, as the code above does, please check that **fopen()** does not return
+NULL before trying to use the FILE pointer it returns.
+
+Third, note that when the error case occurs, the program prints a message and
+then exits with error status of 1. In UNIX systems, it is traditional to
+return 0 upon success, and non-zero upon failure. Here, we will use 1 to
+indicate failure.
+
+
+
+Side note: if **fopen()** does fail, there are many reasons possible as to
+why.  You can use the functions **perror()** or **strerror()** to print out
+more about *why* the error occurred; learn about those on your own (using
+... you guessed it ... the man pages!).
+
+Once a file is open, there are many different ways to read from it. The one
+we're suggesting here to you is **fgets()**, which is used to get input from
+files, one line at a time. 
+
+XXX.
+
+To print out file contents, just use **printf()**. For example, after reading
+in a line with **fgets()** into a variable **buffer**, you can just print out
+the buffer as follows:
+
+```
+printf("%s", buffer);
+```
+
+Note that you should *not* add a newline (\\n) character to the printf(),
+because that would be changing the output of the file to have extra
+newlines. Just print the exact contents of the read-in buffer (which, of
+course, many include a newline).
+
+Finally, when you are done reading and printing, use **fclose()** to close the
+file (thus indicating you no longer need to read from it).
 
 
 
 
 
+### my-cat: Error Conditions
 
+There are XXX error conditions you should worry about when running **my-cat**.
+
+
+exit(1).
+
+
+### my-cat: What To Turn In
+
+Just turn in the single source file, **my-cat.c**. To grade this, we will
+compile it as follows:
+
+```
+prompt> gcc -o my-cat my-cat.c -Wall -Werror
+```
+
+If your code has warnings of any kind, it will not compile, and thus will not
+pass any tests.
 
 
 
