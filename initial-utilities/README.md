@@ -33,7 +33,7 @@ specified by the user and prints its contents. A typical usage is as follows,
 in which the user wants to see the contents of main.c, and thus types: 
 
 ```
-prompt> my-cat main.c
+prompt> ./my-cat main.c
 #include <stdio.h>
 ...
 ```
@@ -110,8 +110,6 @@ then exits with error status of 1. In UNIX systems, it is traditional to
 return 0 upon success, and non-zero upon failure. Here, we will use 1 to
 indicate failure.
 
-
-
 Side note: if **fopen()** does fail, there are many reasons possible as to
 why.  You can use the functions **perror()** or **strerror()** to print out
 more about *why* the error occurred; learn about those on your own (using
@@ -120,8 +118,6 @@ more about *why* the error occurred; learn about those on your own (using
 Once a file is open, there are many different ways to read from it. The one
 we're suggesting here to you is **fgets()**, which is used to get input from
 files, one line at a time. 
-
-XXX.
 
 To print out file contents, just use **printf()**. For example, after reading
 in a line with **fgets()** into a variable **buffer**, you can just print out
@@ -139,38 +135,122 @@ course, many include a newline).
 Finally, when you are done reading and printing, use **fclose()** to close the
 file (thus indicating you no longer need to read from it).
 
-
-
-
-
-### my-cat: Details
+**Details**
 
 * Your program **my-cat** can be invoked with one or more files on the command
-  line; it should just print out each in turn.
-
-* If *no files* are specified on the command line, **my-cat** should instead
-  read from *standard input*. That is, you can read from the already opened
-  FILE pointer called **stdin** instead of reading from **fp** that you got by
-  opening a file. Note: you do not need to open anything in this case.
-
-* If the program tries to **fopen()** a file and fails, it should print the
-  exact message "my-cat: cannot open file" and exit with status code 1.
-
-* In all other cases, **my-cat** should exit with status code 0, usually by
+  line; it should just print out each file in turn. 
+* In all non-error cases, **my-cat** should exit with status code 0, usually by
   returning a 0 from **main()**.
+* If *no files* are specified on the command line, **my-cat** should just exit
+  and return 0. Note that this is slightly different than the behavior of 
+  normal UNIX **cat** (if you'd like to, figure out the difference).
+* If the program tries to **fopen()** a file and fails, it should print the
+  exact message "my-cat: cannot open file" and exit with status code 1. 
+  If multiple files are specified on the command line, the files should
+  be printed out in order until the end of the file list is reached or   
+  an error opening a file is reached (at which point the error message
+  is printed and **my-cat** exits).
 
 
 ## my-grep
 
-The second utility you will build is called **my-grep**. 
+The second utility you will build is called **my-grep**, a variant of the UNIX
+tool **grep**. This tool looks through a file, line by line, trying to find a
+user-specified search term in the line. If a line has the word within it, the
+line is printed out, otherwise it is not. 
 
+Here is how a user would look for the term **foo** in the file **bar.txt**:
 
+```
+prompt> ./my-grep foo bar.txt
+this line has foo in it
+so does this foolish line; do you see where?
+even this line, which has barfood in it, will be printed.
+```
+
+**Details**
+
+* Your program **my-grep** is always passed a search term and zero or
+  more files to grep through. It should go through each line and see if
+  the search term is in it; if so, the line should be printed, and if not,
+  the line should be skipped.
+* The matching is case sensitive. Thus, if searching for **foo**, lines
+  with **Foo** will *not* match.
+* Lines can be arbitrarily long (that is, you may see many many characters
+  before you encounter a newline character, \\n). **my-grep** should work
+  as expected even with very long lines. 
+* If **my-grep** is passed no command-line arguments, it should print
+  "my-grep: searchterm [file ...]" and exit with status 1. 
+* If **my-grep** encounters a file that it cannot open, it should print
+  "my-grep: cannot open file" and exit with status 1. 
+* In all other cases, **my-grep** should exit with return code 0.
+* If a search term, but no file, is specified, **my-grep** should work,
+  but instead of reading from a file, **my-grep** should read from
+  *standard input*. Doing so is easy, because the file stream **stdin**
+  is already open; you can use **fgets()** (or similar routines) to
+  read from it.
 
 ## my-zip and my-unzip
 
-## my-sort
+The next tools you will build come in a pair, because one (**my-zip**) is a
+file compression tool, and the other (**my-unzip**) is a file decompression
+tool. 
 
-## my-uniq
+The type of compression used here is a simple form of compression called
+*run-length encoding* (*RLE*). RLE is quite simple: when you encounter **n**
+characters of the same type in a row, the compression tool (**my-zip**) will
+turn that into the number **n** and a single instance of the character.
+
+Thus, if we had a file with the following contents:
+```
+aaaaaaaaaabbbb
+```
+the tool would turn it (logically) into:
+```
+10a4b
+```
+
+However, the exact format of the compressed file is quite important; here,
+you will write out a 4-byte integer in binary format followed by the single
+character in ASCII. Thus, a compressed file will consist of some number of
+5-byte entries, each of which is comprised of a 4-byte integer (the run
+length) and the single character. 
+
+To write out an integer in binary format (not ASCII), you should use
+**fwrite()**. Read the man page for more details. For **my-zip**, all
+output should be written to standard output (the **stdout** file stream,
+which, as with **stdin**, is already open when the program starts running). 
+
+Note that typical usage of the **my-zip** tool would thus use shell 
+redirection in order to write the compressed output to a file. For example,
+to compress the file **file.txt** into a (hopefully smaller) **file.z**,
+you would type:
+
+```
+prompt> ./my-zip file.txt > file.z
+```
+
+The **my-unzip** tool simply does the reverse of the **my-zip** tool, taking
+in a compressed file and writing (to standard output again) the uncompressed
+results. For example, to see the contents of **file.txt**, you would type:
+
+```
+prompt> ./my-unzip file.z
+```
+
+**my-unzip** should read in the compressed file (likely using **fread()**)
+and print out the uncompressed output to standard output using **printf()**.
+
+**Details**
+
+* Correct invocation should pass one or more files via the command line to the 
+  program.
+* 
+* 
+* 
+* 
+
+
 
 
 

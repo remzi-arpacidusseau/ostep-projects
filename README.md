@@ -23,6 +23,8 @@ journey; you'll have to do more on your own to truly become proficient.
 
 ## Processes
 
+* Shell 
+
 
 ## Virtual Memory
 
