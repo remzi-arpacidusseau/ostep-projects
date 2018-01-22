@@ -21,7 +21,7 @@ these skills already, this is not the right place to start.
 
 Summary of what gets turned in:
 * A bunch of single .c files for each of the utilities below: **my-cat.c**,
-  **my-grep.c**, **my-zip.c**, **my-unzip.c**, **my-sort.c**, **my-uniq.c**.
+  **my-grep.c**, **my-zip.c**, and **my-unzip.c**.
 * Each should compile successfully when compiled with the **-Wall** and
 **-Werror** flags.
 * Each should (hopefully) pass the tests we supply to you.
