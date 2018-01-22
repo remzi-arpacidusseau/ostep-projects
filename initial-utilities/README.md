@@ -106,7 +106,7 @@ available.
 
 Second, note the *critical* checking of whether the **fopen()** actually
 succeeded. This is not Java where an exception will be thrown when things goes
-wrong; rather, it is C, and it is expected (in good programs, you know, the
+wrong; rather, it is C, and it is expected (in good programs, i.e., the
 only kind you'd want to write) that you always will check if the call
 succeeded. Reading the man page tells you the details of what is returned when
 an error is encountered; in this case, the macOS man page says:
@@ -155,7 +155,7 @@ file (thus indicating you no longer need to read from it).
 * Your program **my-cat** can be invoked with one or more files on the command
   line; it should just print out each file in turn. 
 * In all non-error cases, **my-cat** should exit with status code 0, usually by
-  returning a 0 from **main()**.
+  returning a 0 from **main()** (or by calling **exit(0)**).
 * If *no files* are specified on the command line, **my-cat** should just exit
   and return 0. Note that this is slightly different than the behavior of 
   normal UNIX **cat** (if you'd like to, figure out the difference).
