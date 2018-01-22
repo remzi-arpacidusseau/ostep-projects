@@ -39,6 +39,21 @@ prompt> ./my-cat main.c
 ```
 
 As shown, **my-cat** reads the file **main.c** and prints out its contents. 
+The "**./**" before the **my-cat** above is a UNIX thing; it just tells the
+system which directory to find **my-cat** in (in this case, in the "." (dot)
+directory, which means the current working directory). 
+
+To create the **my-cat* binary, you'll be creating a single source file,
+**my-cat.c**, and writing a little C code to implement this simplified version
+of **cat**. To compile this program, you will do the following:
+
+```
+prompt> gcc -o my-cat my-cat.c -Wall -Werror
+prompt> 
+```
+
+This will make a single *executable binary* called **my-cat** which you can
+then run as above. 
 
 You'll need to learn how to use a few library routines from the C standard
 library (often called **libc**) to implement the source code for this program,
