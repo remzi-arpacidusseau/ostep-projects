@@ -160,11 +160,11 @@ file (thus indicating you no longer need to read from it).
   and return 0. Note that this is slightly different than the behavior of 
   normal UNIX **cat** (if you'd like to, figure out the difference).
 * If the program tries to **fopen()** a file and fails, it should print the
-  exact message "my-cat: cannot open file" and exit with status code 1. 
-  If multiple files are specified on the command line, the files should
-  be printed out in order until the end of the file list is reached or   
-  an error opening a file is reached (at which point the error message
-  is printed and **my-cat** exits).
+  exact message "my-cat: cannot open file" and exit with status code 1.  If
+  multiple files are specified on the command line, the files should be
+  printed out in order until the end of the file list is reached or an error
+  opening a file is reached (at which point the error message is printed and
+  **my-cat** exits). 
 
 
 ## my-grep
