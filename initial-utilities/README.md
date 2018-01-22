@@ -43,7 +43,7 @@ The "**./**" before the **my-cat** above is a UNIX thing; it just tells the
 system which directory to find **my-cat** in (in this case, in the "." (dot)
 directory, which means the current working directory). 
 
-To create the **my-cat* binary, you'll be creating a single source file,
+To create the **my-cat** binary, you'll be creating a single source file,
 **my-cat.c**, and writing a little C code to implement this simplified version
 of **cat**. To compile this program, you will do the following:
 
