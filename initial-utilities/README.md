@@ -193,7 +193,9 @@ even this line, which has barfood in it, will be printed.
   with **Foo** will *not* match.
 * Lines can be arbitrarily long (that is, you may see many many characters
   before you encounter a newline character, \\n). **my-grep** should work
-  as expected even with very long lines. 
+  as expected even with very long lines. For this, you might want to look
+  into the **getline()** library call (instead of **fgets()**), or roll your
+  own. 
 * If **my-grep** is passed no command-line arguments, it should print
   "my-grep: searchterm [file ...]" and exit with status 1. 
 * If **my-grep** encounters a file that it cannot open, it should print
@@ -245,6 +247,11 @@ you would type:
 prompt> ./my-zip file.txt > file.z
 ```
 
+The "greater than" sign is a UNIX shell redirection; in this case, it ensures
+that the output from **my-zip** is written to the file **file.z** (instead of
+being printed to the screen). You'll learn more about how this works a little
+later in the course.
+
 The **my-unzip** tool simply does the reverse of the **my-zip** tool, taking
 in a compressed file and writing (to standard output again) the uncompressed
 results. For example, to see the contents of **file.txt**, you would type:
@@ -259,14 +266,11 @@ and print out the uncompressed output to standard output using **printf()**.
 **Details**
 
 * Correct invocation should pass one or more files via the command line to the 
-  program.
-* 
-* 
-* 
-* 
-
-
-
+  program; if no files are specified, the program should exit with return code
+  1 and print "my-zip: file1 [file2 ...]" or "my-unzip: file1 [file2 ...]" for
+  **my-zip** and **my-unzip** respectively.
+* The format of the compressed file must match the description above exactly
+  (a 4-byte integer followed by a character for each run).
 
 
 ### Footnotes
