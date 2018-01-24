@@ -160,11 +160,11 @@ file (thus indicating you no longer need to read from it).
   and return 0. Note that this is slightly different than the behavior of 
   normal UNIX **cat** (if you'd like to, figure out the difference).
 * If the program tries to **fopen()** a file and fails, it should print the
-  exact message "my-cat: cannot open file" and exit with status code 1.  If
-  multiple files are specified on the command line, the files should be
-  printed out in order until the end of the file list is reached or an error
-  opening a file is reached (at which point the error message is printed and
-  **my-cat** exits). 
+  exact message "my-cat: cannot open file" (followed by a newline) and exit
+  with status code 1.  If multiple files are specified on the command line,
+  the files should be printed out in order until the end of the file list is
+  reached or an error opening a file is reached (at which point the error
+  message is printed and **my-cat** exits). 
 
 
 ## my-grep
@@ -197,9 +197,10 @@ even this line, which has barfood in it, will be printed.
   into the **getline()** library call (instead of **fgets()**), or roll your
   own. 
 * If **my-grep** is passed no command-line arguments, it should print
-  "my-grep: searchterm [file ...]" and exit with status 1. 
+  "my-grep: searchterm [file ...]" (followed by a newline) and exit with
+  status 1.  
 * If **my-grep** encounters a file that it cannot open, it should print
-  "my-grep: cannot open file" and exit with status 1. 
+  "my-grep: cannot open file" (followed by a newline) and exit with status 1. 
 * In all other cases, **my-grep** should exit with return code 0.
 * If a search term, but no file, is specified, **my-grep** should work,
   but instead of reading from a file, **my-grep** should read from
@@ -267,8 +268,9 @@ and print out the uncompressed output to standard output using **printf()**.
 
 * Correct invocation should pass one or more files via the command line to the 
   program; if no files are specified, the program should exit with return code
-  1 and print "my-zip: file1 [file2 ...]" or "my-unzip: file1 [file2 ...]" for
-  **my-zip** and **my-unzip** respectively.
+  1 and print "my-zip: file1 [file2 ...]" (followed by a newline) or
+  "my-unzip: file1 [file2 ...]" (followed by a newline) for **my-zip** and
+  **my-unzip** respectively. 
 * The format of the compressed file must match the description above exactly
   (a 4-byte integer followed by a character for each run).
 
