@@ -208,7 +208,7 @@ even this line, which has barfood in it, will be printed.
   is already open; you can use **fgets()** (or similar routines) to
   read from it.
 * For simplicity, if passed the empty string as a search string, **my-grep**
-  should not match any lines in the file.
+  can either match NO lines or match ALL lines, both are acceptable.
 
 ## my-zip and my-unzip
 
