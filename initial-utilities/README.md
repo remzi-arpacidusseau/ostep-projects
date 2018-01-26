@@ -186,9 +186,9 @@ even this line, which has barfood in it, will be printed.
 **Details**
 
 * Your program **my-grep** is always passed a search term and zero or
-  more files to grep through. It should go through each line and see if
-  the search term is in it; if so, the line should be printed, and if not,
-  the line should be skipped.
+  more files to grep through (thus, more than one is possible). It should go
+  through each line and see if the search term is in it; if so, the line
+  should be printed, and if not, the line should be skipped.
 * The matching is case sensitive. Thus, if searching for **foo**, lines
   with **Foo** will *not* match.
 * Lines can be arbitrarily long (that is, you may see many many characters
@@ -207,6 +207,8 @@ even this line, which has barfood in it, will be printed.
   *standard input*. Doing so is easy, because the file stream **stdin**
   is already open; you can use **fgets()** (or similar routines) to
   read from it.
+* For simplicity, if passed the empty string as a search string, **my-grep**
+  should not match any lines in the file.
 
 ## my-zip and my-unzip
 
@@ -273,6 +275,11 @@ and print out the uncompressed output to standard output using **printf()**.
   **my-unzip** respectively. 
 * The format of the compressed file must match the description above exactly
   (a 4-byte integer followed by a character for each run).
+* Do note that if multiple files are passed to **my-zip*, they are compressed
+  into a single compressed output, and when unzipped, will turn into a single
+  uncompressed stream of text (thus, the information that multiple files were
+  originally input into **my-zip** is lost). The same thing holds for
+  **my-unzip**. 
 
 
 ### Footnotes
