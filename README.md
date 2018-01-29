@@ -18,6 +18,7 @@ journey; you'll have to do more on your own to truly become proficient.
 
 * [Unix Utilities](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/initial-utilities)
 
+* [Intro To xv6](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/initial-xv6)
 
 
 
