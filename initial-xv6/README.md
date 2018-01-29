@@ -15,6 +15,13 @@ goal of the project is simple: to add a system call to xv6. Your system call,
 call has been called by user processes since the time that the kernel was
 booted. 
 
+## Background
+
+If you haven't watched the [discussion
+video](https://www.youtube.com/watch?v=vR6z2QGcoo8), you might want to read
+this [background
+section](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/initial-xv6/background.md). 
+
 ## Your System Call
 
 Your new system call should look have the following return codes and
