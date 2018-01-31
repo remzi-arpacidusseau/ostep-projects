@@ -6,8 +6,6 @@ do a few projects *inside* a real OS kernel. The kernel we'll be using is a
 port of the original Unix (version 6), and is runnable on modern x86
 processors. It was developed at MIT and is a small and relatively
 understandable OS and thus an excellent focus for simple projects.
-More information about xv6, including a very useful book which you might want
-to read, is available [here](https://pdos.csail.mit.edu/6.828/2017/xv6.html).
 
 This first project is just a warmup, and thus relatively light on work. The
 goal of the project is simple: to add a system call to xv6. Your system call,
@@ -21,6 +19,13 @@ If you haven't watched the [discussion
 video](https://www.youtube.com/watch?v=vR6z2QGcoo8), you might want to read
 this [background
 section](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/initial-xv6/background.md). 
+
+More information about xv6, including a very useful book written by the MIT
+folks who built xv6, is available
+[here](https://pdos.csail.mit.edu/6.828/2017/xv6.html). Do note, however, that
+we use a slightly older version of xv6 (for various pedagogical reasons), and
+thus the book may not match our code base exactly.
+
 
 ## Your System Call
 
