@@ -28,15 +28,16 @@ the shell you are running (probably bash) to learn more about all of the
 functionality that can be present. For this project, you do not need to
 implement too much functionality.  
 
-## Program Specifications##
+## Program Specifications
 
-### Basic Shell: WiSH
+### Basic Shell: `wish`
 
-Your basic shell, called **wish**, is basically an interactive loop: it
-repeatedly prints a prompt `wish> ` (note the space after the
-greater-than sign), parses the input, executes the command specified on that
-line of input, and waits for the command to finish. This is repeated until the
-user types `exit`.  The name of your final executable should be `wish`:
+Your basic shell, called `wish` (short for Wisconsin Shell, naturally), is
+basically an interactive loop: it repeatedly prints a prompt `wish> ` (note
+the space after the greater-than sign), parses the input, executes the command
+specified on that line of input, and waits for the command to finish. This is
+repeated until the user types `exit`.  The name of your final executable
+should be `wish`:
 
 ```
 prompt> ./wish
