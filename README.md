@@ -24,7 +24,7 @@ journey; you'll have to do more on your own to truly become proficient.
 
 ### Processes and Scheduling
 
-* [Shell]
+* [Shell](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/processes-shell)
 
 ### Virtual Memory
 
