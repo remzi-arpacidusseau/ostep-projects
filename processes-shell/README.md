@@ -217,6 +217,7 @@ Since your code will be graded with automated testing, you should print this
 ```
     char error_message\[30\] = \"An error has occurred\\n\";
     write(STDERR_FILENO, error_message, strlen(error_message)); 
+```
 
 For this project, the error message should be printed to **stderr**.  Also, do
 not attempt to add whitespaces or tabs or extra error messages.
