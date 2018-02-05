@@ -22,11 +22,9 @@ creates a child process that executes the command you entered and then prompts
 for more user input when it has finished.
 
 The shells you implement will be similar to, but simpler than, the one you run
-every day in Unix. You can find out which shell you are running by typing
-**echo $SHELL**] at a prompt. You may then wish to look at the man pages for
-the shell you are running (probably bash) to learn more about all of the
-functionality that can be present. For this project, you do not need to
-implement too much functionality.  
+every day in Unix. If you don't know what shell you are running, it's probably
+`bash`. One thing you should do on your own time is learn more about your
+shell, by reading the man pages or other online materials.
 
 ## Program Specifications
 
@@ -45,14 +43,10 @@ prompt> ./wish
 
 You should structure your shell such that it creates a new process for each
 new command (note that there are a few exceptions to this, which we discuss
-below). There are two advantages of creating a new process. First, it protects
-the main shell process from any errors that occur in the new command. Second,
-it allows for concurrency; that is, multiple commands can be started and
-allowed to execute simultaneously. 
-
-Your basic shell should be able to parse a command, and run the program
-corresponding to the command.  For example, if the user types `ls -la /tmp`,
-your shell should run the program `/bin/ls` with all the given arguments.
+below).  Your basic shell should be able to parse a command and run the
+program corresponding to the command.  For example, if the user types `ls
+-la /tmp`, your shell should run the program `/bin/ls` with the given
+arguments `-la` and `/tmp`.
 
 You might be wondering how the shell knows to run `/bin/ls` (which means the
 program binary `ls` is found in the directory `/bin`) when you type `ls`. The
@@ -60,10 +54,15 @@ shells knows this thanks to a **path** variable that the user sets. The path
 variable contains the list of all directories to search, in order, when the
 user types a command. We'll learn more about how to deal with the path below.
 
-**Important:** Note that the shell itself does not *implement* `code ls` or
-really many other commands at all. All it does is find those executables in
-one of the directories specified by `path` and create a new process to
-run them. More on this below.
+**Important:** Note that the shell itself does not *implement* `ls` or really
+many other commands at all (it does implement a few, called *built-ins*,
+described further below). All it does is find those executables in one of the
+directories specified by `path` and create a new process to run them. More on
+this below.
+
+
+
+
 
 ## Built-in Commands
 
