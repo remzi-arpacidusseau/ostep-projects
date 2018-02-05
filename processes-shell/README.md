@@ -35,7 +35,10 @@ basically an interactive loop: it repeatedly prints a prompt `wish> ` (note
 the space after the greater-than sign), parses the input, executes the command
 specified on that line of input, and waits for the command to finish. This is
 repeated until the user types `exit`.  The name of your final executable
-should be `wish`:
+should be `wish`.
+
+The shell can be invoked with either no arguments or a single argument;
+anything else is an error. Here is the no-argument way:
 
 ```
 prompt> ./wish
@@ -53,13 +56,13 @@ run the shell with a batch file named `batch.txt`:
 prompt> ./wish batch.txt
 ```
 
-You should structure your shell such that it creates a new process for each
-new command (the exception are *built-in commands*, discussed below).  Your
-basic shell should be able to parse a command and run the program
-corresponding to the command.  For example, if the user types `ls -la /tmp`,
-your shell should run the program `/bin/ls` with the given arguments `-la` and
-`/tmp` (how does the shell know to run `/bin/ls`? It's something called the
-shell **path**; more on this below).
+You should structure your shell such that it creates a process for each new
+command (the exception are *built-in commands*, discussed below).  Your basic
+shell should be able to parse a command and run the program corresponding to
+the command.  For example, if the user types `ls -la /tmp`, your shell should
+run the program `/bin/ls` with the given arguments `-la` and `/tmp` (how does
+the shell know to run `/bin/ls`? It's something called the shell **path**;
+more on this below).
 
 ## Structure
 
@@ -195,10 +198,11 @@ above.
 There is a difference between errors that your shell catches and those that
 the program catches. Your shell should catch all the syntax errors specified
 in this project page. If the syntax of the command looks perfect, you simply
-run the specified program. If there is any program-related errors (e.g.,
-invalid arguments to `ls` when you run it, for example), let the program
-prints its specific error messages in any manner it desires (e.g., could be
-stdout or stderr).
+run the specified program. If there are any program-related errors (e.g.,
+invalid arguments to `ls` when you run it, for example), the shell does not
+have to worry about that (rather, the program will print its own error
+messages and exit).
+
 
 ### Miscellaneous Hints
 
@@ -222,15 +226,15 @@ work. This will often catch errors in how you are invoking these new system
 calls. It's also just good programming sense.
 
 Beat up your own code! You are the best (and in this case, the only) tester of
-this code. Throw lots of junk at it and make sure the shell behaves well. Good
-code comes through testing -- you must run all sorts of different tests to
-make sure things work as desired. Don't be gentle -- other users certainly
-won't be. Break it now so we don't have to break it later.
+this code. Throw lots of different inputs at it and make sure the shell
+behaves well. Good code comes through testing; you must run many different
+tests to make sure things work as desired. Don't be gentle -- other users
+certainly won't be. 
 
-Keep versions of your code. More advanced programmers will use a source
-control system such as git. Minimally, when you get a piece of functionality
-working, make a copy of your .c file (perhaps a subdirectory with a version
-number, such as v1, v2, etc.). By keeping older, working versions around, you
-can comfortably work on adding new functionality, safe in the knowledge you
-can always go back to an older, working version if need be.
+Finally, keep versions of your code. More advanced programmers will use a
+source control system such as git. Minimally, when you get a piece of
+functionality working, make a copy of your .c file (perhaps a subdirectory
+with a version number, such as v1, v2, etc.). By keeping older, working
+versions around, you can comfortably work on adding new functionality, safe in
+the knowledge you can always go back to an older, working version if need be.
 
