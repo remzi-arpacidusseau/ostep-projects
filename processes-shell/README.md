@@ -123,8 +123,8 @@ programs. Instead, your shell will invoke your implementation of the built-in
 command. For example, to implement the `exit` built-in command, you simply
 call `exit(0);` in your wish source code, which then will exit the shell.
 
-In this project, you should implement `exit`, `cd`, `pwd`, and `path` as
-built-in commands.
+In this project, you should implement `exit`, `cd`, and `path` as built-in
+commands.
 
 * `exit`: When the user types `exit`, your shell should simply call the `exit`
   system call with 0 as a parameter. It is an error to pass any arguments to
@@ -133,9 +133,6 @@ built-in commands.
 * `cd`: `cd` always take one argument (0 or >1 args should be signaled as an
 error). To change directories, use the `chdir()` system call with the argument
 supplied by the user; if `chdir` fails, that is also an error.
-
-* `pwd`: When a user types `pwd`, your shell should call getcwd() and show the 
-result. It is an error to pass any arguments to `pwd`.
 
 * `path`: The `path` command takes 0 or more arguments, with each argument
   separated by whitespace from the others. A typical usage would be like this:
