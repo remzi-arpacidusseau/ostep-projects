@@ -200,6 +200,8 @@ message whenever you encounter an error of any type:
 The error message should be printed to stderr (standard error), as shown
 above. 
 
+After *any* error, your shell should immediately exit by calling `exit(1)`.
+
 There is a difference between errors that your shell catches and those that
 the program catches. Your shell should catch all the syntax errors specified
 in this project page. If the syntax of the command looks perfect, you simply
