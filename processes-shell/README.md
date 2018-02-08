@@ -115,6 +115,8 @@ consider the `access()` system call. For example, when the user types `ls`,
 and path is set to include both `/bin` and `/usr/bin`, try `access("/bin/ls",
 X_OK)`. If that fails, try "/usr/bin/ls". If that fails too, it is an error.
 
+Your initial shell path should contain one directory: `/bin'
+
 ### Built-in Commands
 
 Whenever your shell accepts a command, it should check whether the command is
@@ -138,7 +140,9 @@ supplied by the user; if `chdir` fails, that is also an error.
   separated by whitespace from the others. A typical usage would be like this:
   `wish> path /bin /usr/bin`, which would add `/bin` and `/usr/bin` to the
   search path of the shell. If the user sets path to be empty, then the shell
-  should not be able to run any programs (except built-in commands).
+  should not be able to run any programs (except built-in commands). The
+  `path` command always overwrites the old path with the newly specified
+  path. 
 
 ### Redirection
 
@@ -177,6 +181,10 @@ wish> cmd1 & cmd2 args1 args2 & cmd3 args1
 In this case, instead of running `cmd1` and then waiting for it to finish,
 your shell should run `cmd1`, `cmd2`, and `cmd3` (each with whatever arguments
 the user has passed to it).
+
+**Important:** For any new processes your shell creates via `fork()`, you must
+make sure to use `wait()` (or `waitpid`) to wait for them to complete. Not
+doing so is a bug.
 
 
 ### Program Errors
