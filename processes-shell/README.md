@@ -181,11 +181,13 @@ wish> cmd1 & cmd2 args1 args2 & cmd3 args1
 
 In this case, instead of running `cmd1` and then waiting for it to finish,
 your shell should run `cmd1`, `cmd2`, and `cmd3` (each with whatever arguments
-the user has passed to it).
+the user has passed to it) in parallel, *before* waiting for any of them to
+complete. 
 
-**Important:** For any new processes your shell creates via `fork()`, you must
-make sure to use `wait()` (or `waitpid`) to wait for them to complete. Not
-doing so is a bug.
+Then, after starting all such processes, you must make sure to use `wait()`
+(or `waitpid`) to wait for them to complete. After all processes are done,
+return control to the user as usual (or, if in batch mode, move on to the next
+line).
 
 
 ### Program Errors
