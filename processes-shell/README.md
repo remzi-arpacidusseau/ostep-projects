@@ -82,7 +82,8 @@ should not read user input (from `stdin`) but rather from this file to get the
 commands to execute.
 
 To parse the input line into constituent pieces, you might want to use
-`strtok()`. Read the man page (carefully) for more details.
+`strtok()` (or, if doing nested tokenization, use `strtok_r()`). Read the man
+page (carefully) for more details.
 
 To execute commands, look into `fork()`, `exec()`, and `wait()/waitpid()`.
 See the man pages for these functions, and also read the relevant [book
