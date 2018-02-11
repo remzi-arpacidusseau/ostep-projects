@@ -81,6 +81,9 @@ which the shell is given an input file of commands; in this case, the shell
 should not read user input (from `stdin`) but rather from this file to get the
 commands to execute.
 
+In either mode, if you hit the end-of-file marker (EOF), you should call
+`exit(0)` and exit gracefully. 
+
 To parse the input line into constituent pieces, you might want to use
 `strtok()` (or, if doing nested tokenization, use `strtok_r()`). Read the man
 page (carefully) for more details.
