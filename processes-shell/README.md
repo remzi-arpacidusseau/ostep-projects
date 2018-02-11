@@ -118,6 +118,14 @@ X_OK)`. If that fails, try "/usr/bin/ls". If that fails too, it is an error.
 
 Your initial shell path should contain one directory: `/bin'
 
+Note: Most shells allow you to specify a binary specifically without using a
+search path, using either **absolute paths** or **relative paths**. For
+example, a user could type the **absolute path** `/bin/ls` and execute the
+`ls` binary without a search path being needed. A user could also specify a
+**relative path** which starts with the current working directory and
+specifies the executable directly, e.g., `./main`. In this project, you **do
+not** have to worry about these features.
+
 ### Built-in Commands
 
 Whenever your shell accepts a command, it should check whether the command is
@@ -160,7 +168,7 @@ the file should be rerouted to the file `output` (the twist is that this
 is a little different than standard redirection).
 
 If the `output` file exists before you run your program, you should simple
-overwrite them (after truncating it).  
+overwrite it (after truncating it).  
 
 The exact format of redirection is a command (and possibly some arguments)
 followed by the redirection symbol followed by a filename. Multiple
