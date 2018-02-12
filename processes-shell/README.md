@@ -56,6 +56,9 @@ run the shell with a batch file named `batch.txt`:
 prompt> ./wish batch.txt
 ```
 
+One difference between batch and interactive modes: in interactive mode, a
+prompt is printed (`wish> `). In batch mode, no prompt should be printed.
+
 You should structure your shell such that it creates a process for each new
 command (the exception are *built-in commands*, discussed below).  Your basic
 shell should be able to parse a command and run the program corresponding to
@@ -214,7 +217,10 @@ message whenever you encounter an error of any type:
 The error message should be printed to stderr (standard error), as shown
 above. 
 
-After *any* error, your shell should immediately exit by calling `exit(1)`.
+After ~~*any*~~ most errors, your shell simply *continue processing* after
+printing the one and only error message. However, if the shell is invoked with
+more than one file, or if the shell is passed a bad batch file, it should exit
+by calling `exit(1)`.
 
 There is a difference between errors that your shell catches and those that
 the program catches. Your shell should catch all the syntax errors specified
