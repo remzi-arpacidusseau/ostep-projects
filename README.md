@@ -46,6 +46,8 @@ real, working operating system (albeit a simple one).
 
 ### Processes and Scheduling
 
+* [Scheduling (Lottery)](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/scheduling-xv6-lottery)
+
 ### Virtual Memory
 
 ### File Systems
