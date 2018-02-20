@@ -31,7 +31,8 @@ The second is `int getpinfo(struct pstat *)`. This routine returns some
 information about all running processes, including how many times each has
 been chosen to run and the process ID of each. You can use this system call to
 build a variant of the command line program `ps`, which can then be called to
-see what is going on. The structure `pstat` is defined below.
+see what is going on. The structure `pstat` is defined below; note, you cannot
+change this structure, and must use it exactly as is.
 
 Most of the code for the scheduler is quite localized and can be found in
 `proc.c`; the associated header file, `proc.h` is also quite useful to
@@ -61,6 +62,14 @@ struct pstat {
 
 #endif // _PSTAT_H_
 ```
+
+Good examples of how to pass arguments into the kernel are found in existing
+system calls. In particular, follow the path of `read()`, which will lead you
+to `sys_read()`, which will show you how to use `argptr()` (and related calls)
+to obtain a pointer that has been passed into the kernel. Note how careful the
+kernel is with pointers passed from user space -- they are a security
+threat(!), and thus must be checked very carefully before usage.
+
 
 ## Graph
 
