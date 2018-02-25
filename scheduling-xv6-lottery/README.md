@@ -39,6 +39,11 @@ Most of the code for the scheduler is quite localized and can be found in
 examine. To change the scheduler, not much needs to be done; study its control
 flow and then try some small changes. 
 
+You'll need to assign tickets to a process when it is created. Specfically,
+you'll need to make sure a child process *inherits* the same number of tickets
+as its parents. Thus, if the parent has 10 tickets, and calls **fork()** to
+create a child process, the child should also get 10 tickets.
+
 You'll also need to figure out how to generate random numbers in the kernel;
 some searching should lead you to a simple pseudo-random number generator,
 which you can then include in the kernel and use as appropriate.
