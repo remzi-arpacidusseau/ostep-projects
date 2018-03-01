@@ -32,7 +32,9 @@ information about all running processes, including how many times each has
 been chosen to run and the process ID of each. You can use this system call to
 build a variant of the command line program `ps`, which can then be called to
 see what is going on. The structure `pstat` is defined below; note, you cannot
-change this structure, and must use it exactly as is.
+change this structure, and must use it exactly as is. This routine should
+return 0 if successful, and -1 otherwise (if, for example, a bad or NULL
+pointer is passed into the kernel).
 
 Most of the code for the scheduler is quite localized and can be found in
 `proc.c`; the associated header file, `proc.h` is also quite useful to
