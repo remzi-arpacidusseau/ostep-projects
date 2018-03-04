@@ -23,7 +23,7 @@ again, this project is mostly about understanding the code, and not writing
 very much. Look at how **exec()** works to better understand how address
 spaces get filled with code and in general initialized.
 
-You should also look at [code fork()], in particular the part where the
+You should also look at `fork()`, in particular the part where the
 address space of the child is created by copying the address space of the
 parent. What needs to change in there?
 
@@ -41,7 +41,7 @@ clearly the entry point will have to be somewhere else (e.g., the next page,
 or 0x1000). Thus, something in the makefile will need to change to reflect
 this as well.
 
-## Read-only Code]
+## Read-only Code
 
 In most operating systems, code is marked read-only instead of
 read-write. However, in xv6 this is not the case, so a buggy program could
