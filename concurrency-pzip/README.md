@@ -84,7 +84,7 @@ Your code will first be measured for correctness, ensuring that it zips input
 files correctly.
 
 If you pass the correctness tests, your code will be tested for performance;
-higher performing will lead to better scores.
+higher performance will lead to better scores.
 
 
 
