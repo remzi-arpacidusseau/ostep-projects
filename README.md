@@ -28,6 +28,13 @@ journey; you'll have to do more on your own to truly become proficient.
 
 ### Virtual Memory
 
+### Concurrency
+
+* [Parallel Zip](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/concurrency-pzip)
+* Web Server
+* Web Crawler
+
+
 ### File Systems
 
 ### Distributed Systems
@@ -51,6 +58,8 @@ real, working operating system (albeit a simple one).
 ### Virtual Memory
 
 * [Virtual Memory (Null Pointer and Read-Only Regions)](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/vm-xv6-intro)
+
+### Concurrency
 
 ### File Systems
 
