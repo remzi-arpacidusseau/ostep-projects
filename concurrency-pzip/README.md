@@ -80,6 +80,11 @@ least) the following issues:
 
 ## Grading
 
+Your code should compile (and should be compiled) with the following flags:
+`-Wall -Werror -pthread -O`. The last one is important: it turns on the
+optimizer! In fact, for fun, try timing your code with and without `-O` and
+marvel at the difference.
+
 Your code will first be measured for correctness, ensuring that it zips input
 files correctly.
 
