@@ -69,6 +69,13 @@ or `addr` points to a region that is not currently a part of the address
 space, or `len` is less than or equal to zero, return -1 and do not change
 anything. Otherwise, return 0 upon success.
 
+Hint: after changing a page-table entry, you need to make sure the hardware
+knows of the change. On 32-bit x86, this is readily accomplished by updating
+the `CR3` register (what we generically call the *page-table base register* in
+class). When the hardware sees that you overwrote `CR3` (even with the same
+value), it guarantees that your PTE updates will be used upon subsequent
+accesses. The `lcr3()` function will help you in this pursuit.
+
 ## Handling Illegal Accesses
 
 In both the cases above, you should be able to demonstrate what happens when
