@@ -43,16 +43,16 @@ routine. This routine should call `malloc()` to create a new user stack, use
 call should also be created, which calls the underlying `join()` system call,
 frees the user stack, and then returns.
 
-Your thread library should also have a simple *ticket lock* (read
-[http://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf](this book chapter)
-for more information on this). There should be a type `lock_t` that one uses
-to declare a lock, and two routines `lock_acquire(lock_t *)` and
-`lock_release(lock_t *)`, which acquire and release the lock. The spin lock
-should use x86 atomic add to build the lock -- see
-[https://en.wikipedia.org/wiki/Fetch-and-add](this wikipedia page) for a way
-to create an atomic fetch-and-add routine using the x86 `xaddl`
-instruction. One last routine, `lock_init(lock_t *)`, is used to initialize
-the lock as need be (it should only be called by one thread).
+Your thread library should also have a simple *ticket lock* (read [this book
+chapter](http://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf) for more
+information on this). There should be a type `lock_t` that one uses to declare
+a lock, and two routines `lock_acquire(lock_t *)` and `lock_release(lock_t
+*)`, which acquire and release the lock. The spin lock should use x86 atomic
+add to build the lock -- see [this wikipedia
+page](https://en.wikipedia.org/wiki/Fetch-and-add) for a way to create an
+atomic fetch-and-add routine using the x86 `xaddl` instruction. One last
+routine, `lock_init(lock_t *)`, is used to initialize the lock as need be (it
+should only be called by one thread).
 
 The thread library should be available as part of every program that runs in
 xv6. Thus, you should add prototypes to `user/user.h` and the actual code to
@@ -117,13 +117,13 @@ little work on your part to figure out; have fun!
 ## x86 Calling Convention
 
 One other thing you'll have to understand to make this all work is the x86
-calling convention, and exactly how the stack works when calling a function. 
-This is you can read about in
-[https://download-mirror.savannah.gnu.org/releases/pgubook/ProgrammingGroundUp-1-0-booksize.pdf](Programming
-From The Ground Up), a free online book. Specifically, you should understand
-Chapter 4 (and maybe Chapter 3) and the details of call/return. All of this
-will be useful in getting `clone()` above to set things up properly on the
-user stack of the child thread.
+calling convention, and exactly how the stack works when calling a function.
+This is you can read about in [Programming From The Ground
+Up](https://download-mirror.savannah.gnu.org/releases/pgubook/ProgrammingGroundUp-1-0-booksize.pdf),
+a free online book. Specifically, you should understand Chapter 4 (and maybe
+Chapter 3) and the details of call/return. All of this will be useful in
+getting `clone()` above to set things up properly on the user stack of the
+child thread.
 
 
 

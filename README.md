@@ -61,6 +61,8 @@ real, working operating system (albeit a simple one).
 
 ### Concurrency
 
+* [Kernel Threads (Basic Implementation)](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/concurrency-xv6-threads)
+
 ### File Systems
 
 
