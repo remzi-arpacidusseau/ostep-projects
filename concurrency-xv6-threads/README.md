@@ -13,16 +13,16 @@ library, with a `thread_create()` call and `lock_acquire()` and
 
 ## Overview
 
-Your new clone system call should look like this: `int
-clone(void(*fcn)(void*), void *arg1, void *arg2, void *stack)`. This call
-creates a new kernel thread which shares the calling process's address
-space. File descriptors are copied as in `fork()`. The new process uses
-`stack` as its user stack, which is passed two arguments (`arg1` and `arg2`)
-and uses a fake return PC (`0xffffffff`); a proper thread will simply call
-`exit()` when it is done (and not `return`). The stack should be one page in
-size and page-aligned. The new thread starts executing at the address
-specified by `fcn`. As with `fork()`, the PID of the new thread is returned to
-the parent (for simplicity, threads each have their own process ID).
+Your new clone system call should look like this: `int clone(void(*fcn)(void
+*, void *), void *arg1, void *arg2, void *stack)`. This call creates a new
+kernel thread which shares the calling process's address space. File
+descriptors are copied as in `fork()`. The new process uses `stack` as its
+user stack, which is passed two arguments (`arg1` and `arg2`) and uses a fake
+return PC (`0xffffffff`); a proper thread will simply call `exit()` when it is
+done (and not `return`). The stack should be one page in size and
+page-aligned. The new thread starts executing at the address specified by
+`fcn`. As with `fork()`, the PID of the new thread is returned to the parent
+(for simplicity, threads each have their own process ID).
 
 The other new system call is `int join(void **stack)`. This call waits for a
 child thread that shares the address space with the calling process to
