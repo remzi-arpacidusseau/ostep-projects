@@ -37,7 +37,7 @@ space if this is last reference to it. Also, `exit()` should work as before
 but for both processes and threads; little change is required here.
 
 Your thread library will be built on top of this, and just have a simple
-`thread_create(void (*start_routine)(void*), void *arg1, void *arg2)`
+`thread_create(void (*start_routine)(void *, void *), void *arg1, void *arg2)`
 routine. This routine should call `malloc()` to create a new user stack, use
 `clone()` to create the child thread and get it running. A `thread_join()`
 call should also be created, which calls the underlying `join()` system call,
