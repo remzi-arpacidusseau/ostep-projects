@@ -36,23 +36,25 @@ share the address space with this process. It should also free the address
 space if this is last reference to it. Also, `exit()` should work as before
 but for both processes and threads; little change is required here.
 
-Your thread library will be built on top of this, and just have a simple
-`thread_create(void (*start_routine)(void *, void *), void *arg1, void *arg2)`
+Your thread library will be built on top of this, and just have a simple `int
+thread_create(void (*start_routine)(void *, void *), void *arg1, void *arg2)`
 routine. This routine should call `malloc()` to create a new user stack, use
-`clone()` to create the child thread and get it running. A `thread_join()`
-call should also be created, which calls the underlying `join()` system call,
-frees the user stack, and then returns.
+`clone()` to create the child thread and get it running. It returns the newly
+created PID to the parent and 0 to the child (if successful), -1 otherwise.
+An `int thread_join()` call should also be created, which calls the underlying
+`join()` system call, frees the user stack, and then returns. It returns the
+waited-for PID (when successful), -1 otherwise.
 
 Your thread library should also have a simple *ticket lock* (read [this book
 chapter](http://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf) for more
 information on this). There should be a type `lock_t` that one uses to declare
-a lock, and two routines `lock_acquire(lock_t *)` and `lock_release(lock_t
-*)`, which acquire and release the lock. The spin lock should use x86 atomic
-add to build the lock -- see [this wikipedia
+a lock, and two routines `void lock_acquire(lock_t *)` and `void
+lock_release(lock_t *)`, which acquire and release the lock. The spin lock
+should use x86 atomic add to build the lock -- see [this wikipedia
 page](https://en.wikipedia.org/wiki/Fetch-and-add) for a way to create an
 atomic fetch-and-add routine using the x86 `xaddl` instruction. One last
-routine, `lock_init(lock_t *)`, is used to initialize the lock as need be (it
-should only be called by one thread).
+routine, `void lock_init(lock_t *)`, is used to initialize the lock as need be
+(it should only be called by one thread).
 
 The thread library should be available as part of every program that runs in
 xv6. Thus, you should add prototypes to `user/user.h` and the actual code to
