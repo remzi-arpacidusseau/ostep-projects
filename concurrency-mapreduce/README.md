@@ -90,8 +90,9 @@ infrastructure does the rest.
 
 ## Code Overview
 
-We give you here `mapreduce.h` file that specifies exactly what you must build
-in your MapReduce library:
+We give you here the
+[`mapreduce.h`](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/concurrency-mapreduce/mapreduce.h)
+header file that specifies exactly what you must build in your MapReduce library:
 
 ```
 #ifndef __mapreduce_h__
