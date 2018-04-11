@@ -99,7 +99,7 @@ header file that specifies exactly what you must build in your MapReduce library
 #define __mapreduce_h__
 
 // Various function pointers
-typedef char *(*Getter)();
+typedef char *(*Getter)(char *key);
 typedef void (*Mapper)(char *file_name);
 typedef void (*Reducer)(char *key, Getter get_func, int partition_number);
 typedef unsigned long (*Partitioner)(char *key, int num_buckets);
@@ -161,7 +161,7 @@ void Map(char *file_name) {
 void Reduce(char *key, Getter get_next, int partition_number) {
     int count = 0;
     char *value;
-    while ((value = get_next(partition_number)) != NULL)
+    while ((value = get_next(key)) != NULL)
         count++;
     printf("%s %d\n", key, count);
 }

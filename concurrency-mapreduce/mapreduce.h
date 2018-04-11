@@ -1,7 +1,7 @@
 #ifndef __mapreduce_h__
 #define __mapreduce_h__
 
-typedef char *(*Getter)();
+typedef char *(*Getter)(char *key);
 
 typedef void (*Mapper)(char *file_name);
 typedef void (*Reducer)(char *key, Getter get_func, int partition_number);
