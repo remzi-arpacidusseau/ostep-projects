@@ -12,10 +12,10 @@ machines, the developer can instead just focus on writing little bits of code
 (described below) and the infrastructure handles the rest.
 
 In this project, you'll be building a simplified version of MapReduce for just
-a single machine. While somewhat easier than with a single machine, there are
-still numerous challenges, mostly in building the correct concurrency
-support. Thus, you'll have to think a bit about how to build the MapReduce
-implementation, and then build it work efficiently and correctly.
+a single machine. While somewhat easier to build MapReduce for a single
+machine, there are still numerous challenges, mostly in building the correct
+concurrency support. Thus, you'll have to think a bit about how to build the
+MapReduce implementation, and then build it to work efficiently and correctly.
 
 There are three specific objectives to this assignment:
 
