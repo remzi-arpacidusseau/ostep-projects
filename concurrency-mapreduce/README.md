@@ -17,6 +17,14 @@ still numerous challenges, mostly in building the correct concurrency
 support. Thus, you'll have to think a bit about how to build the MapReduce
 implementation, and then build it work efficiently and correctly.
 
+There are three specific objectives to this assignment:
+
+- To learn bout the general nature of the MapReduce paradigm.
+- To implement a correct and efficient MapReduce framework using threads and
+  related functions.
+- To gain more experience writing concurrent code.
+
+
 ## Background
 
 To understand how to make progress on this project, you should understand the
@@ -82,8 +90,8 @@ infrastructure does the rest.
 
 ## Details
 
-We give you here a `.h` file that specifies exactly what you must build in
-your MapReduce library:
+We give you here `mapreduce.h` file that specifies exactly what you must build
+in your MapReduce library:
 
 ```
 #ifndef __mapreduce_h__
@@ -92,7 +100,7 @@ your MapReduce library:
 // Various function pointers
 typedef char *(*Getter)();
 typedef void (*Mapper)(char *file_name);
-typedef void (*Reducer)(char *key, Getter get_func, int get_index);
+typedef void (*Reducer)(char *key, Getter get_func, int partition_number);
 typedef unsigned long (*Partitioner)(char *key, int num_buckets);
 
 // Key functions exported by MapReduce
@@ -104,6 +112,85 @@ void MR_Run(int argc, char *argv[],
             Partitioner partition);
 ```
 
+The most important function is `MR_Run`, which takes the command line
+parameters of a given program, a pointer to a Map function (type `Mapper`,
+called `map`), the number of mapper threads your library should create
+(`num_mappers`), a pointer to a Reduce function (type `Reducer`, called
+`reduce`), the number of reducers (`num_reducers`), and finally, a pointer to
+a Partition function (`partition`, described below).
+
+Thus, when a user is writing a MapReduce computation with your library, they
+will implement a Map function, implement a Reduce function, possibly implement
+a Partition function, and then call `MR_Run()`. The infrastructure will then
+create threads as appropriate and run the computation.
+
+Here is a simple (but functional) wordcount program, written to use this
+infrastructure: 
+
+```
+#include <assert.h>
+#include <stdio.h>
+#include <string.h>
+#include "mapreduce.h"
+
+void Map(char *file_name) {
+    FILE *fp = fopen(file_name, "r");
+    assert(fp != NULL);
+
+    char *line = NULL;
+    size_t size = 0;
+    while (getline(&line, &size, fp) != -1) {
+        char *token, *dummy = line;
+        while ((token = strsep(&dummy, " \t\n\r")) != NULL) {
+            MR_Emit(token, "1");
+        }
+    }
+
+    fclose(fp);
+}
+
+void Reduce(char *key, Getter get_next, int partition_number) {
+    int count = 0;
+    char *value;
+    while ((value = get_next(partition_number)) != NULL)
+        count++;
+    printf("%s %d\n", key, count);
+}
+
+int main(int argc, char *argv[]) {
+    MR_Run(argc, argv, Map, 10, Reduce, 10, MR_DefaultHashPartition);
+}
+```
+
+Let's walk through this code, in order to see what it is doing. First, notice
+that `Map()` is called with a file name. In general, we assume that this type
+of computation is being run over many files; each invocation of `Map()` is
+thus handed one file name and is expected to process that file in its
+entirety. 
+
+In this example, the code above just reads through the file, one line at a
+time, and uses `strsep()` to chop the line into tokens. Each token is then
+emitted using the `MR_Emit()` function, which takes two strings as input: a
+key and a value. The key here is the word itself, and the token is just a
+count, in this case, 1 (as a string). It then closes the file.
+
+The `MR_Emit()` function is thus another key part of your library; it needs to
+take key/value pairs from the many different mappers and store them in a way 
+that later reducers can access them, given constraints described
+below. Designing and implementing this data structure is thus a central
+challenge of the project.
+
+After the mappers are finished, your library should have stored the key/value
+pairs in such a way that the `Reduce()` function can be called. `Reduce()` is
+invoked once per key, and is passed the key along with a function that enables
+iteration over all of the values that produced that same key. To iterate, the
+code just calls `get_next()` repeatedly until a NULL value is returned;
+`get_next` returns a pointer to the value passed in by the `MR_Emit()`
+function above. 
+
+
+
+
 
 
 
@@ -111,7 +198,7 @@ void MR_Run(int argc, char *argv[],
 ## Considerations
 
 
-- **xxx**. yyy.
+- **Memory Management**. yyy.
 
 
 
