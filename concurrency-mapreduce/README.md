@@ -62,18 +62,18 @@ of occurrences of each word in a set of documents:
 
 ```
 map(String key, String value):
-  // key: document name
-  // value: document contents
-  for each word w in value:
-    EmitIntermediate(w, "1");
+    // key: document name
+    // value: document contents
+    for each word w in value:
+        EmitIntermediate(w, "1");
 
 reduce(String key, Iterator values):
-  // key: a word
-  // values: a list of counts
-  int result = 0;
-  for each v in values:
-    result += ParseInt(v);
-  print key, result;
+    // key: a word
+    // values: a list of counts
+    int result = 0;
+    for each v in values:
+        result += ParseInt(v);
+    print key, result;
 ```
 
 What's fascinating about MapReduce is that so many different kinds of relevant
@@ -213,7 +213,7 @@ unsigned long MR_DefaultHashPartition(char *key, int num_buckets) {
     unsigned long hash = 5381;
     int c;
     while ((c = *key++) != '\0')
-      hash = hash * 33 + c;
+        hash = hash * 33 + c;
     return hash % num_buckets;
 }
 ```
