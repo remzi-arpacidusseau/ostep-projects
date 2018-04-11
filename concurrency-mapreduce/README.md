@@ -19,7 +19,7 @@ implementation, and then build it work efficiently and correctly.
 
 There are three specific objectives to this assignment:
 
-- To learn bout the general nature of the MapReduce paradigm.
+- To learn about the general nature of the MapReduce paradigm.
 - To implement a correct and efficient MapReduce framework using threads and
   related functions.
 - To gain more experience writing concurrent code.
