@@ -27,10 +27,10 @@ There are three specific objectives to this assignment:
 
 ## Background
 
-To understand how to make progress on this project, you should understand the
-basics of thread creation, mutual exclusion (with locks), and
-signaling/waiting (with condition variables). These are described in the
-following book chapters:
+To understand how to make progress on any project that involves concurrency,
+you should understand the basics of thread creation, mutual exclusion (with
+locks), and signaling/waiting (with condition variables). These are described
+in the following book chapters:
 
 - [Intro to Threads](http://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf)
 - [Threads API](http://pages.cs.wisc.edu/~remzi/OSTEP/threads-api.pdf)
