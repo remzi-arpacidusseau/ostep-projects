@@ -239,9 +239,9 @@ Here are a few things to consider in your implementation:
 - **Thread Management**. This part is fairly straightforward. You should
     create `num_mappers` mapping threads, and assign a file to each `Map()`
     invocation in some manner you think is best (e.g., Round Robin,
-    Shortest-File-First, etc.). Which way might lead to best performance?  
-    You should also create `num_reducers` reducer threads at some point, to
-    work on the map'd output. 
+    Shortest-File-First, etc.). Which way might lead to best performance?  You
+    should also create `num_reducers` reducer threads at some point, to work
+    on the map'd output.
 
 - **Partitioning and Sorting**. Your central data structure should be
     concurrent, allowing mappers to each put values into different
