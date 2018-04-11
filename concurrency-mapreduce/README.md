@@ -186,10 +186,31 @@ invoked once per key, and is passed the key along with a function that enables
 iteration over all of the values that produced that same key. To iterate, the
 code just calls `get_next()` repeatedly until a NULL value is returned;
 `get_next` returns a pointer to the value passed in by the `MR_Emit()`
-function above. 
+function above. The output, in the example, is just a count of how many times
+a given word has appeared.
 
+All of this computation is started off by a call to `MR_Run()` in the `main()`
+routine of the user program. This function is passed the `argv` array, and
+assumes that `argv[1]` ... `argv[n-1]` (with `argc` equal to `n`) all contain
+file names that will be passed to the mappers.
 
+One interesting function that you also need to pass to `MR_Run()` is the
+partitioning function. In most cases, programs will use the default function
+(`MR_DefaultHashPartition`), which should be implemented by your code. Here is
+its implementation:
 
+```
+unsigned long MR_DefaultHashPartition(char *key, int num_buckets) {
+    unsigned long hash = 5381;
+    int c;
+    while ((c = *key++) != '\0')
+      hash = hash * 33 + c;
+    return hash % num_buckets;
+}
+```
+
+The function's role is to take a given `key` and map it to a number, from `0`
+to `num_buckets - 1`. Its use is internal to the MapReduce library; 
 
 
 
@@ -197,6 +218,7 @@ function above.
 
 ## Considerations
 
+- **Thread Management**. 
 
 - **Memory Management**. yyy.
 
