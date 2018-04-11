@@ -31,9 +31,9 @@ journey; you'll have to do more on your own to truly become proficient.
 ### Concurrency
 
 * [Parallel Zip](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/concurrency-pzip)
+* [MapReduce](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/concurrency-mapreduce)
 * Web Server
 * Web Crawler
-
 
 ### File Systems
 
