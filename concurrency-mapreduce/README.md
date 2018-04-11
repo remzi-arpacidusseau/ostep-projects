@@ -88,7 +88,7 @@ the same time. Users don't have to worry about how to parallelize their
 application; rather, they just write `Map()` and `Reduce()` functions and the
 infrastructure does the rest.
 
-## Details
+## Code Overview
 
 We give you here `mapreduce.h` file that specifies exactly what you must build
 in your MapReduce library:
@@ -123,6 +123,14 @@ Thus, when a user is writing a MapReduce computation with your library, they
 will implement a Map function, implement a Reduce function, possibly implement
 a Partition function, and then call `MR_Run()`. The infrastructure will then
 create threads as appropriate and run the computation.
+
+One basic assumption is that the library will create `num_mappers` threads
+(in a thread pool) that perform the map tasks. Another is that your library 
+will create `num_reducers` threads to perform the reduction tasks. Finally,
+your library will create some kind of internal data structure to pass
+keys and values from mappers to reducers; more on this below.
+
+## Simple Example: Wordcount
 
 Here is a simple (but functional) wordcount program, written to use this
 infrastructure: 
@@ -210,19 +218,43 @@ unsigned long MR_DefaultHashPartition(char *key, int num_buckets) {
 ```
 
 The function's role is to take a given `key` and map it to a number, from `0`
-to `num_buckets - 1`. Its use is internal to the MapReduce library; 
+to `num_buckets - 1`. Its use is internal to the MapReduce library, but
+critical. Specifically, your MR library should use this function to decide
+which Reduce thread gets a particular key/list of values to process.  For some
+applications, which Reducer thread processes a particular key is not
+important (and thus the default function above should be passed in to
+`MR_Run()`); for others, it is, and this is why the user can even pass in
+their own partitioning function as need be.
 
-
-
-
+One last requirement: For each partition, keys (and the value list associated
+with said keys) should be *sorted* in ascending key order; thus, when a
+particular reducer thread (and its associated partition) are working, the
+`Reduce()` function should be called on each key in order for that partition.
 
 ## Considerations
 
-- **Thread Management**. 
+Here are a few things to consider in your implementation:
 
-- **Memory Management**. yyy.
+- **Thread Management**. This part is fairly straightforward. You should
+    create `num_mappers` mapping threads, and assign a file to each `Map()`
+    invocation in some manner you think is best (e.g., Round Robin,
+    Shortest-File-First, etc.). Which way might lead to best performance?  
+    You should also create `num_reducers` reducer threads at some point, to
+    work on the map'd output. 
 
+- **Partitioning and Sorting**. Your central data structure should be
+    concurrent, allowing mappers to each put values into different
+    partitions correctly and efficiently. Once the mappers have completed, a
+    sorting phase should order the key/value-lists. Then, finally, each
+    reducer thread should start calling the user-defined `Reduce()` function
+    on the keys in sorted order per partition. You should think about what
+    type of locking is needed throughout this process for correctness.
 
+- **Memory Management**. One last concern is memory management. The
+    `MR_Emit()` function is passed a key/value pair; it is the responsibility
+    of the MR library to make copies of each of these. Then, when the entire
+    mapping and reduction is complete, it is the responsibility of the MR
+    library to free everything.
 
 ## Grading
 
