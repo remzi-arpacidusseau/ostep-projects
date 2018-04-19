@@ -100,7 +100,7 @@ This output must be printed to standard error and exit with the error code of 1.
 If the file system image does not exist, you should print the error `image not
 found.` to standard error and exit with the error code of 1. 
 
-If the checker detects any one of the errors above, it should print the
+If the checker detects any one of the 12 errors above, it should print the
 specific error to standard error and exit with error code 1.
 
 If the checker detects none of the problems listed above, it should exit with
