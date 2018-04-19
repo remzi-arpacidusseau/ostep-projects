@@ -41,43 +41,43 @@ consistency of a number of things, including the following. When a problem is
 detected, print the error message (shown below) to **standard error** and
 exit immediately with **exit code 1** (i.e., call `exit(1)`). 
 
-- Each inode is either unallocated or one of the valid types (`T_FILE`, `T_DIR`,
+1. Each inode is either unallocated or one of the valid types (`T_FILE`, `T_DIR`,
 `T_DEV`). If not, print `ERROR: bad inode.`
 
-- For in-use inodes, each address that is used by inode is valid (points to a
+1. For in-use inodes, each address that is used by inode is valid (points to a
 valid datablock address within the image). If the direct block is used and is
 invalid, print `ERROR: bad direct address in inode.`; if the indirect block is
 in use and is invalid, print `ERROR: bad indirect address in inode.`
 
-- Root directory exists, its inode number is 1, and the parent of the root
+1. Root directory exists, its inode number is 1, and the parent of the root
 directory is itself. If not, print `ERROR: root directory does not exist.`
 
-- Each directory contains `.` and `..` entries, and the `.` entry points to the
+1. Each directory contains `.` and `..` entries, and the `.` entry points to the
 directory itself. If not, print `ERROR: directory not properly formatted.`
 
-- For in-use inodes, each address in use is also marked in use in the
+1. For in-use inodes, each address in use is also marked in use in the
   bitmap. If not, print `ERROR: address used by inode but marked free in bitmap.`
 
-- For blocks marked in-use in bitmap, the block should actually be in-use in
+1. For blocks marked in-use in bitmap, the block should actually be in-use in
 an inode or indirect block somewhere. If not, print `ERROR: bitmap marks block in use but it is not in use.`
 
-- For in-use inodes, each direct address in use is only used once. If not,
+1. For in-use inodes, each direct address in use is only used once. If not,
   print `ERROR: direct address used more than once.`
 
-- For in-use inodes, each indirect address in use is only used once. If not,
+1. For in-use inodes, each indirect address in use is only used once. If not,
   print `ERROR: indirect address used more than once.`
 
-- For all inodes marked in use, each must be referred to in at least one directory. 
+1. For all inodes marked in use, each must be referred to in at least one directory. 
   If not, print `ERROR: inode marked use but not found in a directory.`
 
-- For each inode number that is referred to in a valid directory, it is actually
+1. For each inode number that is referred to in a valid directory, it is actually
   marked in use. If not, print `ERROR: inode referred to in directory but marked free.`
 
-- Reference counts (number of links) for regular files match the number of times
+1. Reference counts (number of links) for regular files match the number of times
   file is referred to in directories (i.e., hard links work correctly). 
   If not, print `ERROR: bad reference count for file.`
 
-- No extra links allowed for directories (each directory only appears in one
+1. No extra links allowed for directories (each directory only appears in one
   other directory). If not, print `ERROR: directory appears more than once in file system.`
 
 
@@ -100,7 +100,8 @@ This output must be printed to standard error and exit with the error code of 1.
 If the file system image does not exist, you should print the error `image not
 found.` to standard error and exit with the error code of 1. 
 
-If the checker detects one 
+If the checker detects any one of the errors above, it should print the
+specific error to standard error and exit with error code 1.
 
 If the checker detects none of the problems listed above, it should exit with
 return code of 0 and not print anything. 

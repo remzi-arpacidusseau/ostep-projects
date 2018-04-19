@@ -3,10 +3,10 @@
 For this project, there is a contest, which will compare checkers that can
 handle these more challenging condition checks:
 
-- Each `..` entry in directory refers to the proper parent inode, and parent inode
+1. Each `..` entry in directory refers to the proper parent inode, and parent inode
 points back to it. If not, print `ERROR: parent directory mismatch.`
 
-- Every directory traces back to the root directory. (i.e. no loops in the
+1. Every directory traces back to the root directory. (i.e. no loops in the
 directory tree). If not, print `ERROR: inaccessible directory exists.`
 
 This better checker will also have to do something new: actually repair the
