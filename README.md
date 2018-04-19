@@ -37,6 +37,8 @@ journey; you'll have to do more on your own to truly become proficient.
 
 ### File Systems
 
+* [File System Checker](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/filesystems-checker)
+
 ### Distributed Systems
 
 
