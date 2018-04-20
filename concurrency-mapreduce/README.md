@@ -158,7 +158,7 @@ void Map(char *file_name) {
             MR_Emit(token, "1");
         }
     }
-
+    free(line);
     fclose(fp);
 }
 
