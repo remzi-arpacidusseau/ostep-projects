@@ -170,7 +170,7 @@ feature, but with a slight twist (explained below).
 For example, if a user types `ls -la /tmp > output`, nothing should be printed
 on the screen. Instead, the standard output of the `ls` program should be
 rerouted to the file `output`. In addition, the standard error output of
-the file should be rerouted to the file `output` (the twist is that this
+the program should be rerouted to the file `output` (the twist is that this
 is a little different than standard redirection).
 
 If the `output` file exists before you run your program, you should simple
