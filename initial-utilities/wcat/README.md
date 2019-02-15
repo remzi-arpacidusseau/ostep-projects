@@ -1,6 +1,6 @@
 
 In this directory, you should write the program `wcat.c` and compile it into
-the binary `wcat'.
+the binary `wcat`.
 
 After doing so, you can run the tests from this directory by running the
 `run-tests.sh` script. If all goes well, you will see:
