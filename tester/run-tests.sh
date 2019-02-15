@@ -52,35 +52,36 @@ usage () {
 verbose=0
 specific=""
 
-while true; do
-    case "$1" in
+args=`getopt hvt: $*`
+if [[ $? != 0 ]]; then
+    usage; exit 1
+fi
+
+set -- $args
+for i; do
+    case "$i" in
     -h)
 	usage
 	exit 0
-        ;;
+        shift;;
     -v)
         verbose=1
-        ;;
+        shift;;
     -t)
-        shift;
-	if (( $# == 0 )); then
-	    usage
-	    echo "-t needs a specific test number" >&2; exit 1
-	fi
-        specific=$1
+        specific=$2
+	shift
 	number='^[0-9]+$'
 	if ! [[ $specific =~ $number ]]; then
 	    usage
 	    echo "-t must be followed by a number" >&2; exit 1
 	fi
-        ;;
+        shift;;
+    --)
+        shift; break;;
     esac
-    shift
-    if (( $# == 0 )); then
-	break
-    fi
 done
 
+# need a test directory; must be named "tests-out"
 if [[ ! -d tests-out ]]; then
     mkdir tests-out
 fi
