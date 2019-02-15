@@ -23,6 +23,10 @@ check_test () {
     return 0
 }
 
+if [[ ! -d tests-out ]]; then
+    mkdir tests-out
+fi
+
 (( testnum = 1 ))
 
 while true; do
