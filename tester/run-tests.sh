@@ -3,8 +3,7 @@
 # run_test testnumber
 run_test () {
     testfile=tests/$1.run
-    # cat $testfile
-    $(cat $testfile) > tests-out/$1.out 2> tests-out/$1.err
+    eval $(cat $testfile) > tests-out/$1.out 2> tests-out/$1.err
     return 0
 }
 
