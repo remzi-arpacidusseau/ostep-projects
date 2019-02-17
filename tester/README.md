@@ -1,5 +1,5 @@
 
-The 'run-tests.sh' script is called by various testers to do the work of
+The `run-tests.sh` script is called by various testers to do the work of
 testing. Each test is actually fairly simple: it is a comparison of standard
 output and standard error, as per the program specification.
 
