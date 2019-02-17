@@ -72,7 +72,7 @@ run_and_check () {
 
 # usage: call when args not parsed, or when help needed
 usage () {
-    echo "usage: run-tests.sh [-h] [-v] [-t test]"
+    echo "usage: run-tests.sh [-h] [-v] [-t test] [-c]"
     echo "  -h                help message"
     echo "  -v                verbose"
     echo "  -t n              run only test n"
