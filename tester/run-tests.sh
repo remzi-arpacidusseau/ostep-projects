@@ -1,9 +1,14 @@
 #! /usr/bin/env bash
 
-# run_test testnumber
+# run_test testdir testnumber
 run_test () {
-    local testnum=$1
-    local testfile=tests/$testnum.run
+    local testdir=$1
+    local testnum=$2
+    local prefile=$testdir/$testnum.pre
+    if [[ -f $prefile ]]; then
+	eval $(cat $prefile)
+    fi
+    local testfile=$testdir/$testnum.run
     eval $(cat $testfile) > tests-out/$testnum.out 2> tests-out/$testnum.err
 }
 
@@ -12,22 +17,24 @@ print_error_message () {
     local contrunning=$2
     local filetype=$3
     builtin echo -e "\e[31mtest $testnum: standard $filetype incorrect\e[0m"
-    echo "  what results should be found in file: tests/$testnum.$filetype"
+    echo "  what results should be found in file: $testdir/$testnum.$filetype"
     echo "  what results produced by your program: tests-out/$testnum.$filetype"
-    echo "  compare the two using diff, cmp, or related tools to debug"
+    echo "  compare the two using diff, cmp, or related tools to debug, e.g.:"
+    echo "  prompt> diff $testdir/$testnum.$filetype tests-out/$testnum.$filetype"
     if (( $contrunning == 0 )); then
 	exit 1
     fi
 }
 
-# check_test testnumber contrunning out/err
+# check_test testdir testnumber contrunning out/err
 check_test () {
-    local testnum=$1
-    local contrunning=$2
-    local filetype=$3
+    local testdir=$1
+    local testnum=$2
+    local contrunning=$3
+    local filetype=$4
 
     # option to use cmp instead?
-    returnval=$(diff tests/$testnum.$filetype tests-out/$testnum.$filetype)
+    returnval=$(diff $testdir/$testnum.$filetype tests-out/$testnum.$filetype)
     if (( $? != 0 )); then
 	echo -n 1
     else
@@ -35,16 +42,17 @@ check_test () {
     fi
 }
 
-# run_and_check testnumber contrunning verbose printerror
+# run_and_check testdir testnumber contrunning verbose printerror
 #   testnumber: the test to run and check
 #   printerrer: if 1, print an error if test does not exist
 run_and_check () {
-    local testnum=$1
-    local contrunning=$2
-    local verbose=$3
-    local failmode=$4
+    local testdir=$1
+    local testnum=$2
+    local contrunning=$3
+    local verbose=$4
+    local failmode=$5
 
-    if [[ ! -f tests/$testnum.run ]]; then
+    if [[ ! -f $testdir/$testnum.run ]]; then
 	if (( $failmode == 1 )); then
 	    echo "test $testnum does not exist" >&2; exit 1
 	fi
@@ -52,11 +60,11 @@ run_and_check () {
     fi
     if (( $verbose == 1 )); then
 	echo "running test $testnum"
-	cat tests/$testnum.desc
+	cat $testdir/$testnum.desc
     fi
-    run_test $testnum
-    outcheck=$(check_test $testnum $contrunning out)
-    errcheck=$(check_test $testnum $contrunning err)
+    run_test $testdir $testnum
+    outcheck=$(check_test $testdir $testnum $contrunning out)
+    errcheck=$(check_test $testdir $testnum $contrunning err)
     # echo "results: outcheck:$outcheck errcheck:$errcheck"
     if (( $outcheck == 0 )) && (( $errcheck == 0 )); then
 	builtin echo -e "\e[32mtest $testnum: passed\e[0m"
@@ -72,11 +80,12 @@ run_and_check () {
 
 # usage: call when args not parsed, or when help needed
 usage () {
-    echo "usage: run-tests.sh [-h] [-v] [-t test] [-c]"
+    echo "usage: run-tests.sh [-h] [-v] [-t test] [-c] [-d testdir]"
     echo "  -h                help message"
     echo "  -v                verbose"
     echo "  -t n              run only test n"
     echo "  -c                continue even after failure"
+    echo "  -d testdir        run tests from testdir"
     return 0
 }
 
@@ -84,10 +93,11 @@ usage () {
 # main program
 #
 verbose=0
+testdir="tests"
 contrunning=0
 specific=""
 
-args=`getopt hvct: $*`
+args=`getopt hvct:d: $*`
 if [[ $? != 0 ]]; then
     usage; exit 1
 fi
@@ -114,6 +124,10 @@ for i; do
 	    echo "-t must be followed by a number" >&2; exit 1
 	fi
         shift;;
+    -d)
+        testdir=$2
+	shift
+        shift;;
     --)
         shift; break;;
     esac
@@ -126,14 +140,14 @@ fi
 
 # run just one test
 if [[ $specific != "" ]]; then
-    run_and_check $specific $contrunning $verbose 1
+    run_and_check $testdir $specific $contrunning $verbose 1
     exit 0
 fi
 
 # run all tests
 (( testnum = 1 ))
 while true; do
-    run_and_check $testnum $contrunning $verbose 0
+    run_and_check $testdir $testnum $contrunning $verbose 0
     (( testnum = $testnum + 1 ))
 done
 

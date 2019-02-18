@@ -1,0 +1,1 @@
+ls /no/such/file > tests/3.out 2> tests/3.err
