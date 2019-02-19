@@ -1,0 +1,6 @@
+path tests
+p1.sh
+path
+p1.sh
+ls
+exit

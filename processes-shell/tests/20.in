@@ -1,0 +1,9 @@
+path /bin tests
+p1.sh > /tmp/output201 & p2.sh > /tmp/output202 & p3.sh > /tmp/output203
+cat /tmp/output201
+cat /tmp/output202
+cat /tmp/output203
+rm -rf /tmp/output201
+rm -rf /tmp/output202
+rm -rf /tmp/output203
+exit

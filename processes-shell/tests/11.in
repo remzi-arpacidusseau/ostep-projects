@@ -1,0 +1,4 @@
+ls tests/p2a-test>/tmp/output11
+cat /tmp/output11
+rm -f /tmp/output11
+exit
