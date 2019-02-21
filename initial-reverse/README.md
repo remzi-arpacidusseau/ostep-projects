@@ -92,10 +92,7 @@ return code 1.
 - **How to print error messages:** On any error, you should print the
 error to the screen using `fprintf()`, and send the error message to
 `stderr` (standard error) and not `stdout` (standard output). This
-is accomplished in your C code as follows: 
-```
-fprintf(stderr, "whatever the error message is\n");
-```
+is accomplished in your C code as follows: `fprintf(stderr, "whatever the error message is\n");`
 
 
 ## Useful Routines
