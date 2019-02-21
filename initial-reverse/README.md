@@ -106,7 +106,7 @@ easy: `fopen()`, `getline()`, and `fclose()`.
 
 For printing (to screen, or to a file), use `fprintf()`.  Note that it is easy
 to write to standard output by passing `stdout` to `fprintf()`; it is also
-easy to write to a file by passing in the value returned by `fopen`, e.g.,
+easy to write to a file by passing in the `FILE *` returned by `fopen`, e.g.,
 `fp=fopen(...); fprintf(fp, ...);`.
 
 The routine `malloc()` is useful for memory allocation. Perhaps for
