@@ -1,7 +1,7 @@
 
 # Introduction
 
-**Before beginning:** Read this [lab tutorial](lab-tutorial.pdf); 
+**Before beginning:** Read this [lab tutorial](http://pages.cs.wisc.edu/~remzi/OSTEP/lab-tutorial.pdf);  
 it has some useful tips for programming in the C environment.
 
 This project is a simple warm-up to get you used to how this whole
