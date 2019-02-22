@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#! /usr/bin/env bash 
 
 # run_test testdir testnumber
 run_test () {
@@ -10,13 +10,15 @@ run_test () {
     fi
     local testfile=$testdir/$testnum.run
     eval $(cat $testfile) > tests-out/$testnum.out 2> tests-out/$testnum.err
+    echo $? > tests-out/$testnum.rc
+    return 
 }
 
 print_error_message () {
     local testnum=$1
     local contrunning=$2
     local filetype=$3
-    builtin echo -e "\e[31mtest $testnum: standard $filetype incorrect\e[0m"
+    builtin echo -e "\e[31mtest $testnum: $filetype incorrect\e[0m"
     echo "  what results should be found in file: $testdir/$testnum.$filetype"
     echo "  what results produced by your program: tests-out/$testnum.$filetype"
     echo "  compare the two using diff, cmp, or related tools to debug, e.g.:"
@@ -35,10 +37,10 @@ check_test () {
 
     # option to use cmp instead?
     returnval=$(diff $testdir/$testnum.$filetype tests-out/$testnum.$filetype)
-    if (( $? != 0 )); then
-	echo -n 1
+    if (( $? == 0 )); then
+	echo 0
     else
-	echo -n 0
+	echo 1
     fi
 }
 
@@ -63,17 +65,28 @@ run_and_check () {
 	cat $testdir/$testnum.desc
     fi
     run_test $testdir $testnum
+    rccheck=$(check_test $testdir $testnum $contrunning rc)
     outcheck=$(check_test $testdir $testnum $contrunning out)
     errcheck=$(check_test $testdir $testnum $contrunning err)
+    othercheck=0
+    if [[ -f $testdir/$testnum.other ]]; then
+	othercheck=$(check_test $testdir $testnum $contrunning other)
+    fi
     # echo "results: outcheck:$outcheck errcheck:$errcheck"
-    if (( $outcheck == 0 )) && (( $errcheck == 0 )); then
+    if (( $rccheck == 0 )) && (( $outcheck == 0 )) && (( $errcheck == 0 )) && (( $othercheck == 0 )); then
 	builtin echo -e "\e[32mtest $testnum: passed\e[0m"
     else
+	if (( $rccheck == 1 )); then
+	    print_error_message $testnum $contrunning rc
+	fi
 	if (( $outcheck == 1 )); then
 	    print_error_message $testnum $contrunning out
 	fi
 	if (( $errcheck == 1 )); then
 	    print_error_message $testnum $contrunning err
+	fi
+	if (( $othercheck == 1 )); then
+	    print_error_message $testnum $contrunning other
 	fi
     fi
 }
