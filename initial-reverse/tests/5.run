@@ -1,0 +1,2 @@
+./reverse tests/5.in tests-out/5.other
+
