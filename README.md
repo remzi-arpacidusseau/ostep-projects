@@ -21,12 +21,15 @@ journey; you'll have to do more on your own to truly become proficient.
 * [Unix Utilities](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/initial-utilities) (cat, grep, zip/unzip)
 * Sort (text-based)
 * Sort (binary)
+* [Reverse](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/initial-reverse) (very simple reverse program)
 
 ### Processes and Scheduling
 
 * [Shell](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/processes-shell)
 
 ### Virtual Memory
+
+* Memory Allocator
 
 ### Concurrency
 
