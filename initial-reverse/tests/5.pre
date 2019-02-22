@@ -1,0 +1,1 @@
+rm -f tests-out/5.in; ln tests/5.in tests-out/5.in

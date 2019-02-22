@@ -4,13 +4,34 @@
 run_test () {
     local testdir=$1
     local testnum=$2
+    local verbose=$3
+
+    # pre: execute this after before the test is done, to set up
     local prefile=$testdir/$testnum.pre
     if [[ -f $prefile ]]; then
 	eval $(cat $prefile)
+	if (( $verbose == 1 )); then
+	    echo -n "pre-test: "
+	    cat $prefile
+	fi
     fi
     local testfile=$testdir/$testnum.run
+    if (( $verbose == 1 )); then
+	echo -n "test: "
+	cat $testfile
+    fi
     eval $(cat $testfile) > tests-out/$testnum.out 2> tests-out/$testnum.err
     echo $? > tests-out/$testnum.rc
+
+    # post: execute this after the test is done, to clean up
+    local postfile=$testdir/$testnum.post
+    if [[ -f $postfile ]]; then
+	eval $(cat $postfile)
+	if (( $verbose == 1 )); then
+	    echo -n "post-test: "
+	    cat $postfile
+	fi
+    fi
     return 
 }
 
@@ -64,7 +85,7 @@ run_and_check () {
 	echo "running test $testnum"
 	cat $testdir/$testnum.desc
     fi
-    run_test $testdir $testnum
+    run_test $testdir $testnum $verbose
     rccheck=$(check_test $testdir $testnum $contrunning rc)
     outcheck=$(check_test $testdir $testnum $contrunning out)
     errcheck=$(check_test $testdir $testnum $contrunning err)

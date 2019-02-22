@@ -1,1 +1,1 @@
-./reverse < tests/5.in
+./reverse tests/6.in tests-out/6.other
