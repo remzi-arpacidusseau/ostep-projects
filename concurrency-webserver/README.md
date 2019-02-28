@@ -288,7 +288,7 @@ but perhaps those are beyond the scope of the project.
 Your C program must be invoked exactly as follows:
 
 ```sh
-prompt> ./wserver [-d <basedir>] [-p <portnum>] [-t <threads>] [-b <buffers>] [-s <schedalg>]
+prompt> ./wserver [-d basedir] [-p port] [-t threads] [-b buffers] [-s schedalg]
 ```
 
 The command line arguments to your web server are to be interpreted as
@@ -298,7 +298,7 @@ follows.
   operate. The server should try to ensure that file accesses do not access
   files above this directory in the file-system hierarchy. Default: current
   working directory (e.g., `.`).
-- **portnum**: the port number that the web server should listen on; the basic web
+- **port**: the port number that the web server should listen on; the basic web
   server already handles this argument. Default: 10000.
 - **threads**: the number of worker threads that should be created within the web
   server. Must be a positive integer. Default: 1.
