@@ -1,4 +1,3 @@
-
 # Overview
 
 In this assignment, you will be developing a concurrent web server. To
@@ -163,11 +162,10 @@ errors silently is **BAD C PROGRAMMING** and should be avoided at all costs.
 
 # Finally: Some New Functionality!
 
-In this project, you will be adding three key pieces of functionality to the
+In this project, you will be adding two key pieces of functionality to the
 basic web server. First, you make the web server multi-threaded. Second, you
 will implement different scheduling policies so that requests are serviced in
-different orders. Third, you will add statistics to measure how the web server
-is performing. You will also be modifying how the web server is invoked so
+different orders. You will also be modifying how the web server is invoked so
 that it can handle new input parameters (e.g., the number of threads to
 create).
 
@@ -322,23 +320,23 @@ in progress (or waiting), and use SFF scheduling for arriving requests.
 We recommend understanding how the code that we gave you works.  We provide
 the following files:
 
-- **wserver.c:** Contains main() for the web server and the basic serving loop.
-- **request.c:** Performs most of the work for handling requests in the basic
+- [`wserver.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/wserver.c): Contains `main()` for the web server and the basic serving loop.
+- [`request.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/request.c): Performs most of the work for handling requests in the basic
   web server. Start at `request_handle()` and work through the logic from
   there. 
-- **io_helper.h:** Contains wrapper functions for the system calls invoked by
+- [`io_helper.h`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/io_helper.h) and [`io_helper.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/io_helper.c): Contains wrapper functions for the system calls invoked by
   the basic web server and client. The convention is to add `_or_die` to an
   existing call to provide a version that either succeeds or exits. For
   example, the `open()` system call is used to open a file, but can fail for a
   number of reasons. The wrapper, `open_or_die()`, either successfully opens a
   file or exists upon failure. 
-- **wclient.c:** Contains main() and the support routines for the very simple
+- [`wclient.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/wclient.c): Contains main() and the support routines for the very simple
   web client. To test your server, you may want to change this code so that it
   can send simultaneous requests to your server. By launching `wclient`
   multiple times, you can test how your server handles concurrent requests.
-- **spin.c:** A simple CGI program. Basically, it spins for a fixed amount
+- [`spin.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/spin.c): A simple CGI program. Basically, it spins for a fixed amount
   of time, which you may useful in testing various aspects of your server.  
-- **Makefile:** We also provide you with a sample Makefile that creates
+- [`Makefile`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/Makefile): We also provide you with a sample Makefile that creates
   `wserver`, `wclient`, and `spin.cgi`. You can type make to create all of 
   these programs. You can type make clean to remove the object files and the
   executables. You can type make server to create just the server program,
