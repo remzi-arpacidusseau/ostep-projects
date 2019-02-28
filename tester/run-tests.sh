@@ -11,13 +11,13 @@ run_test () {
     if [[ -f $prefile ]]; then
 	eval $(cat $prefile)
 	if (( $verbose == 1 )); then
-	    echo -n "pre-test: "
+	    echo -n "pre-test:  "
 	    cat $prefile
 	fi
     fi
     local testfile=$testdir/$testnum.run
     if (( $verbose == 1 )); then
-	echo -n "test: "
+	echo -n "test:      "
 	cat $testfile
     fi
     eval $(cat $testfile) > tests-out/$testnum.out 2> tests-out/$testnum.err
@@ -82,7 +82,7 @@ run_and_check () {
 	exit 0
     fi
     if (( $verbose == 1 )); then
-	echo "running test $testnum"
+	echo -n -e "\e[33mrunning test $testnum: \e[0m"
 	cat $testdir/$testnum.desc
     fi
     run_test $testdir $testnum $verbose
@@ -96,6 +96,9 @@ run_and_check () {
     # echo "results: outcheck:$outcheck errcheck:$errcheck"
     if (( $rccheck == 0 )) && (( $outcheck == 0 )) && (( $errcheck == 0 )) && (( $othercheck == 0 )); then
 	builtin echo -e "\e[32mtest $testnum: passed\e[0m"
+	if (( $verbose == 1 )); then
+	    echo ""
+	fi
     else
 	if (( $rccheck == 1 )); then
 	    print_error_message $testnum $contrunning rc
@@ -171,6 +174,9 @@ done
 if [[ ! -d tests-out ]]; then
     mkdir tests-out
 fi
+
+# do a one-time setup step
+# xxx
 
 # run just one test
 if [[ $specific != "" ]]; then
