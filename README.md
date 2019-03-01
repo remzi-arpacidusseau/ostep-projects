@@ -6,6 +6,14 @@ systems class aimed at upper-level undergraduates and (in some cases)
 beginning graduate students. They are based on years of teaching such a course
 at the University of Wisconsin-Madison.
 
+Also (increasingly) available are some tests to see if your code works; eventually
+every project will have a set of tests available. The testing framework that is
+currently available is found [here](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/tester).
+A specific testing script, found in each project directory, can be used to run
+the tests against your code. For example, in the initial utilities project, the
+relatively simple `wcat` program that you create can be tested by running the 
+`test-wcat.sh` script.
+
 ## C/Linux Projects
 
 ### Initial Projects
