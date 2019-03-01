@@ -4,15 +4,21 @@ testing. Each test is actually fairly simple: it is a comparison of standard
 output and standard error, as per the program specification.
 
 In any given program specification directory, there exists a specific `tests/`
-directory which holds the expected standard output and error in files called
-`n.out` and `n.err` for each test `n`. The testing framework just starts at
-`1` and keeps incrementing tests until it can't find any more or encounters a
-failure. Thus, adding new tests is easy; just add the relevant files to the
-tests directory at the lowest available number.
+directory which holds the expected return code, standard output, and standard
+error in files called `n.rc`, `n.out`, and `n.err` (respectively) for each
+test `n`. The testing framework just starts at `1` and keeps incrementing
+tests until it can't find any more or encounters a failure. Thus, adding new
+tests is easy; just add the relevant files to the tests directory at the
+lowest available number.
 
-A couple of other files are needed to fully describe a test. The first is a
-run file (e.g., `n.run`) which shows exactly how to run the test; the second
-is a description file (e.g., `n.desc`) which just describes the test.
+The files needed to describe a test number `n` are:
+- `n.rc`: The return code the program should return (usually 0 or 1)
+- `n.out`: The standard output expected from the test
+- `n.err`: The standard error expected from the test
+- `n.run`: How to run the test (which arguments it needs, etc.)
+- `n.desc`: A short text description of the test
+- `n.pre` (optional): Code to run before the test, to set something up
+- `n.post` (optional): Code to run after the test, to clean something up
 
 In most cases, a wrapper script is used to call `run-tests.sh` to do the
 necessary work.
@@ -22,5 +28,5 @@ The options for `run-tests.sh` include:
 * `-v` (verbose: print what each test is doing)
 * `-t n` (run only test `n`)
 * `-c` (continue even after a test fails)
-
+* `-d` (run tests not from `tests/` directory but from this directory instead)
 
