@@ -77,9 +77,14 @@ journey; you'll have to do more on your own to truly become proficient.
 ## Kernel Hacking Projects (xv6)
 
 These projects all are to be done inside the
-[xv6](https://pdos.csail.mit.edu/6.828/2017/xv6.html) kernel developed at
-MIT. Unlike the C/Linux projects, these give you direct experience inside a
-real, working operating system (albeit a simple one).
+[xv6](https://pdos.csail.mit.edu/6.828/2017/xv6.html) kernel based on an early
+version of Unix and developed at MIT. Unlike the C/Linux projects, these give
+you direct experience inside a real, working operating system (albeit a simple
+one).
+
+Read the [install
+notes](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/INSTALL-xv6.md)
+to see how to download the latest xv6 and install the tools you'll need.
 
 ### Initial Projects
 
