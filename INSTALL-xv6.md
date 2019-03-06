@@ -23,11 +23,22 @@ There! Now you have completed the easiest part.
 ## MacOS Build Environment for xv6
 
 To play with xv6 on a Mac, you'll need to install two pieces of software. The
-first is the [`qemu`](https://www.qemu.org/download/) machine simulation
+first is the [`qemu`](https://www.qemu.org/download/) machine emulation
 environment. 
 
-What is a simulator? TBD.
-Why use one? TBD.
+To learn more about what emulation is, read [this
+page](https://en.wikipedia.org/wiki/Emulator). The short story is that an
+emulator is just another computer program, but one that is a realistic
+facsimile of a particular computer system. In this case, we'll use `qemu` to
+pretend we are running an x86 computer system; on this pretend x86 system,
+we'll boot our xv6 kernel.
+
+Now you might ask: why not just run xv6 on a real machine? You could do that,
+but it would make running and debugging xv6 slower and more painful. With a
+realistic emulator like `qemu`, you can quickly run your kernel but not have
+the pain of rebooting the actual system you are using. Further, if you make a
+mistake, your entire machine doesn't lock up, just the emulator, which you can
+exit or kill. It just makes your life much better than doing the real thing. 
 
 To install `qemu` on a Mac, just do the following:
 
