@@ -27,8 +27,7 @@ first is the [`qemu`](https://www.qemu.org/download/) machine simulation
 environment. 
 
 What is a simulator? TBD.
-
-Why use one?
+Why use one? TBD.
 
 To install `qemu` on a Mac, just do the following:
 
