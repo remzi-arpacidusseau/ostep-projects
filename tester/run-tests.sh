@@ -117,11 +117,12 @@ run_and_check () {
 
 # usage: call when args not parsed, or when help needed
 usage () {
-    echo "usage: run-tests.sh [-h] [-v] [-t test] [-c] [-d testdir]"
+    echo "usage: run-tests.sh [-h] [-v] [-t test] [-c] [-s] [-d testdir]"
     echo "  -h                help message"
     echo "  -v                verbose"
     echo "  -t n              run only test n"
     echo "  -c                continue even after failure"
+    echo "  -s                skip pre-test initialization"
     echo "  -d testdir        run tests from testdir"
     return 0
 }
@@ -132,9 +133,10 @@ usage () {
 verbose=0
 testdir="tests"
 contrunning=0
+skippre=0
 specific=""
 
-args=`getopt hvct:d: $*`
+args=`getopt hvsct:d: $*`
 if [[ $? != 0 ]]; then
     usage; exit 1
 fi
@@ -151,6 +153,9 @@ for i; do
         shift;;
     -c)
         contrunning=1
+        shift;;
+    -s)
+        skippre=1
         shift;;
     -t)
         specific=$2
@@ -176,7 +181,16 @@ if [[ ! -d tests-out ]]; then
 fi
 
 # do a one-time setup step
-# xxx
+if (( $skippre == 0 )); then
+    if [[ -f tests/pre ]]; then
+	builtin echo -e "\e[32mdoing one-time pre-test\e[0m (use -s to suppress)"
+	source tests/pre
+	if (( $? != 0 )); then
+	    echo "pre-test: failed"
+	    exit 1
+	fi
+    fi
+fi
 
 # run just one test
 if [[ $specific != "" ]]; then
@@ -192,13 +206,3 @@ while true; do
 done
 
 exit 0
-
-
-
-
-
-
-
-
-
-
