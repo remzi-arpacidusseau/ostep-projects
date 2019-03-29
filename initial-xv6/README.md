@@ -82,8 +82,9 @@ this when debugging (assuming you ever make mistakes, that is), e.g.:
 prompt> make -f Makefile.test qemu-nox
 ```
 
+You can suppress the repeated building of xv6 in the tests with the
+`-s` flag. This should make repeated testing faster:
 
-
-
-
-
+```sh
+prompt> ./test-getreadcounts.sh -s
+```
