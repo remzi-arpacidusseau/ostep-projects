@@ -59,6 +59,32 @@ Using gdb (the debugger) may be helpful in understanding code, doing code
 traces, and is helpful for later projects too. Get familiar with this fine
 tool!
 
+# Running Tests
 
+Running tests for your system call is easy. Just do the following from
+inside the `initial-xv6` directory:
 
+```sh
+prompt> ./test-getreadcounts.sh
+```
 
+If you implemented things correctly, you should get some notification
+that the tests passed. If not ...
+
+The tests assume that xv6 source code is found in the `src/` subdirectory.
+If it's not there, the script will complain.
+
+The test script does a one-time clean build of your xv6 source code
+using a newly generated makefile called `Makefile.test`. You can use
+this when debugging (assuming you ever make mistakes, that is), e.g.:
+
+```sh
+prompt> make -f Makefile.test qemu-nox
+```
+
+You can suppress the repeated building of xv6 in the tests with the
+`-s` flag. This should make repeated testing faster:
+
+```sh
+prompt> ./test-getreadcounts.sh -s
+```
