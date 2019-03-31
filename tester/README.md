@@ -36,7 +36,7 @@ The options for `run-tests.sh` include:
 * `-d` (run tests not from `tests/` directory but from this directory instead)
 * `-s` (suppress running the one-time set of commands in `pre` file)
 
-There is also another script used in testing of `xv6' projects, called
+There is also another script used in testing of `xv6` projects, called
 `run-xv6-command`. This is an `expect` script which launches the qemu
 emulator and runs the relevant testing command in the xv6 environment
 before automatically terminating the test. It is used by the `run-tests.sh`
