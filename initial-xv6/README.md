@@ -79,6 +79,7 @@ using a newly generated makefile called `Makefile.test`. You can use
 this when debugging (assuming you ever make mistakes, that is), e.g.:
 
 ```sh
+prompt> cd src/
 prompt> make -f Makefile.test qemu-nox
 ```
 
@@ -88,3 +89,8 @@ You can suppress the repeated building of xv6 in the tests with the
 ```sh
 prompt> ./test-getreadcounts.sh -s
 ```
+
+The other usual testing flags are also available. See [the testing
+README](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/tester/README.md)
+for details.
+
