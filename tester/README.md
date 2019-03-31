@@ -20,6 +20,11 @@ The files needed to describe a test number `n` are:
 - `n.pre` (optional): Code to run before the test, to set something up
 - `n.post` (optional): Code to run after the test, to clean something up
 
+There is also a single file called `pre` which gets run once at the 
+beginning of testing; this is often used to do a more complex build
+of a code base, for example. To prevent repeated time-wasting pre-test
+activity, suppress this with the `-s` flag (as described below).
+
 In most cases, a wrapper script is used to call `run-tests.sh` to do the
 necessary work.
 
@@ -29,4 +34,13 @@ The options for `run-tests.sh` include:
 * `-t n` (run only test `n`)
 * `-c` (continue even after a test fails)
 * `-d` (run tests not from `tests/` directory but from this directory instead)
+* `-s` (suppress running the one-time set of commands in `pre` file)
+
+There is also another script used in testing of `xv6' projects, called
+`run-xv6-command`. This is an `expect` script which launches the qemu
+emulator and runs the relevant testing command in the xv6 environment
+before automatically terminating the test. It is used by the `run-tests.sh`
+script as described above and thus not generally called by users directly.
+
+
 
