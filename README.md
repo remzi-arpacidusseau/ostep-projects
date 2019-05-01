@@ -47,14 +47,14 @@ Realize the best thing you can do to learn to program in any environment is to
 program **a lot**. These small projects are only the beginning of that
 journey; you'll have to do more on your own to truly become proficient.
 
-* [Unix Utilities](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/initial-utilities) (cat, grep, zip/unzip)
+* [Unix Utilities](initial-utilities) (cat, grep, zip/unzip)
 * Sort (text-based)
 * Sort (binary)
-* [Reverse](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/initial-reverse) (very simple reverse program)
+* [Reverse](initial-reverse) (very simple reverse program)
 
 ### Processes and Scheduling
 
-* [Shell](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/processes-shell)
+* [Shell](processes-shell)
 
 ### Virtual Memory
 
@@ -62,14 +62,14 @@ journey; you'll have to do more on your own to truly become proficient.
 
 ### Concurrency
 
-* [Web Server](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/concurrency-webserver)
-* [Parallel Zip](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/concurrency-pzip)
-* [MapReduce](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/concurrency-mapreduce)
+* [Web Server](concurrency-webserver)
+* [Parallel Zip](concurrency-pzip)
+* [MapReduce](concurrency-mapreduce)
 * Web Crawler
 
 ### File Systems
 
-* [File System Checker](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/filesystems-checker)
+* [File System Checker](filesystems-checker)
 
 ### Distributed Systems
 
@@ -82,25 +82,24 @@ version of Unix and developed at MIT. Unlike the C/Linux projects, these give
 you direct experience inside a real, working operating system (albeit a simple
 one).
 
-Read the [install
-notes](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/INSTALL-xv6.md)
-to see how to download the latest xv6 and install the tools you'll need.
+Read the [install notes](INSTALL-xv6.md) to see how to download the latest xv6 
+and install the tools you'll need.
 
 ### Initial Projects
 
-* [Intro To xv6](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/initial-xv6)
+* [Intro To xv6](initial-xv6)
 
 ### Processes and Scheduling
 
-* [Scheduling (Lottery)](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/scheduling-xv6-lottery)
+* [Scheduling (Lottery)](scheduling-xv6-lottery)
 
 ### Virtual Memory
 
-* [Virtual Memory (Null Pointer and Read-Only Regions)](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/vm-xv6-intro)
+* [Virtual Memory (Null Pointer and Read-Only Regions)](vm-xv6-intro)
 
 ### Concurrency
 
-* [Kernel Threads (Basic Implementation)](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/concurrency-xv6-threads)
+* [Kernel Threads (Basic Implementation)](concurrency-xv6-threads)
 
 ### File Systems
 
