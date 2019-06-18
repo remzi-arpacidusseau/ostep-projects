@@ -60,7 +60,7 @@ When finished, you should be able to run the `qemu` software. To run the x86
 version (which is what is needed for xv6), type the following command:
 
 ```sh
-prompt> qemu-system_x86-64 -nographic
+prompt> qemu-system-x86_64 -nographic
 ```
 
 This will run the `qemu` emulator, but with no kernel to boot! Alas, not that
