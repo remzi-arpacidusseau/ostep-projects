@@ -51,7 +51,7 @@ In this portion of the xv6 project, you'll change the protection bits of parts
 of the page table to be read-only, thus preventing such over-writes, and also
 be able to change them back.
 
-To do this, you'll be adding two system calls: `int mprotect(void *addr, int len)` 
+To do this, you'll be adding two system calls: `int mprotect(void *addr, int len)`
 and `int munprotect(void *addr, int len)`.
 
 Calling `mprotect()` should change the protection bits of the page range

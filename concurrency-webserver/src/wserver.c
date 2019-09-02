@@ -5,13 +5,13 @@
 char default_root[] = ".";
 
 //
-// ./wserver [-d <basedir>] [-p <portnum>] 
-// 
+// ./wserver [-d <basedir>] [-p <portnum>]
+//
 int main(int argc, char *argv[]) {
     int c;
     char *root_dir = default_root;
     int port = 10000;
-    
+
     while ((c = getopt(argc, argv, "d:p:")) != -1)
 	switch (c) {
 	case 'd':
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 }
 
 
-    
 
 
- 
+
+

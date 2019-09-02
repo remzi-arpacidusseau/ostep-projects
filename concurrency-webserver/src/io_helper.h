@@ -31,7 +31,7 @@ typedef struct sockaddr sockaddr_t;
 #define fork_or_die() \
     ({ pid_t pid = fork(); assert(pid >= 0); pid; })
 #define execve_or_die(filename, argv, envp) \
-    assert(execve(filename, argv, envp) == 0); 
+    assert(execve(filename, argv, envp) == 0);
 #define wait_or_die(status) \
     ({ pid_t pid = wait(status); assert(pid >= 0); pid; })
 #define gethostname_or_die(name, len) \
@@ -39,7 +39,7 @@ typedef struct sockaddr sockaddr_t;
 #define setenv_or_die(name, value, overwrite) \
     ({ int rc = setenv(name, value, overwrite); assert(rc == 0); rc; })
 #define chdir_or_die(path) \
-    assert(chdir(path) == 0); 
+    assert(chdir(path) == 0);
 #define open_or_die(pathname, flags, mode) \
     ({ int rc = open(pathname, flags, mode); assert(rc >= 0); rc; })
 #define read_or_die(fd, buf, count) \
@@ -49,7 +49,7 @@ typedef struct sockaddr sockaddr_t;
 #define lseek_or_die(fd, offset, whence) \
     ({ off_t rc = lseek(fd, offset, whence); assert(rc >= 0); rc; })
 #define close_or_die(fd) \
-    assert(close(fd) == 0); 
+    assert(close(fd) == 0);
 #define select_or_die(n, readfds, writefds, exceptfds, timeout) \
     ({ int rc = select(n, readfds, writefds, exceptfds, timeout); assert(rc >= 0); rc; })
 #define dup2_or_die(fd1, fd2) \
@@ -61,7 +61,7 @@ typedef struct sockaddr sockaddr_t;
 #define mmap_or_die(addr, len, prot, flags, fd, offset) \
     ({ void *ptr = mmap(addr, len, prot, flags, fd, offset); assert(ptr != (void *) -1); ptr; })
 #define munmap_or_die(start, length) \
-    assert(munmap(start, length) >= 0); 
+    assert(munmap(start, length) >= 0);
 #define socket_or_die(domain, type, protocol) \
     ({ int rc = socket(domain, type, protocol); assert(rc >= 0); rc; })
 #define setsockopt_or_die(s, level, optname, optval, optlen) \
@@ -79,7 +79,7 @@ typedef struct sockaddr sockaddr_t;
 #define gethostbyaddr_or_die(addr, len, type) \
     ({ struct hostent *p = gethostbyaddr(addr, len, type); assert(p != NULL); p; })
 
-// client/server helper functions 
+// client/server helper functions
 ssize_t readline(int fd, void *buf, size_t maxlen);
 int open_client_fd(char *hostname, int portno);
 int open_listen_fd(int portno);

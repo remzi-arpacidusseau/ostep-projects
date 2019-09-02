@@ -24,7 +24,7 @@ There! Now you have completed the easiest part.
 
 To play with xv6 on a Mac, you'll need to install two pieces of software. The
 first is the [`qemu`](https://www.qemu.org/download/) machine emulation
-environment. 
+environment.
 
 To learn more about what emulation is, read [this
 page](https://en.wikipedia.org/wiki/Emulator). The short story is that an
@@ -38,7 +38,7 @@ but it would make running and debugging xv6 slower and more painful. With a
 realistic emulator like `qemu`, you can quickly run your kernel but not have
 the pain of rebooting the actual system you are using. Further, if you make a
 mistake, your entire machine doesn't lock up, just the emulator, which you can
-exit or kill. It just makes your life much better than doing the real thing. 
+exit or kill. It just makes your life much better than doing the real thing.
 
 To install `qemu` on a Mac, just do the following:
 
@@ -46,11 +46,11 @@ To install `qemu` on a Mac, just do the following:
 prompt> sudo port install qemu
 ```
 
-This will take a little while, so pour yourself a cup of coffee and enjoy. 
+This will take a little while, so pour yourself a cup of coffee and enjoy.
 
 This command assumes you have [MacPorts](https://www.macports.org/)
 installed. If you don't, go to the [MacPorts install
-page](https://www.macports.org/install.php) and follow instructions first. 
+page](https://www.macports.org/install.php) and follow instructions first.
 
 Th command further assumes that the path to port (usually `/opt/local/bin`) is
 in your path. You should probably add this directory to your path anyhow; the
@@ -64,10 +64,10 @@ prompt> qemu-system-x86_64 -nographic
 ```
 
 This will run the `qemu` emulator, but with no kernel to boot! Alas, not that
-useful. 
+useful.
 
 To quit `qemu`, type `C-a x` (that is, hold down `control` and while doing so,
-press `a`, then let go of `control`, then press `x`). 
+press `a`, then let go of `control`, then press `x`).
 
 The second piece of software you'll need is the `gcc` cross-compilation
 toolchain. To install these pieces of software, type:
@@ -95,7 +95,7 @@ init: starting sh
 $
 ```
 
-The `$` is the shell command prompt: who-hoo! 
+The `$` is the shell command prompt: who-hoo!
 
 Remember to type `C-a x` to quit the emulation.
 

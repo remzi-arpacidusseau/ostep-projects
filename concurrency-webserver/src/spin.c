@@ -11,7 +11,7 @@
 // This program is intended to help you test your web server.
 // You can use it to test that you are correctly having multiple threads
 // handling http requests.
-// 
+//
 
 double get_seconds() {
     struct timeval t;
@@ -34,19 +34,19 @@ int main(int argc, char *argv[]) {
     while ((get_seconds() - t1) < spin_for)
 	sleep(1);
     double t2 = get_seconds();
-    
+
     /* Make the response body */
     char content[MAXBUF];
     sprintf(content, "<p>Welcome to the CGI program (%s)</p>\r\n", buf);
     sprintf(content, "%s<p>My only purpose is to waste time on the server!</p>\r\n", content);
     sprintf(content, "%s<p>I spun for %.2f seconds</p>\r\n", content, t2 - t1);
-    
+
     /* Generate the HTTP response */
     printf("Content-length: %lu\r\n", strlen(content));
     printf("Content-type: text/html\r\n\r\n");
     printf("%s", content);
     fflush(stdout);
-    
+
     exit(0);
 }
 

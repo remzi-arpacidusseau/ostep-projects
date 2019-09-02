@@ -32,7 +32,7 @@ Summary of what gets turned in:
 
 The program **wcat** is a simple program. Generally, it reads a file as
 specified by the user and prints its contents. A typical usage is as follows,
-in which the user wants to see the contents of main.c, and thus types: 
+in which the user wants to see the contents of main.c, and thus types:
 
 ```
 prompt> ./wcat main.c
@@ -40,10 +40,10 @@ prompt> ./wcat main.c
 ...
 ```
 
-As shown, **wcat** reads the file **main.c** and prints out its contents. 
+As shown, **wcat** reads the file **main.c** and prints out its contents.
 The "**./**" before the **wcat** above is a UNIX thing; it just tells the
 system which directory to find **wcat** in (in this case, in the "." (dot)
-directory, which means the current working directory). 
+directory, which means the current working directory).
 
 To create the **wcat** binary, you'll be creating a single source file,
 **wcat.c**, and writing a little C code to implement this simplified version
@@ -51,11 +51,11 @@ of **cat**. To compile this program, you will do the following:
 
 ```
 prompt> gcc -o wcat wcat.c -Wall -Werror
-prompt> 
+prompt>
 ```
 
 This will make a single *executable binary* called **wcat** which you can
-then run as above. 
+then run as above.
 
 You'll need to learn how to use a few library routines from the C standard
 library (often called **libc**) to implement the source code for this program,
@@ -63,7 +63,7 @@ which we'll assume is in a file called **wcat.c**. All C code is
 automatically linked with the C library, which is full of useful functions you
 can call to implement your program. Learn more about the C library
 [here](https://en.wikipedia.org/wiki/C_standard_library) and perhaps
-[here](https://www-s.acm.illinois.edu/webmonkeys/book/c_guide/)<sup>[1](#myfootnote1)</sup>.  
+[here](https://www-s.acm.illinois.edu/webmonkeys/book/c_guide/)<sup>[1](#myfootnote1)</sup>.
 
 For this project, we recommend using the following routines to do file input
 and output: **fopen()**, **fgets()**, and **fclose()**. Whenever you use a new
@@ -76,7 +76,7 @@ the man pages feel a bit antiquated, but they are useful and informative and
 generally quite easy to use.
 
 To access the man page for **fopen()**, for example, just type the following
-at your UNIX shell prompt: 
+at your UNIX shell prompt:
 ```
 prompt> man fopen
 ```
@@ -88,7 +88,7 @@ We will also give a simple overview here. The **fopen()** function "opens" a
 file, which is a common way in UNIX systems to begin the process of file
 access. In this case, opening a file just gives you back a pointer to a
 structure of type **FILE**, which can then be passed to other routines to
-read, write, etc. 
+read, write, etc.
 
 Here is a typical usage of **fopen()**:
 
@@ -104,7 +104,7 @@ A couple of points here. First, note that **fopen()** takes two arguments: the
 *name* of the file and the *mode*. The latter just indicates what we plan to
 do with the file. In this case, because we wish to read the file, we pass "r"
 as the second argument. Read the man pages to see what other options are
-available. 
+available.
 
 Second, note the *critical* checking of whether the **fopen()** actually
 succeeded. This is not Java where an exception will be thrown when things goes
@@ -116,7 +116,7 @@ an error is encountered; in this case, the macOS man page says:
 ```
 Upon successful completion fopen(), fdopen(), freopen() and fmemopen() return
 a FILE pointer.  Otherwise, NULL is returned and the global variable errno is
-set to indicate the error. 
+set to indicate the error.
 ```
 
 Thus, as the code above does, please check that **fopen()** does not return
@@ -134,7 +134,7 @@ more about *why* the error occurred; learn about those on your own (using
 
 Once a file is open, there are many different ways to read from it. The one
 we're suggesting here to you is **fgets()**, which is used to get input from
-files, one line at a time. 
+files, one line at a time.
 
 To print out file contents, just use **printf()**. For example, after reading
 in a line with **fgets()** into a variable **buffer**, you can just print out
@@ -155,18 +155,18 @@ file (thus indicating you no longer need to read from it).
 **Details**
 
 * Your program **wcat** can be invoked with one or more files on the command
-  line; it should just print out each file in turn. 
+  line; it should just print out each file in turn.
 * In all non-error cases, **wcat** should exit with status code 0, usually by
   returning a 0 from **main()** (or by calling **exit(0)**).
 * If *no files* are specified on the command line, **wcat** should just exit
-  and return 0. Note that this is slightly different than the behavior of 
+  and return 0. Note that this is slightly different than the behavior of
   normal UNIX **cat** (if you'd like to, figure out the difference).
 * If the program tries to **fopen()** a file and fails, it should print the
   exact message "wcat: cannot open file" (followed by a newline) and exit
   with status code 1.  If multiple files are specified on the command line,
   the files should be printed out in order until the end of the file list is
   reached or an error opening a file is reached (at which point the error
-  message is printed and **wcat** exits). 
+  message is printed and **wcat** exits).
 
 
 ## wgrep
@@ -174,7 +174,7 @@ file (thus indicating you no longer need to read from it).
 The second utility you will build is called **wgrep**, a variant of the UNIX
 tool **grep**. This tool looks through a file, line by line, trying to find a
 user-specified search term in the line. If a line has the word within it, the
-line is printed out, otherwise it is not. 
+line is printed out, otherwise it is not.
 
 Here is how a user would look for the term **foo** in the file **bar.txt**:
 
@@ -197,12 +197,12 @@ even this line, which has barfood in it, will be printed.
   before you encounter a newline character, \\n). **wgrep** should work
   as expected even with very long lines. For this, you might want to look
   into the **getline()** library call (instead of **fgets()**), or roll your
-  own. 
+  own.
 * If **wgrep** is passed no command-line arguments, it should print
   "wgrep: searchterm [file ...]" (followed by a newline) and exit with
-  status 1.  
+  status 1.
 * If **wgrep** encounters a file that it cannot open, it should print
-  "wgrep: cannot open file" (followed by a newline) and exit with status 1. 
+  "wgrep: cannot open file" (followed by a newline) and exit with status 1.
 * In all other cases, **wgrep** should exit with return code 0.
 * If a search term, but no file, is specified, **wgrep** should work,
   but instead of reading from a file, **wgrep** should read from
@@ -216,7 +216,7 @@ even this line, which has barfood in it, will be printed.
 
 The next tools you will build come in a pair, because one (**wzip**) is a
 file compression tool, and the other (**wunzip**) is a file decompression
-tool. 
+tool.
 
 The type of compression used here is a simple form of compression called
 *run-length encoding* (*RLE*). RLE is quite simple: when you encounter **n**
@@ -236,14 +236,14 @@ However, the exact format of the compressed file is quite important; here,
 you will write out a 4-byte integer in binary format followed by the single
 character in ASCII. Thus, a compressed file will consist of some number of
 5-byte entries, each of which is comprised of a 4-byte integer (the run
-length) and the single character. 
+length) and the single character.
 
 To write out an integer in binary format (not ASCII), you should use
 **fwrite()**. Read the man page for more details. For **wzip**, all
 output should be written to standard output (the **stdout** file stream,
-which, as with **stdin**, is already open when the program starts running). 
+which, as with **stdin**, is already open when the program starts running).
 
-Note that typical usage of the **wzip** tool would thus use shell 
+Note that typical usage of the **wzip** tool would thus use shell
 redirection in order to write the compressed output to a file. For example,
 to compress the file **file.txt** into a (hopefully smaller) **file.z**,
 you would type:
@@ -270,18 +270,18 @@ and print out the uncompressed output to standard output using **printf()**.
 
 **Details**
 
-* Correct invocation should pass one or more files via the command line to the 
+* Correct invocation should pass one or more files via the command line to the
   program; if no files are specified, the program should exit with return code
   1 and print "wzip: file1 [file2 ...]" (followed by a newline) or
   "wunzip: file1 [file2 ...]" (followed by a newline) for **wzip** and
-  **wunzip** respectively. 
+  **wunzip** respectively.
 * The format of the compressed file must match the description above exactly
   (a 4-byte integer followed by a character for each run).
 * Do note that if multiple files are passed to **wzip*, they are compressed
   into a single compressed output, and when unzipped, will turn into a single
   uncompressed stream of text (thus, the information that multiple files were
   originally input into **wzip** is lost). The same thing holds for
-  **wunzip**. 
+  **wunzip**.
 
 
 ### Footnotes

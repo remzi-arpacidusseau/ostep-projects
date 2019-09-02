@@ -80,7 +80,7 @@ What's fascinating about MapReduce is that so many different kinds of relevant
 computations can be mapped onto this framework. The original paper lists many
 examples, including word counting (as above), a distributed grep, a URL
 frequency access counters, a reverse web-link graph application, a term-vector
-per host analysis, and others. 
+per host analysis, and others.
 
 What's also quite interesting is how easy it is to parallelize: many mappers
 can be running at the same time, and later, many reducers can be running at
@@ -109,9 +109,9 @@ void MR_Emit(char *key, char *value);
 
 unsigned long MR_DefaultHashPartition(char *key, int num_partitions);
 
-void MR_Run(int argc, char *argv[], 
-	    Mapper map, int num_mappers, 
-	    Reducer reduce, int num_reducers, 
+void MR_Run(int argc, char *argv[],
+	    Mapper map, int num_mappers,
+	    Reducer reduce, int num_reducers,
 	    Partitioner partition);
 
 #endif // __mapreduce_h__
@@ -130,7 +130,7 @@ a Partition function, and then call `MR_Run()`. The infrastructure will then
 create threads as appropriate and run the computation.
 
 One basic assumption is that the library will create `num_mappers` threads
-(in a thread pool) that perform the map tasks. Another is that your library 
+(in a thread pool) that perform the map tasks. Another is that your library
 will create `num_reducers` threads to perform the reduction tasks. Finally,
 your library will create some kind of internal data structure to pass
 keys and values from mappers to reducers; more on this below.
@@ -138,7 +138,7 @@ keys and values from mappers to reducers; more on this below.
 ## Simple Example: Wordcount
 
 Here is a simple (but functional) wordcount program, written to use this
-infrastructure: 
+infrastructure:
 
 ```
 #include <assert.h>
@@ -180,7 +180,7 @@ Let's walk through this code, in order to see what it is doing. First, notice
 that `Map()` is called with a file name. In general, we assume that this type
 of computation is being run over many files; each invocation of `Map()` is
 thus handed one file name and is expected to process that file in its
-entirety. 
+entirety.
 
 In this example, the code above just reads through the file, one line at a
 time, and uses `strsep()` to chop the line into tokens. Each token is then
@@ -189,7 +189,7 @@ key and a value. The key here is the word itself, and the token is just a
 count, in this case, 1 (as a string). It then closes the file.
 
 The `MR_Emit()` function is thus another key part of your library; it needs to
-take key/value pairs from the many different mappers and store them in a way 
+take key/value pairs from the many different mappers and store them in a way
 that later reducers can access them, given constraints described
 below. Designing and implementing this data structure is thus a central
 challenge of the project.

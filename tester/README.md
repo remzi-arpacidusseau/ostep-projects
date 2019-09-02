@@ -20,7 +20,7 @@ The files needed to describe a test number `n` are:
 - `n.pre` (optional): Code to run before the test, to set something up
 - `n.post` (optional): Code to run after the test, to clean something up
 
-There is also a single file called `pre` which gets run once at the 
+There is also a single file called `pre` which gets run once at the
 beginning of testing; this is often used to do a more complex build
 of a code base, for example. To prevent repeated time-wasting pre-test
 activity, suppress this with the `-s` flag (as described below).
