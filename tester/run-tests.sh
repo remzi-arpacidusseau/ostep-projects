@@ -182,9 +182,9 @@ fi
 
 # do a one-time setup step
 if (( $skippre == 0 )); then
-    if [[ -f tests/pre ]]; then
+    if [[ -f $testdir/pre ]]; then
 	builtin echo -e "\e[33mdoing one-time pre-test\e[0m (use -s to suppress)"
-	source tests/pre
+	source $testdir/pre
 	if (( $? != 0 )); then
 	    echo "pre-test: failed"
 	    exit 1
