@@ -49,7 +49,7 @@ read:
 File: **usys.S**
 
 Here we can see that the **read()** library function actually doesn't do much
-at all; it moves the value 5 into the register **%eax** and issues the x86
+at all; it moves the value 6 into the register **%eax** and issues the x86
 trap instruction which is confusingly called **int** (short for *interrupt*).
 The value in **%eax** is going to be used by the kernel to *vector* to the
 right system call, i.e., it determines which system call is being invoked. The
