@@ -39,7 +39,7 @@ pointer is passed into the kernel).
 Most of the code for the scheduler is quite localized and can be found in
 `proc.c`; the associated header file, `proc.h` is also quite useful to
 examine. To change the scheduler, not much needs to be done; study its control
-flow and then try some small changes. 
+flow and then try some small changes.
 
 You'll need to assign tickets to a process when it is created. Specfically,
 you'll need to make sure a child process *inherits* the same number of tickets
@@ -63,8 +63,8 @@ you see here, in a file you'll have to include called `pstat.h`:
 struct pstat {
   int inuse[NPROC];   // whether this slot of the process table is in use (1 or 0)
   int tickets[NPROC]; // the number of tickets this process has
-  int pid[NPROC];     // the PID of each process 
-  int ticks[NPROC];   // the number of ticks each process has accumulated 
+  int pid[NPROC];     // the PID of each process
+  int ticks[NPROC];   // the number of ticks each process has accumulated
 };
 
 #endif // _PSTAT_H_

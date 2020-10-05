@@ -1,4 +1,4 @@
-#! /usr/bin/env bash 
+#! /usr/bin/env bash
 
 # run_test testdir testnumber
 run_test () {
@@ -32,7 +32,7 @@ run_test () {
 	    cat $postfile
 	fi
     fi
-    return 
+    return
 }
 
 print_error_message () {

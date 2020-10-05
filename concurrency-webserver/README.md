@@ -50,7 +50,7 @@ sends a request just to read a specific file from the server. Slightly more
 complex is *dynamic* content, in which a client requests that an executable
 file be run on the web server and its output returned to the client.
 Each file has a unique name known as a **URL** (**Universal Resource
-Locator**). 
+Locator**).
 
 As a simple example, let's say the client browser wants to fetch static
 content (i.e., just some file) from a web server running on some machine.  The
@@ -170,7 +170,7 @@ that it can handle new input parameters (e.g., the number of threads to
 create).
 
 ## Part 1: Multi-threaded
- 
+
 The basic web server that we provided has a single thread of
 control. Single-threaded web servers suffer from a fundamental performance
 problem in that only a single HTTP request can be serviced at a time. Thus,
@@ -275,7 +275,7 @@ backdoor into files in your system.
 Your system should also make sure to constrain file requests to stay within
 the sub-tree of the file system hierarchy, rooted at the base working
 directory that the server starts in. You must take steps to ensure that
-pathnames that are passed in do not refer to files outside of this sub-tree. 
+pathnames that are passed in do not refer to files outside of this sub-tree.
 One simple (perhaps overly conservative) way to do this is to reject any
 pathname with `..` in it, thus avoiding any traversals up the file system
 tree. More sophisticated solutions could use `chroot()` or Linux containers,
@@ -323,21 +323,21 @@ the following files:
 - [`wserver.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/wserver.c): Contains `main()` for the web server and the basic serving loop.
 - [`request.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/request.c): Performs most of the work for handling requests in the basic
   web server. Start at `request_handle()` and work through the logic from
-  there. 
+  there.
 - [`io_helper.h`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/io_helper.h) and [`io_helper.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/io_helper.c): Contains wrapper functions for the system calls invoked by
   the basic web server and client. The convention is to add `_or_die` to an
   existing call to provide a version that either succeeds or exits. For
   example, the `open()` system call is used to open a file, but can fail for a
   number of reasons. The wrapper, `open_or_die()`, either successfully opens a
-  file or exists upon failure. 
+  file or exists upon failure.
 - [`wclient.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/wclient.c): Contains main() and the support routines for the very simple
   web client. To test your server, you may want to change this code so that it
   can send simultaneous requests to your server. By launching `wclient`
   multiple times, you can test how your server handles concurrent requests.
 - [`spin.c`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/spin.c): A simple CGI program. Basically, it spins for a fixed amount
-  of time, which you may useful in testing various aspects of your server.  
+  of time, which you may useful in testing various aspects of your server.
 - [`Makefile`](https://github.com/remzi-arpacidusseau/ostep-projects/blob/master/concurrency-webserver/src/Makefile): We also provide you with a sample Makefile that creates
-  `wserver`, `wclient`, and `spin.cgi`. You can type make to create all of 
+  `wserver`, `wclient`, and `spin.cgi`. You can type make to create all of
   these programs. You can type make clean to remove the object files and the
   executables. You can type make server to create just the server program,
   etc. As you create new files, you will need to add them to the Makefile.
@@ -355,5 +355,5 @@ We anticipate that you will find the following routines useful for creating
 and synchronizing threads: `pthread_create()`, `pthread_mutex_init()`,
 `pthread_mutex_lock()`, `pthread_mutex_unlock()`, `pthread_cond_init()`,
 `pthread_cond_wait()`, `pthread_cond_signal()`. To find information on these
-library routines, read the man pages (RTFM). 
+library routines, read the man pages (RTFM).
 

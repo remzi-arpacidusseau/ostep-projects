@@ -102,7 +102,7 @@ kernel stack for the new thread, etc.
 
 However, as you can see, the next thing `fork()` does is copy the address
 space and point the page directory (`np->pgdir`) to a new page table for that
-address space. When creating a thread (as `clone()` does), you'll want the 
+address space. When creating a thread (as `clone()` does), you'll want the
 new child thread to be in the *same* address space as the parent; thus, there
 is no need to create a copy of the address space, and the new thread's
 `np->pgdir` should be the same as the parent's -- they now share the address

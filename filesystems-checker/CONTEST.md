@@ -11,7 +11,7 @@ directory tree). If not, print `ERROR: inaccessible directory exists.`
 
 This better checker will also have to do something new: actually repair the
 image, in one specific case. Specifically, your task will be to repair the
-"inode marked use but not found in a directory" error. 
+"inode marked use but not found in a directory" error.
 
 We will provide you with an xv6 image that has a number of in-use inodes that
 are not linked by any directory. Your job is to collect these nodes and put
@@ -31,7 +31,7 @@ In this repair mode, your program should **not** exit when an error is
 encountered, but rather continue processing. For simplicity, you can also
 assume there is no other types of error in the provided image. It should exit
 only after it has created an entry under the `lost_found` directory for every
-lost inode. 
+lost inode.
 
 The contest will be judged based on whether all extra tests are passed. If
 they are, the winner will be given to the most readable implementation.

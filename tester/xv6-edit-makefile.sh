@@ -9,8 +9,8 @@ gawk -vtestnames=$testnames '
   for (i = 1; i <= n; i++) {
     printf("\t_%s\\\n", x[i]);
   }
-} 
+}
 
 {
   print $0;
-}' $infile 
+}' $infile

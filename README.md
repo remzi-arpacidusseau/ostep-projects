@@ -10,7 +10,7 @@ Also (increasingly) available are some tests to see if your code works; eventual
 every project will have a set of tests available. The testing framework that is
 currently available is found [here](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/tester).
 A specific testing script, found in each project directory, can be used to run
-the tests against your code. 
+the tests against your code.
 
 For example, in the initial utilities project, the relatively simple `wcat`
 program that you create can be tested by running the `test-wcat.sh` script.
@@ -18,8 +18,8 @@ This could be accomplished by the following commands:
 ```sh
 prompt> git clone https://github.com/remzi-arpacidusseau/ostep-projects
 prompt> cd ostep-projects/initial-utilities/wcat
-prompt> emacs -nw wcat.c 
-prompt> gcc -o wcat wcat.c -Wall 
+prompt> emacs -nw wcat.c
+prompt> gcc -o wcat wcat.c -Wall
 prompt> ./test-wcat.sh
 test 1: passed
 test 2: passed
@@ -28,7 +28,7 @@ test 4: passed
 test 5: passed
 test 6: passed
 test 7: passed
-prompt> 
+prompt>
 ```
 Of course, this sequence assumes (a) you use `emacs` (you should!), (b) your
 code is written in one shot (impressive!), and (c) that it works perfectly
@@ -41,7 +41,7 @@ compile/run/debug cycle might take a few iterations.
 
 These projects are meant to get you warmed up with programming in the C/UNIX
 environment. None are meant to be particularly hard, but should be enough so
-that you can get more comfortable programming. 
+that you can get more comfortable programming.
 
 Realize the best thing you can do to learn to program in any environment is to
 program **a lot**. These small projects are only the beginning of that
@@ -82,7 +82,7 @@ version of Unix and developed at MIT. Unlike the C/Linux projects, these give
 you direct experience inside a real, working operating system (albeit a simple
 one).
 
-Read the [install notes](INSTALL-xv6.md) to see how to download the latest xv6 
+Read the [install notes](INSTALL-xv6.md) to see how to download the latest xv6
 and install the tools you'll need.
 
 ### Initial Projects
