@@ -1,0 +1,42 @@
+# This file lists files in this project which should be ignored by git.
+# Git is a version control system used to track changes to source code.
+# Generally any file which is built from the source code should be ignored.
+
+# Compiled Object files
+*.o
+
+# Compiled Static libraries
+*.a
+
+# dependancy files
+*.d
+
+# generated assembly
+*.asm
+
+# generated symbols
+*.sym
+
+# disk images
+fs.img
+xv6.img
+xv6memfs.img
+
+# other generated files
+bootother
+initcode
+TAGS
+.gdbinit
+fs/
+kernel/vectors.S
+kernel/bootblock
+kernel/bootblock.out
+kernel/bootother.out
+kernel/initcode.out
+kernel/kernel
+bootother
+initcode
+user/bin/
+tools/mkfs
+version
+
