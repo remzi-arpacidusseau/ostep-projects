@@ -8,6 +8,7 @@ USER_PROGS := \
 	init\
 	kill\
 	hello\
+	test_1\
 	ln\
 	ls\
 	mkdir\

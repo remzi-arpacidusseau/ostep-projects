@@ -17,6 +17,7 @@ int sys_mknod(void);
 int sys_open(void);
 int sys_pipe(void);
 int sys_read(void);
+int sys_getreadcount(void);
 int sys_sbrk(void);
 int sys_sleep(void);
 int sys_unlink(void);
