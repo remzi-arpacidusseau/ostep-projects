@@ -121,7 +121,7 @@ consider the `access()` system call. For example, when the user types `ls`,
 and path is set to include both `/bin` and `/usr/bin`, try `access("/bin/ls",
 X_OK)`. If that fails, try "/usr/bin/ls". If that fails too, it is an error.
 
-Your initial shell path should contain one directory: `/bin'
+Your initial shell path should contain one directory: `/bin`
 
 Note: Most shells allow you to specify a binary specifically without using a
 search path, using either **absolute paths** or **relative paths**. For
