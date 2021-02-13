@@ -135,8 +135,6 @@ Now, time to go do the projects!
 
 ## Linux
 
-TBD. 
-
 Quick notes for Linux distributions: 
 - install QEMU package for simulating x86 architecture hardware:
 *e.g. Debian package `qemu-system-i386`, which will install `qemu-system-x86_64` command too.*
