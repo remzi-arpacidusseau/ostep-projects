@@ -136,7 +136,7 @@ Now, time to go do the projects!
 ## Linux distributions
 
 *[Prerequisite for Makefile script]* 
-**Perl programming language** must be installed. https://learn.perl.org/installing/unix_linux.html
+- **Perl programming language** must be installed. https://learn.perl.org/installing/unix_linux.html
  
 **QEMU package** installation for simulating x86 architecture hardware:
 - *e.g. Debian package `qemu-system-i386`, which will install `qemu-system-x86_64` command too.*
@@ -150,8 +150,7 @@ Now, time to go do the projects!
    prompt> qemu-system-x86_64 -nographic
    ```
 
-**Compile & Run** xv6 code using Makefile:
-*It will detect the correct gcc cross-compilation toolchain (e.g. `elf32-i386`)*
+**Compile & Run** xv6 code using Makefile: *It will detect the correct gcc cross-compilation toolchain (e.g. `elf32-i386`)*
 ```sh
  make qemu-nox
 ```
