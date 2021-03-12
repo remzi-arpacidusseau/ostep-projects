@@ -33,7 +33,7 @@ void client_send(int fd, char *filename) {
     gethostname_or_die(hostname, MAXBUF);
 
     /* Form and send the HTTP request */
-    sprintf(buf, "GET %s HTTP/1.1\n",
+    sprintf(buf, "GET %s HTTP/1.1\n"
                  "host: %s\n\r\n", filename, hostname);
     write_or_die(fd, buf, strlen(buf));
 }
