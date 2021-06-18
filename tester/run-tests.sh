@@ -39,7 +39,7 @@ print_error_message () {
     local testnum=$1
     local contrunning=$2
     local filetype=$3
-    builtin echo -e "\e[31mtest $testnum: $filetype incorrect\e[0m"
+    printf "\e[31mtest $testnum: $filetype incorrect\e[0m\n"
     echo "  what results should be found in file: $testdir/$testnum.$filetype"
     echo "  what results produced by your program: tests-out/$testnum.$filetype"
     echo "  compare the two using diff, cmp, or related tools to debug, e.g.:"
@@ -82,7 +82,7 @@ run_and_check () {
 	exit 0
     fi
     if (( $verbose == 1 )); then
-	echo -n -e "\e[33mrunning test $testnum: \e[0m"
+	printf "\e[33mrunning test $testnum: \e[0m\n"
 	cat $testdir/$testnum.desc
     fi
     run_test $testdir $testnum $verbose
@@ -95,7 +95,7 @@ run_and_check () {
     fi
     # echo "results: outcheck:$outcheck errcheck:$errcheck"
     if (( $rccheck == 0 )) && (( $outcheck == 0 )) && (( $errcheck == 0 )) && (( $othercheck == 0 )); then
-	builtin echo -e "\e[32mtest $testnum: passed\e[0m"
+	printf "\e[32mtest $testnum: passed\e[0m\n"
 	if (( $verbose == 1 )); then
 	    echo ""
 	fi
@@ -183,7 +183,7 @@ fi
 # do a one-time setup step
 if (( $skippre == 0 )); then
     if [[ -f tests/pre ]]; then
-	builtin echo -e "\e[33mdoing one-time pre-test\e[0m (use -s to suppress)"
+	printf "\e[33mdoing one-time pre-test\e[0m (use -s to suppress)\n"
 	source tests/pre
 	if (( $? != 0 )); then
 	    echo "pre-test: failed"
