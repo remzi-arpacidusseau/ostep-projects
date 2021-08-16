@@ -106,7 +106,7 @@ the `TOOLPREFIX` line to uncommented, and to look as follows:
 TOOLPREFIX = i386-elf-
 ```
 
-This will all you to type the following simpler `make` command:
+This will allow you to type the following simpler `make` command:
 
 ```sh
 prompt> make qemu-nox
@@ -133,6 +133,103 @@ CPUS := 1
 Now, time to go do the projects!
 
 
-## Linux
+## Linux Build Environment for xv6
 
-TBD.
+
+To compile and run xv6 on Linux based environments you will need the same
+tools, `qemu` and the standard x86 `gcc` cross-compilation tool chain.
+
+On Ubuntu Linux (20.04 or later) distributions, you may install the
+needed `qemu` packages using the apt package manager:
+
+```sh
+prompt> sudo apt install -y qemu qemu-system-x86-xen
+```
+
+On other Linux distributions, there will usually be a `qemu` package and
+packages specific for x86_64 qemu emulation that can
+be installed using the distribution's package manager that will provide the
+basic `qemu` emulator that you will need.
+
+When finished, you can test and run the basic `qemu` emulator in the same
+was as shown for the MacOS install:
+
+```sh
+prompt> qemu-system-x86_64 -nographic
+```
+
+This will run the `qemu` emulator, but with no bootable kernal.  To quit
+`qemu`, type `C-a x` (that is, hold down `control` and while doing so, 
+press `a`, then let go of `control`, then press `x`).
+
+The second piece of software you'll need is the `gcc` cross-compilation
+toolchain.  You can install the basic `gcc` toolchain compilers and debuggers 
+on Ubuntu Linux using the build-essential package group
+
+```sh
+prompt> sudo apt install -y build-essential
+```
+
+And again if you are using a Linux distribution other than Ubuntu, there
+will often be a similar package group that installs the basic compiler
+toolchain that you will need.
+
+When you're done, you are ready to try to build and run xv6.  Change into the
+`xv6-public` directory, and type:
+
+```sh
+prompt> make TOOLPREFIX=x86_64-linux-gnu- qemu-nox
+```
+
+Note: the prefix differs from the MacOS instructions, and uses the x86_64
+versions of the gcc toolchain tools installed from the build-essential package.
+
+If all worked well, you'll see something like:
+
+```sh
+Booting from Hard Disk...
+xv6...
+cpu1: starting 1
+cpu0: starting 0
+sb: size 1000 nblocks 941 ninodes 200 nlog 30 logstart 2 inodestart 32 bmap start 58
+init: starting sh
+$ 
+```
+
+The `$` is the shell command prompt from the xv6 kernel: who-hoo!
+
+Remember to type `C-a x` to quit the emulation.
+
+A couple of quick edits might be useful to the xv6 `Makefile`.  First,
+change the `TOOLPREFIX` line to uncommented, and to look as follows:
+
+```sh
+TOOLPREFIX = x86_64-linux-gnu-
+```
+
+This will allow you to type the following simpler `make` command:
+
+```sh
+prompt> make qemu-nox
+```
+
+Note: `qemu-nox` is the way this `Makefile` allows you to build and run xv6
+without spinning up a separate window, but rather running `qemu` directly
+within your terminal, which we prefer. If you want the new window to pop up
+instead, just run `make qemu`.
+
+We also usually edit the `Makefile` to use one CPU (not two). Look for the
+line that says:
+
+```sh
+CPUS := 2
+```
+
+and change it to:
+
+```sh
+CPUS := 1
+```
+
+Now, time to go do the projects!
+
