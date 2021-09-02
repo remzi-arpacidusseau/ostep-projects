@@ -87,8 +87,56 @@ Here are some details that may help you complete the project.
 
 ## Persistence
 
+One thing you have to figure out in this project is how to "persist"
+the keys and values, so that they can be retrieved by later
+invocations of the `kv` command. Persistence is something we cover
+later in the course, but the idea here is simple: it means `kv` will
+have to write out keys and values to a file (or multiple files), and
+then the next time it's run, be able to read them back in in order to
+fulfill requests.
 
+For example, let's say you run the following:
 
+```sh
+prompt> ./kv p,1,first
+```
+
+The `kv` program should now store the key `1` and value `first` in its
+database. Thus, when you later run `kv` and try to get the `1` key,
+you get the value back:
+
+```sh
+prompt> ./kv g,1,first
+1,first
+prompt> 
+```
+
+There are many many ways to implement such a feature. Here, we suggest
+something very simple. The idea will be to use a single file (called,
+say, `database.txt`), where you store all of this information in
+plain-text format.
+
+For example, in a database with a few keys and values in it, you might
+store the information in a plain-text file, one line per entry. The
+contents of the file might then like this:
+
+```sh
+prompt> cat database.txt
+1,first
+2,second
+prompt>
+```
+
+So, how should `kv` use this file? One simple approach is to read the
+file into memory in its entirety at startup into some kind of data
+structure, say a linked list or hash table. Then, when processing put,
+get, delete, or other commands, all `kv` would do is update the
+in-memory data structure. Then, before exiting, the program should
+write out the file again, storing all key/value pairs for future use.
+
+Of course, more sophisticated techniques can be used to improve
+performance, allow efficient access to very large databases, and
+tolerate crashes; none of these things are required for this project. 
 
 ## Assumptions and Errors
 
@@ -110,7 +158,7 @@ perhaps `fprintf()` or even `getline()`.
 
 The routine `malloc()` is useful for memory allocation.
 
-The routine `strsep()' is useful for parsing. For example, when you
+The routine `strsep()` is useful for parsing. For example, when you
 get a string like `p,10,remzi`, `strsep()` can be used to split out
 the different pieces.
 
