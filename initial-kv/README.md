@@ -140,7 +140,10 @@ tolerate crashes; none of these things are required for this project.
 
 ## Assumptions and Errors
 
-- **Bad command:** If the command line specifies a bad command, e.g., XXX.
+- **Bad command:** If the command line specifies a bad command, e.g.,
+    something that is not a `p`, `g`, `a`, `c`, or `d`, print out the
+    warning `bad command` on a line by itself and keep processing the
+    rest of the command line.
 
 
 ## Useful Routines
@@ -170,21 +173,23 @@ information on malloc.
 
 ## Tips
 
-**Start small, and get things working incrementally.** For example, first
+Here are some tips:
+
+- **Start small, and get things working incrementally.** For example, first
 get a program that simply parses the command line successfully for one
 command. Then, add a loop and parse multiple commands on one command line.
 Then, add the ability to add elements to an in-memory data structure,
 but don't worry about persistence. Then add persistence. Or something
 like that. 
 
-**Testing is critical.** A great programmer we once knew said you have to
+- **Testing is critical.** A great programmer we once knew said you have to
 write five to ten lines of test code for every line of code you produce;
 testing your code to make sure it works is crucial. Write tests to see if your
 code handles all the cases you think it should. Be as comprehensive as you can
 be. Of course, when grading your projects, we will be. Thus, it is better if
 you find your bugs first, before we do.
 
-**Keep old versions around.** Keep copies of older versions of your
+- **Keep old versions around.** Keep copies of older versions of your
 program around, as you may introduce bugs and not be able to easily
 undo them. A simple way to do this is to keep copies around, by
 explicitly making copies of the file at various points during
