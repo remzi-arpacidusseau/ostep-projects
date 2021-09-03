@@ -59,10 +59,10 @@ prompt> ./kv g,10
 prompt>
 ```
 
-Here you can see that when we `get` the key `10`, the program prints out
-the key value, followed by a space, followed by a comma, followed by
-the value (in this case, `remzi`). We accomplish this output simply by
-calling `printf` and printing the results to **standard output**.
+Here you can see that when we `get` the key `10`, the program prints
+out the key value, followed by a comma, followed by the value (in this
+case, `remzi`). We accomplish this output simply by calling `printf`
+and printing the results to **standard output**.
 
 The full list of commands which your KV store should support are:
 - *put*: The format is `p,key,value`, where `key` is an integer, and
