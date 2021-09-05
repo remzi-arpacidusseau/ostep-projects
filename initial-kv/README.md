@@ -146,14 +146,14 @@ tolerate crashes; none of these things are required for this project.
 - **Bad command:** If the command line specifies a bad command, e.g.,
     something that is not a `p`, `g`, `a`, `c`, or `d`, print out the
     warning `bad command` on a line by itself and keep processing the
-    rest of the command line.
+    rest of the command line; importantly, do *not* exit.
 
+- **Unexpected error:** On any unexpected error condition, such as
+    malloc() failing, or failure to open a file successfully, print
+    out a useful error message and exit. This won't be tested, but may
+    be useful for you during development.
 
 ## Useful Routines
-
-To exit, call `exit(1)`. The number you pass to `exit()`, in this case 1, is
-then available to the user to see if the program returned an error (i.e.,
-return a non-zero) or exited cleanly (i.e., returned 0).
 
 For reading in the input file, the following routines will make your life
 easy: `fopen()`, `getline()`, and `fclose()`.
