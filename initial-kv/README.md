@@ -24,12 +24,12 @@ prompt> ./kv p,20,andrea p,40,someotherperson
 ```
 
 The above line means the users typed in the name of the key-value
-program `reverse` (the `./` in front of it simply refers to the
-current working directory (called dot, referred to as `.`) and the
-slash (`/`) is a separator; thus, in this directory, look for a
-program named `reverse`) and gave it either no command-line arguments,
-one command-line argument (`p,10,remzi`), or two command-line
-arguments (`p,20,andrea p,40,someotherperson`).
+program `kv` (the `./` in front of it simply refers to the current
+working directory (called dot, referred to as `.`) and the slash (`/`)
+is a separator; thus, in this directory, look for a program named
+`kv`) and gave it either no command-line arguments, one command-line
+argument (`p,10,remzi`), or two command-line arguments (`p,20,andrea
+p,40,someotherperson`).
 
 The first invocation, with no arguments, doesn't do anything; not too
 exciting, eh?
@@ -195,7 +195,7 @@ undo them. A simple way to do this is to keep copies around, by
 explicitly making copies of the file at various points during
 development. For example, let's say you get a simple version of `kv.c`
 working (say, that just reads in the file); type `cp kv.c kv.v1.c` to
-make a copy into the file `reverse.v1.c`. More sophisticated
+make a copy into the file `kv.v1.c`. More sophisticated
 developers use version control systems such as git; such a tool is
 well worth learning, so do it! 
 
