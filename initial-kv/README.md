@@ -8,11 +8,13 @@ It also serves to get you into the mindset of a C programmer,
 something you will become quite familiar with over the next few
 months. Good luck!
 
-You will write a simple program called `kv`. It is a simple persistent key-value store.
-Key-value storage systems, like RocksDB from Facebook and LevelDB from
-Google, are widely used in industry for various purposes; here, you
-will write a simple one (or a complex one, who knows?) and remember
-the basics of C and systems programming.
+You will write a simple program called `kv`. It is a simple persistent
+key-value store.  Key-value storage systems, like
+[RocksDB](http://rocksdb.org/) from Facebook and
+[LevelDB](https://github.com/google/leveldb) from Google, are widely
+used in industry for various purposes; here, you will write a simple
+one (or a complex one, who knows?) and remember the basics of C and
+systems programming.
 
 The program will have a few options. The first is to insert some (key,
 value) pairs into the database. This is accomplished as follows:
