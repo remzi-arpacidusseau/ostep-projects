@@ -109,7 +109,7 @@ database. Thus, when you later run `kv` and try to get the `1` key,
 you get the value back:
 
 ```sh
-prompt> ./kv g,1,first
+prompt> ./kv g,1
 1,first
 prompt> 
 ```
