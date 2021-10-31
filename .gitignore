@@ -1,2 +1,11 @@
 #output file
+# tests-out/
+
+#ignore all
+*
+#uningore file with extensions
+!*.*
+#unignore all directories
+!*/
+#ignore test-out(directory)
 tests-out/
