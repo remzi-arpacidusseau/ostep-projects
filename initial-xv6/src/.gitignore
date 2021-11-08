@@ -17,3 +17,8 @@ kernel
 kernelmemfs
 mkfs
 .gdbinit
+
+Makefile.test
+test_1.c
+test_2.c
+
