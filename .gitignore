@@ -9,3 +9,5 @@
 !*/
 #ignore test-out(directory)
 tests-out/
+
+.DS_Store
