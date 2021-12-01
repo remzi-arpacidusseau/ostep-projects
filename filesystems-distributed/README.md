@@ -47,17 +47,18 @@ Each inode should be simple: a size field (the number of the last byte in
 the file), a type field (regular or directory), and 14 direct pointers; thus,
 the maximum file size is 14 times the 4KB block size, or 56 KB.
 
-One other structure you'll have to manage on disk are directories. Each
-directory has an inode, and points to one or more data blocks that contain
-directory entries. Each directory entry should be simple, and consist of 32
-bytes: a name and an inode number pair. The name should be a fixed-length
-field of size 28 bytes; the inode number is just an integer (4 bytes). When a
-directory is created, it should contain two entries: the name ., which
-refers to this new directory's inode number, and .., which refers to the
-parent directory's inode number. For directory entries that are not yet in use
-(in an allocated 4-KB directory block), the inode number should be set to
--1. This way, utilities can scan through the entries to check if they are
-valid.
+One other structure you'll have to manage on disk are
+directories. Each directory has an inode, and points to one or more
+data blocks that contain directory entries. Each directory entry
+should be simple, and consist of 32 bytes: a name and an inode number
+pair. The name should be a fixed-length field of size 28 bytes; the
+inode number is just an integer (4 bytes). When a directory is
+created, it should contain two entries: the name `.` (dot), which
+refers to this new directory's inode number, and `..` (dot-dot), which
+refers to the parent directory's inode number. For directory entries
+that are not yet in use (in an allocated 4-KB directory block), the
+inode number should be set to -1. This way, utilities can scan through
+the entries to check if they are valid.
 
 When your server is started, it is passed the name of the file system image
 file. If this file does not exist, the file server should create it, and
@@ -74,39 +75,39 @@ inode map and keep it in-memory too.
 
 The client library should export the following interfaces:
 
-- int MFS_Init(char *hostname, int port): MFS_Init() takes a host name
+- `int MFS_Init(char *hostname, int port)`: `MFS_Init()` takes a host name
 and port number and uses those to find the server exporting the file system.
-- int MFS_Lookup(int pinum, char *name): MFS_Lookup() takes the parent
+- `int MFS_Lookup(int pinum, char *name)`: `MFS_Lookup()` takes the parent
 inode number (which should be the inode number of a directory) and looks up
 the entry `name` in it. The inode number of `name` is returned. Success: 
 return inode number of name; failure: return -1. Failure modes: invalid pinum,
 name does not exist in pinum.
-- int MFS_Stat(int inum, MFS_Stat_t *m): MFS_Stat() returns some
+- `int MFS_Stat(int inum, MFS_Stat_t *m)`: `MFS_Stat()` returns some
 information about the file specified by inum. Upon success, return 0,
-otherwise -1. The exact info returned is defined by MFS_Stat_t. Failure modes:
+otherwise -1. The exact info returned is defined by `MFS_Stat_t`. Failure modes:
 inum does not exist. 
-- int MFS_Write(int inum, char *buffer, int block): MFS_Write() writes a
+- `int MFS_Write(int inum, char *buffer, int block)`: `MFS_Write()` writes a
 block of size 4096 bytes at the block offset specified by `block`. Returns 0
 on success, -1 on failure. Failure modes: invalid inum, invalid block, not a
 regular file (because you can't write to directories).
-- int MFS_Read(int inum, char *buffer, int block): MFS_Read() reads
+- `int MFS_Read(int inum, char *buffer, int block)`: `MFS_Read()` reads
 a block specified by `block` into the buffer from file specified by
 `inum`. The routine should work for either a file or directory;
 directories should return data in the format specified by
-MFS_DirEnt_t. Success: 0, failure: -1. Failure modes: invalid inum,
+`MFS_DirEnt_t`. Success: 0, failure: -1. Failure modes: invalid inum,
 invalid block. 
-- int MFS_Creat(int pinum, int type, char *name): MFS_Creat() makes a
+- `int MFS_Creat(int pinum, int type, char *name)`: `MFS_Creat()` makes a
 file (`type == MFS_REGULAR_FILE`) or directory (`type == MFS_DIRECTORY`)
-in the parent directory specified by *pinum* of name *name*. Returns 0 on
+in the parent directory specified by `pinum` of name `name`. Returns 0 on
 success, -1 on failure. Failure modes: pinum does not exist, or name is too
 long. If `name` already exists, return success (think about why).
-- int MFS_Unlink(int pinum, char *name): MFS_Unlink() removes the file or
+- `int MFS_Unlink(int pinum, char *name)`: `MFS_Unlink()` removes the file or
 directory `name` from the directory specified by `pinum`. 0 on success, -1
 on failure. Failure modes: pinum does not exist, directory is NOT empty. Note
 that the name not existing is NOT a failure by our definition (think about why
 this might be). 
-- int MFS_Shutdown(): MFS_Shutdown() just tells the server to force all
-of its data structures to disk and shutdown by calling exit(0). This interface
+- `int MFS_Shutdown()`: `MFS_Shutdown()` just tells the server to force all
+of its data structures to disk and shutdown by calling `exit(0)`. This interface
 will mostly be used for testing purposes.
 
 
@@ -114,7 +115,7 @@ will mostly be used for testing purposes.
 
 The key behavior implemented by the server is *idempotency*.
 Specifically, on any change to the file system state (such as a
-MFS_Write, MFS_Creat, or MFS_Unlink), all the dirtied buffers in the
+`MFS_Write`, `MFS_Creat`, or `MFS_Unlink`), all the dirtied buffers in the
 server are committed to the disk.  The server can achieved this end by
 calling `fsync()` on the file system image. Thus, before returning a
 success code, the file system should always `fsync()` the image.
@@ -146,7 +147,7 @@ The command line arguments to your file server are to be interpreted as follows.
 If the file system image does not exist, you should create it and properly
 initialize it to include an empty root directory.
 
-Your client library should be called libmfs.so. It should implement
+Your client library should be called `libmfs.so`. It should implement
 the interface as specified by `mfs.h`, and in particular deal with
 the case where the server does not reply in a timely fashion; the way
 it deals with that is simply by retrying the operation, after a
