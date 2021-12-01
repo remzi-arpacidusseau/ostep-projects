@@ -17,7 +17,7 @@ representation of your data structures; you should use these system calls
 to access it: `open(), read(), write(), lseek(), close(), fsync().`
 
 To access the file server, you will be building a client library. The
-interface that the library supports is defined in XXX MFS.H XXX.  The
+interface that the library supports is defined in [mfs.h](mfs.h).  The
 library should be called `libmfs.so`, and any programs that wish to access
 your file server will link with it and call its various routines.
 
