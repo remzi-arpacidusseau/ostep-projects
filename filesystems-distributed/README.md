@@ -125,7 +125,8 @@ success code, the file system should always `fsync()` the image.
 
 Now you might be wondering: why do this? Simple: if the server crashes, the
 client can simply timeout and retry the operation and know that it is OK to do
-so. Read this chapter on NFS for details.
+so. Read [this chapter](https://pages.cs.wisc.edu/~remzi/OSTEP/dist-nfs.pdf) on NFS
+for details. 
 
 Now you might be wondering: how do I implement a timeout? Simple, with the
 `select()` interface. The `select()` calls allows you to wait for a reply
