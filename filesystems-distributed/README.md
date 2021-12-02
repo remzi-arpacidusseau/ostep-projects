@@ -24,11 +24,13 @@ your file server will link with it and call its various routines.
 ## On-Disk File System: A Log-Structured File System
 
 Your on-disk file system structures should roughly follow that of the
-log-structured file system discussed in class. On-disk, the first structure
-should be a singular checkpoint region. The checkpoint region should contain a
-disk pointer to the current end of the log; it should also contain pointers 
-to pieces of the inode map (assume there are a maximum of 4096 inodes; assume
-each piece of the inode map has 16 entries).
+log-structured file system discussed
+[here](https://pages.cs.wisc.edu/~remzi/OSTEP/file-lfs.pdf). On-disk,
+the first structure should be a singular checkpoint region. The
+checkpoint region should contain a disk pointer to the current end of
+the log; it should also contain pointers to pieces of the inode map
+(assume there are a maximum of 4096 inodes; assume each piece of the
+inode map has 16 entries).
 
 Other than the checkpoint region, your on-disk image just consists of an
 ever-growing log (i.e., we won't be implementing cleaning). Thus, whenever you
@@ -60,11 +62,12 @@ that are not yet in use (in an allocated 4-KB directory block), the
 inode number should be set to -1. This way, utilities can scan through
 the entries to check if they are valid.
 
-When your server is started, it is passed the name of the file system image
-file. If this file does not exist, the file server should create it, and
-initialize it properly, and force it to disk. Such initialization includes
-creating the checkpoint region, the initial inode map, and creating a single
-root directory with proper . and .. entries. The root inode number should be 0.
+When your server is started, it is passed the name of the file system
+image file. If this file does not exist, the file server should create
+it, and initialize it properly, and force it to disk. Such
+initialization includes creating the checkpoint region, the initial
+inode map, and creating a single root directory with proper `.` and
+`..` entries. The root inode number should be 0.
 
 When booting off of an existing image, your server should read in the
 checkpoint region (and keep an in-memory version of it), as well as the entire
@@ -124,7 +127,6 @@ Now you might be wondering: why do this? Simple: if the server crashes, the
 client can simply timeout and retry the operation and know that it is OK to do
 so. Read this chapter on NFS for details.
 
-
 Now you might be wondering: how do I implement a timeout? Simple, with the
 `select()` interface. The `select()` calls allows you to wait for a reply
 on a certain socket descriptor (or more than one, though that is not needed
@@ -157,9 +159,11 @@ timeout of some kind (default: five second timeout).
 
 To get you going, we have written some simple UDP code that can send a
 message and then receive a reply from a client to a server. It can be found in
-the XXX.
+[here](https://github.com/remzi-arpacidusseau/ostep-code/tree/master/dist-intro).
 
-How to make a shared library: [here](https://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html)
+You'll also have to learn how to make a shared library. Read [here](https://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html) for more information.
+
+
 
 
 
