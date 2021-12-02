@@ -156,6 +156,14 @@ the case where the server does not reply in a timely fashion; the way
 it deals with that is simply by retrying the operation, after a
 timeout of some kind (default: five second timeout).
 
+## Relevant Chapters
+
+Read these:
+- [Log-structured File System](https://pages.cs.wisc.edu/~remzi/OSTEP/file-lfs.pdf)
+- [Distributed Systems](https://pages.cs.wisc.edu/~remzi/OSTEP/dist-intro.pdf)
+- [Distributed File System: NFS](https://pages.cs.wisc.edu/~remzi/OSTEP/dist-nfs.pdf)
+
+
 ## Some Helper Code
 
 To get you going, we have written some simple UDP code that can send a
