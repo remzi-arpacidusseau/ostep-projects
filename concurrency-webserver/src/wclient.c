@@ -59,10 +59,14 @@ void client_print(int fd) {
     }
     
     // Read and display the HTTP Body 
-    n = readline_or_die(fd, buf, MAXBUF);
-    while (n > 0) {
-	printf("%s", buf);
-	n = readline_or_die(fd, buf, MAXBUF);
+    int capacity = sizeof(buf) - 1;
+    n = read_or_die(fd, buf, capacity);
+    while (n > 0)
+    {
+        buf[n] = '\0';
+        printf("%s", buf);
+
+        n = read_or_die(fd, buf, capacity);
     }
 }
 
