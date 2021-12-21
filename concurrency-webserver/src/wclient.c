@@ -61,8 +61,7 @@ void client_print(int fd) {
     // Read and display the HTTP Body 
     int capacity = sizeof(buf) - 1;
     n = read_or_die(fd, buf, capacity);
-    while (n > 0)
-    {
+    while (n > 0) {
         buf[n] = '\0';
         printf("%s", buf);
 
