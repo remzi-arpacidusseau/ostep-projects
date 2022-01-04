@@ -10,7 +10,7 @@ typedef struct linkedList
   struct linkedList *next;
 } LinkedList;
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[argc+1])
 {
   if (argc > 3)
   {

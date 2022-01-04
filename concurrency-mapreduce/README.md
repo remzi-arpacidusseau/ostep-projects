@@ -274,7 +274,3 @@ Your code will first be measured for correctness, ensuring that it performs
 the maps and reductions correctly. If you pass the correctness tests, your
 code will be tested for performance; higher performance will lead to better
 scores.
-
-
-
-
