@@ -52,7 +52,7 @@ This command assumes you have [MacPorts](https://www.macports.org/)
 installed. If you don't, go to the [MacPorts install
 page](https://www.macports.org/install.php) and follow instructions first. 
 
-Th command further assumes that the path to port (usually `/opt/local/bin`) is
+The command further assumes that the path to port (usually `/opt/local/bin`) is
 in your path. You should probably add this directory to your path anyhow; the
 `qemu` software will get installed there too.
 
