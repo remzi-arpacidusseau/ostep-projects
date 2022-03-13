@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/types.h>
 
 
 char sep[2] = " \n";
@@ -28,7 +29,32 @@ void run_cd(char *args) {
 }
 
 
+int run_path(char *buffer, char **paths) {
+    int size = 1;
+    paths = malloc(size * sizeof(char **));
+    if (paths == NULL) print_error_and_exit();
+
+    int i = 0;
+    while (buffer != NULL && *buffer != '\0') {
+        char *path = strsep(&buffer, " ");
+        if (i >=  size) {
+            size = 2 * size;
+            paths = realloc(paths, size * sizeof(char **));
+            if (paths == NULL) print_error_and_exit();
+        }
+        paths[i] = malloc(strlen(path));
+        strcpy(paths[i], path);
+        ++i;
+    }
+    return i;
+}
+
+
 int main(int argc, char *argv[]) {
+    char **paths = NULL;
+    int num_paths = run_path("/bin", paths);
+    if (num_paths != 1) print_error_and_exit();
+
     bool interactive = true;
     FILE *fin;
     if (argc > 2) {
@@ -43,8 +69,6 @@ int main(int argc, char *argv[]) {
         }
     } else fin = stdin;
 
-    // TODO: initialize PATH=/bin
-
     char *line = NULL;
     size_t len;
     int num_lines = -1;
@@ -52,13 +76,13 @@ int main(int argc, char *argv[]) {
         if (interactive) printf("wish> ");
         num_lines = getline(&line, &len, fin);
         // TODO:
-        // * execute built-in commands: cd (1 arg), path (any args, overwrites path)
         // * look up executables in path with access
         // * execute commands with fork, execv, wait/waitpid
         // * implement redirection, parallel commands, etc.
         char *command = strsep(&line, sep);
         if (strcmp(command, "exit") == 0) run_exit(line);
         else if (strcmp(command, "cd") == 0) run_cd(line);
+        else if (strcmp(command, "path") == 0) num_paths = run_path(line, paths);
         else print_error_and_exit();
     } while (num_lines != -1);
 }
