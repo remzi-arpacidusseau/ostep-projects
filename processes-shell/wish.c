@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 
 char sep[2] = " \n";
@@ -17,6 +18,13 @@ void print_error_and_exit() {
 void run_exit(char *args) {
     if (args != NULL && *args != '\0') print_error_and_exit();
     exit(0);
+}
+
+
+void run_cd(char *args) {
+    char *path = strsep(&args, sep);
+    if (path == NULL || (args != NULL && *args != '\0')) print_error_and_exit();
+    if (chdir(path) == -1) print_error_and_exit();
 }
 
 
@@ -50,6 +58,7 @@ int main(int argc, char *argv[]) {
         // * implement redirection, parallel commands, etc.
         char *command = strsep(&line, sep);
         if (strcmp(command, "exit") == 0) run_exit(line);
+        else if (strcmp(command, "cd") == 0) run_cd(line);
         else print_error_and_exit();
     } while (num_lines != -1);
 }
