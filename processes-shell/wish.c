@@ -88,7 +88,9 @@ void run_exec(char *cmd, char *args, int num_paths, StringList *paths) {
             execv(path, cmd_args);
             return;
         } else if (pid > 0) {  // parent
-            waitpid(pid, NULL, 0);
+            int wstatus;
+            if (waitpid(pid, &wstatus, 0) == -1) exit(1);
+            if (!WIFEXITED(wstatus) || WEXITSTATUS(wstatus) != 0) exit(WEXITSTATUS(wstatus));
             return;
         } else print_error_and_exit();
     }
