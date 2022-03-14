@@ -45,6 +45,7 @@ StringList *parse_args(char *buffer) {
         strcpy(args->strs[i], arg);
         ++i;
     }
+    args->size = i;
     return args;
 }
 
@@ -79,21 +80,45 @@ void run_exec(char *cmd, char *args, int num_paths, StringList *paths) {
         strcat(path, cmd);
         if (access(path, X_OK) != 0) continue;
 
+        FILE *fout = stdout;
+        StringList *parsed_args = parse_args(args);
+        char **cmd_args = malloc((2 + parsed_args->size) * sizeof(char *));
+        if (cmd_args == NULL) print_error();
+        cmd_args[0] = cmd;
+        for (int j = 1; j < 1 + parsed_args->size; ++j) {
+            char *arg = parsed_args->strs[j - 1];
+            if (arg != NULL && strcmp(arg, ">") == 0) {
+                if (j != parsed_args->size - 1) print_error();
+                char *filename = parsed_args->strs[parsed_args->size - 1];
+                fout = fopen(filename, "w");
+                if (fout == NULL) print_error();
+                break;
+            }
+            cmd_args[j] = arg;
+        }
+        cmd_args[1 + parsed_args->size] = NULL;
+
+        int pipefd[2];
+        if (pipe(pipefd) == -1) print_error();
         pid_t pid = fork();
         if (pid == 0) {  // child
-            StringList *parsed_args = parse_args(args);
-            char **cmd_args = malloc((2 + parsed_args->size) * sizeof(char *));
-
-            if (cmd_args == NULL) print_error();
-            cmd_args[0] = cmd;
-            for (int i = 1; i < 1 + parsed_args->size; ++i) cmd_args[i] = parsed_args->strs[i - 1];
-            cmd_args[1 + parsed_args->size] = NULL;
+            if (dup2(pipefd[1], STDOUT_FILENO) == -1) print_error();
+            if (close(pipefd[0]) == -1 || close(pipefd[1] == -1)) print_error();
             execv(path, cmd_args);
             return;
         } else if (pid > 0) {  // parent
+            if (close(pipefd[1]) == -1) print_error();
+            char *line = NULL;
+            size_t len;
+            FILE *fin = fdopen(pipefd[0], "r");
+            if (fin == NULL) print_error();
+            while (getline(&line, &len, fin) > 0) {
+                fprintf(fout, "%s", line);  // TODO: `ls` has newline between items
+            }
+
             int wstatus;
             if (waitpid(pid, &wstatus, 0) == -1) exit(1);
-            if (!WIFEXITED(wstatus) || WEXITSTATUS(wstatus) != 0) exit(WEXITSTATUS(wstatus));
+            if (!WIFEXITED(wstatus)) exit(WEXITSTATUS(wstatus));
             return;
         } else print_error();
     }
@@ -122,10 +147,6 @@ int main(int argc, char *argv[]) {
     size_t len;
     if (interactive) printf("wish> ");
     while (getline(&line, &len, fin) != -1) {
-        // TODO:
-        // * look up executables in path with access
-        // * execute commands with fork, execv, wait/waitpid
-        // * implement redirection, parallel commands, etc.
         char *cmd = strsep(&line, sep);
         if (strcmp(cmd, "exit") == 0) run_exit(line);
         else if (strcmp(cmd, "cd") == 0) run_cd(line);
