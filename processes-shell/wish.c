@@ -75,21 +75,22 @@ void run_exec(char *cmd, char *args, int num_paths, StringList *paths) {
         path = strcpy(path, paths->strs[i]);
         strcat(path, "/");
         strcat(path, cmd);
-        if (access(path, X_OK) == 0) {
-            pid_t pid = fork();
-            if (pid == 0) {  // child
-                StringList *parsed_args = parse_args(args);
-                char **cmd_args = malloc((2 + parsed_args->size) * sizeof(char *));
-                if (cmd_args == NULL) print_error_and_exit();
-                cmd_args[0] = cmd;
-                for (int i = 1; i < 1 + parsed_args->size; ++i) cmd_args[i] = parsed_args->strs[i - 1];
-                cmd_args[1 + parsed_args->size] = NULL;
-                execv(path, cmd_args);
-            } else {  // parent
-                waitpid(pid, NULL, 0);
-            }
+        if (access(path, X_OK) != 0) continue;
+
+        pid_t pid = fork();
+        if (pid == 0) {  // child
+            StringList *parsed_args = parse_args(args);
+            char **cmd_args = malloc((2 + parsed_args->size) * sizeof(char *));
+            if (cmd_args == NULL) print_error_and_exit();
+            cmd_args[0] = cmd;
+            for (int i = 1; i < 1 + parsed_args->size; ++i) cmd_args[i] = parsed_args->strs[i - 1];
+            cmd_args[1 + parsed_args->size] = NULL;
+            execv(path, cmd_args);
             return;
-        }
+        } else if (pid > 0) {  // parent
+            waitpid(pid, NULL, 0);
+            return;
+        } else print_error_and_exit();
     }
     print_error_and_exit();
 }
