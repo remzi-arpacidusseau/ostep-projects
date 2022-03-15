@@ -17,9 +17,8 @@ char sep[2] = " \n";
 char error_message[30] = "An error has occurred\n";
 
 
-void print_error_and_exit() {
+void print_error() {
     fprintf(stderr, error_message, strlen(error_message));
-    exit(1);
 }
 
 
@@ -27,11 +26,11 @@ StringList *parse_args(char *buffer) {
     StringList *args = malloc(sizeof(StringList));
     args->size = 0;
     args->strs = NULL;
-    if (buffer == NULL) return args;
+    if (buffer == NULL || *buffer == '\0' || *buffer == '\n') return args;
 
     args->size = 1;
     args->strs = malloc(sizeof(char *));
-    if (args->strs == NULL) print_error_and_exit();
+    if (args->strs == NULL) print_error();
 
     int i = 0;
     while (buffer != NULL && *buffer != '\0') {
@@ -39,10 +38,10 @@ StringList *parse_args(char *buffer) {
         if (i >=  args->size) {
             args->size *= 2;
             args->strs = realloc(args->strs, args->size * sizeof(char *));
-            if (args->strs == NULL) print_error_and_exit();
+            if (args->strs == NULL) print_error();
         }
         args->strs[i] = malloc(strlen(arg));
-        if (args->strs[i] == NULL) print_error_and_exit();
+        if (args->strs[i] == NULL) print_error();
         strcpy(args->strs[i], arg);
         ++i;
     }
@@ -51,15 +50,18 @@ StringList *parse_args(char *buffer) {
 
 
 void run_exit(char *args) {
-    if (args != NULL && *args != '\0') print_error_and_exit();
+    if (args != NULL && *args != '\0') print_error();
     exit(0);
 }
 
 
 void run_cd(char *args) {
     char *path = strsep(&args, sep);
-    if (path == NULL || (args != NULL && *args != '\0')) print_error_and_exit();
-    if (chdir(path) == -1) print_error_and_exit();
+    if (path == NULL || (args != NULL && *args != '\0')) {
+        print_error();
+        return;
+    }
+    if (chdir(path) == -1) print_error();
 }
 
 
@@ -71,7 +73,7 @@ StringList *run_path(char *buffer) {
 void run_exec(char *cmd, char *args, int num_paths, StringList *paths) {
     for (int i = 0; i < num_paths; ++i) {
         char *path = malloc(strlen(paths->strs[i]) + 1 + strlen(cmd));
-        if (path == NULL) print_error_and_exit();
+        if (path == NULL) print_error();
         path = strcpy(path, paths->strs[i]);
         strcat(path, "/");
         strcat(path, cmd);
@@ -81,7 +83,8 @@ void run_exec(char *cmd, char *args, int num_paths, StringList *paths) {
         if (pid == 0) {  // child
             StringList *parsed_args = parse_args(args);
             char **cmd_args = malloc((2 + parsed_args->size) * sizeof(char *));
-            if (cmd_args == NULL) print_error_and_exit();
+
+            if (cmd_args == NULL) print_error();
             cmd_args[0] = cmd;
             for (int i = 1; i < 1 + parsed_args->size; ++i) cmd_args[i] = parsed_args->strs[i - 1];
             cmd_args[1 + parsed_args->size] = NULL;
@@ -92,26 +95,25 @@ void run_exec(char *cmd, char *args, int num_paths, StringList *paths) {
             if (waitpid(pid, &wstatus, 0) == -1) exit(1);
             if (!WIFEXITED(wstatus) || WEXITSTATUS(wstatus) != 0) exit(WEXITSTATUS(wstatus));
             return;
-        } else print_error_and_exit();
+        } else print_error();
     }
-    print_error_and_exit();
+    print_error();
 }
 
 
 int main(int argc, char *argv[]) {
     StringList *paths = run_path("/bin");
-    if (paths->size != 1) print_error_and_exit();
 
     bool interactive = true;
     FILE *fin;
     if (argc > 2) {
-        fprintf(stderr, "too many arguments\n");
+        print_error();
         return 1;
     } else if (argc == 2) {
         interactive = false;
         fin = fopen(argv[1], "r");
         if (fin == NULL) {
-            fprintf(stderr, "file not found\n");
+            print_error();
             return 1;
         }
     } else fin = stdin;
