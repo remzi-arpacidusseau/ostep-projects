@@ -29,6 +29,7 @@ typedef struct ExecNode {
     Token *cmd;
     int n_args;
     Token **args;
+    Token *out;
 } ExecNode;
 
 typedef struct Node {
