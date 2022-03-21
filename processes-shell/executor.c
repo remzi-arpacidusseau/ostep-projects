@@ -20,6 +20,13 @@ void exec_path(PathNode *new_path, PathNode *old_path) {
     old_path->paths = new_path->paths;
 }
 
+void exec_exec(ExecNode *exec_node, PathNode *path) {
+    print_token(exec_node->cmd, true);
+    for (int i = 0; i < exec_node->n_args; ++i) {
+        print_token(exec_node->args[i], true);
+    }
+}
+
 int execute(Node *node, PathNode *path) {
     if (!node) error();
     switch (node->node_type) {
@@ -32,6 +39,9 @@ int execute(Node *node, PathNode *path) {
             break;
         case path_t:
             exec_path(node->path_node, path);
+            break;
+        case exec_t:
+            exec_exec(node->exec_node, path);
             break;
         default:
             error();

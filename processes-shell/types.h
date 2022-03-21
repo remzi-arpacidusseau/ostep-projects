@@ -3,7 +3,7 @@
 
 #include <sys/types.h>
 
-enum NodeType { exit_t, cd_t, path_t };
+enum NodeType { exit_t, cd_t, path_t, exec_t };
 
 enum TokType { sym_t, str_t };
 
@@ -37,6 +37,7 @@ typedef struct Node {
         ExitNode *exit_node;
         CdNode *cd_node;
         PathNode *path_node;
+        ExecNode *exec_node;
     };
 } Node;
 
