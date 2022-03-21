@@ -7,7 +7,7 @@
 
 bool exec_cd(Token *);
 
-bool exec_path(PathNode *, PathNode *);
+void exec_path(PathNode *, PathNode *);
 
 int execute(Node *, PathNode *);
 

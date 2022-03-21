@@ -15,10 +15,9 @@ bool exec_cd(Token *path) {
     return true;
 }
 
-bool exec_path(PathNode *new_path, PathNode *old_path) {
-    for (int i = 0; i < new_path->n_paths; ++i) {
-        print_token((new_path->paths)[i], true);
-    }
+void exec_path(PathNode *new_path, PathNode *old_path) {
+    old_path->n_paths = new_path->n_paths;
+    old_path->paths = new_path->paths;
 }
 
 int execute(Node *node, PathNode *path) {
@@ -32,9 +31,7 @@ int execute(Node *node, PathNode *path) {
             }
             break;
         case path_t:
-            if (!exec_path(node->path_node, path)) {
-                warn();
-            }
+            exec_path(node->path_node, path);
             break;
         default:
             error();

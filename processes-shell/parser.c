@@ -49,14 +49,35 @@ PathNode *parse_path(size_t len, Token **toks) {
         path_node->n_paths = 0;
         path_node->paths = malloc((len - 1) * sizeof(char *));
 
-        int i = 1;
-        while (1 + path_node->n_paths < len && (toks)[i]->tok_type == str_t) {
+        while (1 + path_node->n_paths < len && toks[path_node->n_paths + 1]->tok_type == str_t) {
             (path_node->paths)[path_node->n_paths] = toks[path_node->n_paths + 1];
             ++(path_node->n_paths);
         }
     }
 
     return path_node;
+}
+
+ExecNode *parse_exec(size_t len, Token **toks) {
+    ExecNode *exec_node = NULL;
+
+    if (len >= 1 &&
+        toks[0]->tok_type == str_t &&
+        toks[0]->len > 0
+    ) {
+        exec_node = malloc(sizeof(ExecNode));
+        exec_node->len_cmd = toks[0]->len;
+        exec_node->cmd = toks[0];
+        exec_node->n_args = 0;
+        exec_node->args = malloc((len - 1) * sizeof(char *));
+
+        while (1 + exec_node->n_args < len && toks[exec_node->n_args + 1]->tok_type == str_t) {
+            (exec_node->args)[exec_node->n_args] = toks[exec_node->n_args + 1];
+            ++(exec_node->n_args);
+        }
+    }
+
+    return exec_node;
 }
 
 Node *parse(size_t len, Token **toks) {

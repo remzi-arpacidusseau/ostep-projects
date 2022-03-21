@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     while ((len = getline(&line, &_dummy, fin)) != -1) {
         int n_toks = tokenize(len, line, toks);
         if (node = parse(n_toks, toks)) {
-            execute(node);
+            execute(node, &path);
         }
         else warn();
     }

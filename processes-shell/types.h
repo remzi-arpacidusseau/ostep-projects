@@ -24,6 +24,13 @@ typedef struct PathNode {
     Token **paths;
 } PathNode;
 
+typedef struct ExecNode {
+    int len_cmd;
+    Token *cmd;
+    int n_args;
+    Token **args;
+} ExecNode;
+
 typedef struct Node {
     int node_type;
     union {
