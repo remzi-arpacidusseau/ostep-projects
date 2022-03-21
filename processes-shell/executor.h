@@ -5,8 +5,10 @@
 
 #include "types.h"
 
-bool exec_cd(Token *path);
+bool exec_cd(Token *);
 
-int execute(Node *node);
+bool exec_path(PathNode *, PathNode *);
+
+int execute(Node *, PathNode *);
 
 #endif
