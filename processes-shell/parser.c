@@ -40,7 +40,7 @@ CdNode *parse_cd(size_t len, Token **toks) {
 PathNode *parse_path(size_t len, Token **toks) {
     PathNode *path_node = NULL;
 
-    if (len >= 2 &&
+    if (len >= 1 &&
         toks[0]->tok_type == str_t &&
         toks[0]->len == 4 &&
         !strncmp(toks[0]->val, "path", toks[0]->len)
@@ -69,7 +69,7 @@ ExecNode *parse_exec(size_t len, Token **toks) {
         exec_node->len_cmd = toks[0]->len;
         exec_node->cmd = toks[0];
         exec_node->n_args = 0;
-        exec_node->args = malloc((len - 1) * sizeof(char *));
+        exec_node->args = malloc((len - 1) * sizeof(Token *));
 
         while (1 + exec_node->n_args < len && toks[exec_node->n_args + 1]->tok_type == str_t) {
             (exec_node->args)[exec_node->n_args] = toks[exec_node->n_args + 1];

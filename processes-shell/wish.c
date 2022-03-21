@@ -13,9 +13,9 @@
 #define MAX_LINE_LEN 4096
 
 int main(int argc, char **argv) {
-    char *binsh = malloc(8);
-    strcpy(binsh, "/bin/sh");
-    Token *p = &((Token) { .tok_type = str_t, .len = 7, .val = binsh });
+    char *bin = malloc(5);
+    strcpy(bin, "/bin");
+    Token *p = &((Token) { .tok_type = str_t, .len = 4, .val = bin });
     PathNode path = { .n_paths = 1, .paths = &p };
 
     size_t len, _dummy;

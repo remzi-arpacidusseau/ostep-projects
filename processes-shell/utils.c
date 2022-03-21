@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "utils.h"
 
 void print_token(Token *tok, bool newline) {
@@ -16,4 +18,12 @@ void warn() {
 void error() {
     printf("error\n");
     exit(1);
+}
+
+char *tok_to_str(Token *tok) {
+    if (tok->tok_type != str_t) return NULL;
+    char *str = malloc(1 + tok->len);
+    strncpy(str, tok->val, tok->len);
+    str[tok->len] = '\0';
+    return str;
 }

@@ -13,4 +13,6 @@ void warn();
 
 void error();
 
+char *tok_to_str(Token *tok);
+
 #endif
