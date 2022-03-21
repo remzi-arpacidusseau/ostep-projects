@@ -12,11 +12,11 @@ void print_token(Token *tok, bool newline) {
 }
 
 void warn() {
-    printf("error\n");
+    fprintf(stderr, "An error has occurred\n");
 }
 
 void error() {
-    printf("error\n");
+    fprintf(stderr, "error\n");
     exit(1);
 }
 
