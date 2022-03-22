@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
     if (interactive) printf("wish> ");
     while ((len = getline(&line, &_dummy, fin)) != -1) {
         int n_toks = tokenize(len, line, toks);
-        if (node = parse(n_toks, toks)) {
+        if ((node = parse(n_toks, toks))) {
             execute(node, &path);
         }
         else warn();

@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-I. -g -O0
+CFLAGS=-I. -g -O0 -Wall
 DEPS = executor.h parser.h tokenizer.h types.h utils.h
 OBJ = executor.o parser.o tokenizer.o utils.o wish.o
 

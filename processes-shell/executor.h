@@ -11,6 +11,6 @@ void exec_path(PathNode *, PathNode *);
 
 void exec_exec(ExecNode *, PathNode *);
 
-int execute(Node *, PathNode *);
+void execute(Node *, PathNode *);
 
 #endif

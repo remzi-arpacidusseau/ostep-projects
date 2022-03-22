@@ -8,7 +8,6 @@
 
 int tokenize(size_t len, char *line, Token **toks) {
     int count = 0;
-    size_t pos = 0;
     line += strspn(line, " \n");
     while (strcmp(line, "")) {
         toks[count] = malloc(sizeof(Token));

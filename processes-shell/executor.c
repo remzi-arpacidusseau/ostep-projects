@@ -102,8 +102,12 @@ void exec_exec(ExecNode *exec_node, PathNode *path) {
     warn();
 }
 
-int execute(Node *node, PathNode *path) {
-    if (!node) error();
+void execute(Node *node, PathNode *path) {
+    if (!node) {
+        warn();
+        return;
+    }
+
     switch (node->node_type) {
         case empty_t:
             break;

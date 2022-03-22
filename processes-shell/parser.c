@@ -12,7 +12,6 @@ bool parse_exit(size_t len, Token **toks) {
 CdNode *parse_cd(size_t len, Token **toks) {
     CdNode *cd_node = NULL;
 
-    char *tok = malloc(len);
     if (len == 2 && toks[0]->tok_type == cd_tok) {
         cd_node = malloc(sizeof(CdNode));
         cd_node->path = toks[1];
@@ -90,17 +89,19 @@ Node *parse(size_t len, Token **toks) {
     } else if (parse_exit(len, toks)) {
         node->node_type = exit_t;
         return node;
-    } else if (cd_node = parse_cd(len, toks)) {
+    } else if ((cd_node = parse_cd(len, toks))) {
         node->node_type = cd_t;
         node->cd_node = cd_node;
-    } else if (path_node = parse_path(len, toks)) {
+    } else if ((path_node = parse_path(len, toks))) {
         node->node_type = path_t;
         node->path_node = path_node;
-    } else if (exec_node = parse_exec(len, toks)) {
+    } else if ((exec_node = parse_exec(len, toks))) {
         node->node_type = exec_t;
         node->exec_node = exec_node;
     } else {
         free(node);
         return NULL;
     }
+
+    return node;
 }
