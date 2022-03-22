@@ -24,11 +24,7 @@ CdNode *parse_cd(size_t len, Token **toks) {
 PathNode *parse_path(size_t len, Token **toks) {
     PathNode *path_node = NULL;
 
-    if (len >= 1 &&
-        toks[0]->tok_type == ident_tok &&
-        toks[0]->len == 4 &&
-        !strncmp(toks[0]->val, "path", toks[0]->len)
-    ) {
+    if (len >= 1 && toks[0]->tok_type == path_tok) {
         path_node = malloc(sizeof(PathNode));
         path_node->n_paths = 0;
         path_node->paths = malloc((len - 1) * sizeof(char *));
