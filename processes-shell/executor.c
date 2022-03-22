@@ -105,6 +105,8 @@ void exec_exec(ExecNode *exec_node, PathNode *path) {
 int execute(Node *node, PathNode *path) {
     if (!node) error();
     switch (node->node_type) {
+        case empty_t:
+            break;
         case exit_t:
             exit(0);
         case cd_t:

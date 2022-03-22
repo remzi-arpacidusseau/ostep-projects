@@ -23,11 +23,15 @@ int main(int argc, char **argv) {
     bool interactive;
     FILE *fin;
     if (argc > 2) {
-        error();
+        warn();
+        return 1;
     } else if (argc == 2) {
         interactive = false;
         fin = fopen(argv[1], "r");
-        if (fin == NULL) error();
+        if (fin == NULL) {
+            warn();
+            return 1;
+        }
     } else {
         interactive = true;
         fin = stdin;

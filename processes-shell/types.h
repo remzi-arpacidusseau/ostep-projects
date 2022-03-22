@@ -3,7 +3,7 @@
 
 #include <sys/types.h>
 
-enum NodeType { exit_t, cd_t, path_t, exec_t };
+enum NodeType { empty_t, exit_t, cd_t, path_t, exec_t };
 
 enum TokType { sym_t, str_t };
 

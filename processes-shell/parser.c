@@ -108,7 +108,9 @@ Node *parse(size_t len, Token **toks) {
     CdNode *cd_node;
     PathNode *path_node;
     ExecNode *exec_node;
-    if (exit_node = parse_exit(len, toks)) {
+    if (len == 0) {
+        node->node_type = empty_t;
+    } else if (exit_node = parse_exit(len, toks)) {
         node->node_type = exit_t;
         node->exit_node = exit_node;
         return node;
