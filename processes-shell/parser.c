@@ -13,11 +13,7 @@ CdNode *parse_cd(size_t len, Token **toks) {
     CdNode *cd_node = NULL;
 
     char *tok = malloc(len);
-    if (len >= 2 &&
-        toks[0]->tok_type == ident_tok &&
-        toks[0]->len == 2 &&
-        !strncmp(toks[0]->val, "cd", toks[0]->len)
-    ) {
+    if (len == 2 && toks[0]->tok_type == cd_tok) {
         cd_node = malloc(sizeof(CdNode));
         cd_node->path = toks[1];
     }
