@@ -5,7 +5,7 @@
 
 enum NodeType { empty_t, exit_t, cd_t, path_t, exec_t };
 
-enum TokType { rangle_tok, exit_tok, cd_tok, path_tok, ident_tok };
+enum TokType { rangle_tok, ampand_tok, exit_tok, cd_tok, path_tok, ident_tok };
 
 typedef struct Token {
     int tok_type;
@@ -30,13 +30,19 @@ typedef struct ExecNode {
     Token *out;
 } ExecNode;
 
-typedef struct Node {
+typedef struct CommandNode {
     int node_type;
     union {
         CdNode *cd_node;
         PathNode *path_node;
         ExecNode *exec_node;
     };
-} Node;
+} CommandNode;
+
+typedef struct ParallelNode ParallelNode;
+typedef struct ParallelNode {
+    CommandNode *left;
+    ParallelNode *right;
+} ParallelNode;
 
 #endif

@@ -102,29 +102,34 @@ void exec_exec(ExecNode *exec_node, PathNode *path) {
     warn();
 }
 
-void execute(Node *node, PathNode *path) {
-    if (!node) {
+void exec_command(CommandNode *cmd_node, PathNode *path) {
+    if (!cmd_node) {
         warn();
         return;
     }
 
-    switch (node->node_type) {
+    switch (cmd_node->node_type) {
         case empty_t:
             break;
         case exit_t:
             exit(0);
         case cd_t:
-            if (!exec_cd(node->cd_node->path)) {
+            if (!exec_cd(cmd_node->cd_node->path)) {
                 warn();
             }
             break;
         case path_t:
-            exec_path(node->path_node, path);
+            exec_path(cmd_node->path_node, path);
             break;
         case exec_t:
-            exec_exec(node->exec_node, path);
+            exec_exec(cmd_node->exec_node, path);
             break;
         default:
             error();
     }
+}
+
+
+void exec_parallel(ParallelNode *parallel_node, PathNode *path) {
+    exec_command(parallel_node->left, path);
 }

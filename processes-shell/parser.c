@@ -5,6 +5,10 @@
 #include "parser.h"
 #include "utils.h"
 
+bool parse_empty(size_t len, Token **toks) {
+    return len == 0 || toks[0]->tok_type == ampand_tok;
+}
+
 bool parse_exit(size_t len, Token **toks) {
     return len == 1 && toks[0]->tok_type == exit_tok;
 }
@@ -12,7 +16,7 @@ bool parse_exit(size_t len, Token **toks) {
 CdNode *parse_cd(size_t len, Token **toks) {
     CdNode *cd_node = NULL;
 
-    if (len == 2 && toks[0]->tok_type == cd_tok) {
+    if (len >= 2 && toks[0]->tok_type == cd_tok) {
         cd_node = malloc(sizeof(CdNode));
         cd_node->path = toks[1];
     }
@@ -58,33 +62,30 @@ ExecNode *parse_exec(size_t len, Token **toks) {
         }
 
         // parse output redirection
-        if (exec_node->n_args == len - 3) {
-            if (
-                toks[exec_node->n_args + 1]->tok_type == rangle_tok &&
+        if (exec_node->n_args < len - 1 &&
+            toks[exec_node->n_args + 1]->tok_type == rangle_tok
+        ) {
+            if (exec_node->n_args < len - 2 &&
                 toks[exec_node->n_args + 2]->tok_type == ident_tok
             ) {
                 exec_node->out = toks[exec_node->n_args + 2];
             } else {
-                // free(exec_node);  // TODO: free recursively
                 return NULL;
             }
-        } else if (exec_node->n_args != len - 1) {
-            // free(exec_node);
-            return NULL;
         }
     }
 
     return exec_node;
 }
 
-Node *parse(size_t len, Token **toks) {
-    Node *node = malloc(sizeof(Node));
+CommandNode *parse_command(size_t len, Token **toks) {
+    CommandNode *node = malloc(sizeof(CommandNode));
     if (!node) error();
 
     CdNode *cd_node;
     PathNode *path_node;
     ExecNode *exec_node;
-    if (len == 0) {
+    if (parse_empty(len, toks)) {
         node->node_type = empty_t;
     } else if (parse_exit(len, toks)) {
         node->node_type = exit_t;
@@ -104,4 +105,48 @@ Node *parse(size_t len, Token **toks) {
     }
 
     return node;
+}
+
+ParallelNode *parse_parallel(size_t len, Token** toks) {
+    ParallelNode *parallel_node = NULL;
+
+    Token *path;
+    ExecNode *exec_node;
+    parallel_node = malloc(sizeof(ParallelNode));
+    if ((parallel_node->left = parse_command(len, toks))) {
+        int n_toks;
+        switch (parallel_node->left->node_type) {
+            case empty_t:
+                n_toks = 0;
+                break;
+            case exit_t:
+                n_toks = 1;
+                break;
+            case cd_t:
+                path = parallel_node->left->cd_node->path;
+                n_toks = (path == NULL) ? 1 : 2;
+                break;
+            case path_t:
+                n_toks = 1 + parallel_node->left->path_node->n_paths;
+                break;
+            case exec_t:
+                exec_node = parallel_node->left->exec_node;
+                n_toks = 1 + exec_node->n_args + (exec_node->out == NULL ? 0 : 2);
+                break;
+        }
+        toks += n_toks;
+        len -= n_toks;
+    }
+    if (len > 0) {
+        if (toks[0]->tok_type != ampand_tok) {
+            return NULL;
+        }
+        ++toks;
+        --len;
+        if (len > 1) {
+            parallel_node->right = parse_parallel(len, toks);
+        }
+    }
+
+    return parallel_node;
 }

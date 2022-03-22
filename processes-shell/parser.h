@@ -13,6 +13,8 @@ PathNode *parse_path(size_t, Token **);
 
 ExecNode *parse_exec(size_t, Token **);
 
-Node *parse(size_t, Token **);
+CommandNode *parse_command(size_t, Token **);
+
+ParallelNode *parse_parallel(size_t, Token **);
 
 #endif

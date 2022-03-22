@@ -17,6 +17,9 @@ int tokenize(size_t len, char *line, Token **toks) {
         if (*line == '>') {
             tok_size = 1;
             tok_type = rangle_tok;
+        } else if (*line == '&') {
+            tok_size = 1;
+            tok_type = ampand_tok;
         } else {
             tok_size = strcspn(line, " \n>");
             if (tok_size == 4 && !strncmp(line, "exit", 4)) {
