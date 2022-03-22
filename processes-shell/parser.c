@@ -5,20 +5,13 @@
 #include "parser.h"
 #include "utils.h"
 
-ExitNode *parse_exit(size_t len, Token **toks) {
-    ExitNode *exit_node = NULL;
-    char *tok = malloc(len);
-    if (len == 1 &&
+bool parse_exit(size_t len, Token **toks) {
+    return (
+        len == 1 &&
         toks[0]->tok_type == str_t &&
         toks[0]->len == 4 &&
         !strncmp(toks[0]->val, "exit", toks[0]->len)
-    ) {
-        exit_node = malloc(sizeof(ExitNode));
-        if (!exit_node) error();
-        exit_node = &((ExitNode) {});
-    }
-
-    return exit_node;
+    );
 }
 
 CdNode *parse_cd(size_t len, Token **toks) {
@@ -104,15 +97,13 @@ Node *parse(size_t len, Token **toks) {
     Node *node = malloc(sizeof(Node));
     if (!node) error();
 
-    ExitNode *exit_node;
     CdNode *cd_node;
     PathNode *path_node;
     ExecNode *exec_node;
     if (len == 0) {
         node->node_type = empty_t;
-    } else if (exit_node = parse_exit(len, toks)) {
+    } else if (parse_exit(len, toks)) {
         node->node_type = exit_t;
-        node->exit_node = exit_node;
         return node;
     } else if (cd_node = parse_cd(len, toks)) {
         node->node_type = cd_t;

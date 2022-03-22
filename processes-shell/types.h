@@ -13,8 +13,6 @@ typedef struct Token {
     char *val;
 } Token;
 
-typedef struct ExitNode {} ExitNode;
-
 typedef struct CdNode {
     Token *path;
 } CdNode;
@@ -35,7 +33,6 @@ typedef struct ExecNode {
 typedef struct Node {
     int node_type;
     union {
-        ExitNode *exit_node;
         CdNode *cd_node;
         PathNode *path_node;
         ExecNode *exec_node;
