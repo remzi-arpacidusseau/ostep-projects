@@ -20,7 +20,11 @@ int tokenize(size_t len, char *line, Token **toks) {
             tok_type = rangle_tok;
         } else {
             tok_size = strcspn(line, " \n>");
-            tok_type = ident_tok;
+            if (!strncmp(line, "exit", tok_size)) {
+                tok_type = exit_tok;
+            } else {
+                tok_type = ident_tok;
+            }
         }
         toks[count]->len = tok_size;
         toks[count]->val = line;

@@ -6,12 +6,7 @@
 #include "utils.h"
 
 bool parse_exit(size_t len, Token **toks) {
-    return (
-        len == 1 &&
-        toks[0]->tok_type == ident_tok &&
-        toks[0]->len == 4 &&
-        !strncmp(toks[0]->val, "exit", toks[0]->len)
-    );
+    return len == 1 && toks[0]->tok_type == exit_tok;
 }
 
 CdNode *parse_cd(size_t len, Token **toks) {
