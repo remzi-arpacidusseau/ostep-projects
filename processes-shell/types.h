@@ -5,7 +5,7 @@
 
 enum NodeType { empty_t, exit_t, cd_t, path_t, exec_t };
 
-enum TokType { sym_t, str_t };
+enum TokType { rangle_tok, ident_tok };
 
 typedef struct Token {
     int tok_type;

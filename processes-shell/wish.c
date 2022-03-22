@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
     // initialize path
     char *bin = malloc(5);
     strcpy(bin, "/bin");
-    Token *p = &((Token) { .tok_type = str_t, .len = 4, .val = bin });
+    Token *p = &((Token) { .tok_type = ident_tok, .len = 4, .val = bin });
     PathNode path = { .n_paths = 1, .paths = &p };
 
     // parse arguments

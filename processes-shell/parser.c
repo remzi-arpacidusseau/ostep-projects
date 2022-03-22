@@ -8,7 +8,7 @@
 bool parse_exit(size_t len, Token **toks) {
     return (
         len == 1 &&
-        toks[0]->tok_type == str_t &&
+        toks[0]->tok_type == ident_tok &&
         toks[0]->len == 4 &&
         !strncmp(toks[0]->val, "exit", toks[0]->len)
     );
@@ -19,7 +19,7 @@ CdNode *parse_cd(size_t len, Token **toks) {
 
     char *tok = malloc(len);
     if (len >= 2 &&
-        toks[0]->tok_type == str_t &&
+        toks[0]->tok_type == ident_tok &&
         toks[0]->len == 2 &&
         !strncmp(toks[0]->val, "cd", toks[0]->len)
     ) {
@@ -34,7 +34,7 @@ PathNode *parse_path(size_t len, Token **toks) {
     PathNode *path_node = NULL;
 
     if (len >= 1 &&
-        toks[0]->tok_type == str_t &&
+        toks[0]->tok_type == ident_tok &&
         toks[0]->len == 4 &&
         !strncmp(toks[0]->val, "path", toks[0]->len)
     ) {
@@ -42,7 +42,7 @@ PathNode *parse_path(size_t len, Token **toks) {
         path_node->n_paths = 0;
         path_node->paths = malloc((len - 1) * sizeof(char *));
 
-        while (1 + path_node->n_paths < len && toks[path_node->n_paths + 1]->tok_type == str_t) {
+        while (1 + path_node->n_paths < len && toks[path_node->n_paths + 1]->tok_type == ident_tok) {
             (path_node->paths)[path_node->n_paths] = toks[path_node->n_paths + 1];
             ++(path_node->n_paths);
         }
@@ -55,7 +55,7 @@ ExecNode *parse_exec(size_t len, Token **toks) {
     ExecNode *exec_node = NULL;
 
     if (len >= 1 &&
-        toks[0]->tok_type == str_t &&
+        toks[0]->tok_type == ident_tok &&
         toks[0]->len > 0
     ) {
         // initialize command
@@ -66,7 +66,7 @@ ExecNode *parse_exec(size_t len, Token **toks) {
         exec_node->args = malloc((len - 1) * sizeof(Token *));
 
         // parse arguments
-        while (1 + exec_node->n_args < len && toks[exec_node->n_args + 1]->tok_type == str_t) {
+        while (1 + exec_node->n_args < len && toks[exec_node->n_args + 1]->tok_type == ident_tok) {
             (exec_node->args)[exec_node->n_args] = toks[exec_node->n_args + 1];
             ++(exec_node->n_args);
         }
@@ -74,10 +74,8 @@ ExecNode *parse_exec(size_t len, Token **toks) {
         // parse output redirection
         if (exec_node->n_args == len - 3) {
             if (
-                toks[exec_node->n_args + 1]->tok_type == sym_t &&
-                toks[exec_node->n_args + 1]->len == 1 &&
-                *toks[exec_node->n_args + 1]->val == '>' &&
-                toks[exec_node->n_args + 2]->tok_type == str_t
+                toks[exec_node->n_args + 1]->tok_type == rangle_tok &&
+                toks[exec_node->n_args + 2]->tok_type == ident_tok
             ) {
                 exec_node->out = toks[exec_node->n_args + 2];
             } else {

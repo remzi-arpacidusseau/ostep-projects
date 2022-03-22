@@ -17,10 +17,10 @@ int tokenize(size_t len, char *line, Token **toks) {
         int tok_type;
         if (*line == '>') {
             tok_size = 1;
-            tok_type = sym_t;
+            tok_type = rangle_tok;
         } else {
             tok_size = strcspn(line, " \n>");
-            tok_type = str_t;
+            tok_type = ident_tok;
         }
         toks[count]->len = tok_size;
         toks[count]->val = line;

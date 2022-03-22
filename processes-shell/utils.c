@@ -21,7 +21,7 @@ void error() {
 }
 
 char *tok_to_str(Token *tok) {
-    if (tok->tok_type != str_t) return NULL;
+    if (tok->tok_type != ident_tok) return NULL;
     char *str = malloc(1 + tok->len);
     strncpy(str, tok->val, tok->len);
     str[tok->len] = '\0';

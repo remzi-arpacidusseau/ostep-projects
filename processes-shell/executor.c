@@ -8,7 +8,7 @@
 #include "utils.h"
 
 bool exec_cd(Token *path) {
-    if (path == NULL || path->val == NULL || path->tok_type != str_t) return false;
+    if (path == NULL || path->val == NULL || path->tok_type != ident_tok) return false;
     char *p = malloc(sizeof(1 + path->len));
     strncpy(p, path->val, path->len);
     p[path->len] = '\0';
@@ -27,7 +27,7 @@ void exec_path(PathNode *new_path, PathNode *path) {
     for (int i = 0; i < path->n_paths; ++i) {
         path->paths[i] = malloc(sizeof(Token));
         path->paths[i]->len = new_path->paths[i]->len;
-        path->paths[i]->tok_type = str_t;
+        path->paths[i]->tok_type = ident_tok;
         path->paths[i]->val = malloc(path->paths[i]->len);
         strncpy(path->paths[i]->val, new_path->paths[i]->val, path->paths[i]->len);
     }
