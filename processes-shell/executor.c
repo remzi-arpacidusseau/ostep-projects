@@ -131,5 +131,19 @@ void exec_command(CommandNode *cmd_node, PathNode *path) {
 
 
 void exec_parallel(ParallelNode *parallel_node, PathNode *path) {
-    exec_command(parallel_node->left, path);
+    if (parallel_node->right) {
+        pid_t pid = fork();
+        if (!pid) {  // child
+            exec_command(parallel_node->left, path);
+            exit(0);
+        } else {  // parent
+            exec_parallel(parallel_node->right, path);
+
+            int wstatus;
+            if (waitpid(pid, &wstatus, 0) == -1) exit(1);
+            // if (!WIFEXITED(wstatus)) exit(WEXITSTATUS(wstatus));
+        }
+    } else {
+        exec_command(parallel_node->left, path);
+    }
 }

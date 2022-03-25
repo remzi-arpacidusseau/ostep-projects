@@ -143,9 +143,9 @@ ParallelNode *parse_parallel(size_t len, Token** toks) {
         }
         ++toks;
         --len;
-        if (len > 1) {
-            parallel_node->right = parse_parallel(len, toks);
-        }
+        parallel_node->right = parse_parallel(len, toks);
+    } else {
+        parallel_node->right = NULL;
     }
 
     return parallel_node;

@@ -21,7 +21,7 @@ int tokenize(size_t len, char *line, Token **toks) {
             tok_size = 1;
             tok_type = ampand_tok;
         } else {
-            tok_size = strcspn(line, " \n>");
+            tok_size = strcspn(line, " \n>&");
             if (tok_size == 4 && !strncmp(line, "exit", 4)) {
                 tok_type = exit_tok;
             } else if (tok_size == 2 && !strncmp(line, "cd", 2)) {
