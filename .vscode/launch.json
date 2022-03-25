@@ -26,10 +26,10 @@
                     "text": "-gdb-set disassembly-flavor intel",
                     "ignoreFailures": true
                 },
-                {
-                    "description": "Set which process to follow after a fork",
-                    "text": "-gdb-set follow-fork-mode child"
-                },
+                // {
+                //     "description": "Set which process to follow after a fork",
+                //     "text": "-gdb-set follow-fork-mode child"
+                // },
             ],
             "preLaunchTask": "C/C++: gcc build active file",
             "miDebuggerPath": "/usr/bin/gdb"
