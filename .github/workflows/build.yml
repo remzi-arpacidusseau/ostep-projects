@@ -1,0 +1,16 @@
+name: build
+
+on:
+  workflow_dispatch:
+    branches: dev
+  
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: compile
+      run: | 
+        cd processes-shell
+        gcc -o wish wish.c -Wall
+        ./test-wish.sh
