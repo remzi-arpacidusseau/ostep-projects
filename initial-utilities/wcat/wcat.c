@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
         char buffer[1000];
         FILE *f = fopen(filename, "r");
         if (f == NULL) {
-            printf("\nwcat: cannot open file\n");
+            printf("wcat: cannot open file\n");
             return 1;
         }
 
