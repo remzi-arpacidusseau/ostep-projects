@@ -1,4 +1,4 @@
-
+abc
 In this directory, you should write the program `wgrep.c` and compile it into
 the binary `wgrep` (e.g., `gcc -o wgrep wgrep.c -Wall -Werror`).
 
