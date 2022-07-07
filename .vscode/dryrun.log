@@ -1,4 +1,4 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/kyopa/CS-5377'
 make: Leaving directory '/home/kyopa/CS-5377'
  

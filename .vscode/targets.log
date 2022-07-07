@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jul  6 12:42:13 2022
+# Make data base, printed on Thu Jul  7 13:35:50 2022
 
 # Variables
 
@@ -73,7 +71,7 @@ LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 LC_NAME = fi_FI.UTF-8
 # environment
-VSCODE_CWD = /home/kyopa/CS-5377
+VSCODE_CWD = /home/kyopa/C-programming
 # environment
 XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
 # default
@@ -83,7 +81,7 @@ PATH = /home/kyopa/.nvm/versions/node/v16.13.2/bin:/usr/local/sbin:/usr/local/bi
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/kyopa-VirtualBox:@/tmp/.ICE-unix/1294,unix/kyopa-VirtualBox:/tmp/.ICE-unix/1294
+SESSION_MANAGER = local/kyopa-VirtualBox:@/tmp/.ICE-unix/1284,unix/kyopa-VirtualBox:/tmp/.ICE-unix/1284
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -123,7 +121,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 1417
+SSH_AGENT_PID = 1404
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # environment
@@ -165,7 +163,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-747952b7-c26e-48f8-b603-8f5e46756896.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-c4b130c7-de05-4353-a948-4e689673fdc4.sock
 # environment
 XDG_SESSION_ID = c1
 # environment
@@ -209,8 +207,6 @@ GDK_BACKEND = x11
 # environment
 LC_PAPER = fi_FI.UTF-8
 # environment
-NO_AT_BRIDGE = 1
-# environment
 QT_ACCESSIBILITY = 1
 # default
 MAKEFILES := 
@@ -243,9 +239,9 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 2655
+VSCODE_PID = 4366
 # variable set hash-table stats:
-# Load=116/1024=11%, Rehash=0, Collisions=16/138=12%
+# Load=115/1024=11%, Rehash=0, Collisions=16/137=12%
 
 # Pattern-specific Variable Values
 
@@ -253,9 +249,9 @@ VSCODE_PID = 2655
 
 # Directories
 
-# . (device 2053, inode 1279605): 20 files, no impossibilities.
+# . (device 2053, inode 1279605): 22 files, no impossibilities.
 
-# 20 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -280,9 +276,11 @@ Makefile:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
+ 
+make: *** No rule to make target 'all'.  Stop.
+
 #  File does not exist.
 #  File has been updated.
- 
 #  Failed to be updated.
 
 # Not a target:
@@ -306,12 +304,12 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 28 / storage = 373 B / avg = 13 B
-# current buf: size = 8162 B / used = 373 B / count = 28 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 30 / storage = 385 B / avg = 12 B
+# current buf: size = 8162 B / used = 385 B / count = 30 / avg = 12 B
 
-# strcache performance: lookups = 31 / hit rate = 9%
+# strcache performance: lookups = 33 / hit rate = 9%
 # hash-table stats:
-# Load=28/8192=0%, Rehash=0, Collisions=1/31=3%
-# Finished Make data base on Wed Jul  6 12:42:13 2022
+# Load=30/8192=0%, Rehash=0, Collisions=1/33=3%
+# Finished Make data base on Thu Jul  7 13:35:50 2022
 
  
