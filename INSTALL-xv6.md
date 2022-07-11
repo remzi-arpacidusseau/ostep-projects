@@ -135,4 +135,80 @@ Now, time to go do the projects!
 
 ## Linux
 
-TBD.
+Summary of the commands to install xv6 on Linux:
+
+```
+sudo apt update
+sudo apt install qemu
+git clone git://github.com/mit-pdos/xv6-public.git
+make
+make qemu-nox
+```
+
+Here are the steps:
+
+### Step 1 - Install qemu:
+```
+sudo apt install qemu
+```
+If you have 64 bit OS there is a chance Makefile will not be able to find qemu. In that case you should edit the Makefile at line 54 and add the following code:
+```
+QEMU = qemu-system-x86_64
+```
+
+### Step 2 - Install xv6:
+```
+git clone https://github.com/mit-pdos/xv6-public
+cd xv6-public/
+```
+
+### Step 3 - Compile xv6:
+```
+make
+```
+
+### Step 4 - Compile and run the emulator qemu:
+```
+make qemu-nox
+```
+If you get an error saying: `Couldn't find a working QEMU executable`, follow the steps below
+
+Run the following grep command to verify that your processor supports hardware virtualization
+```
+grep -Eoc '(vmx|svm)' /proc/cpuinfo
+```
+
+If the CPU supports hardware virtualization, the command will output a number greater than zero, which is the number of the CPU cores. Otherwise, if the output is 0 it means that the CPU doesn’t support hardware virtualization.
+
+Run the following command to install KVM and additional virtualization management packages:
+```
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst virt-manager
+```
+
+- qemu-kvm - software that provides hardware emulation for the KVM hypervisor.
+
+- libvirt-daemon-system - configuration files to run the libvirt daemon as a system service.
+
+- libvirt-clients - software for managing virtualization platforms.
+
+- bridge-utils - a set of command-line tools for configuring ethernet bridges.
+
+- virtinst - a set of command-line tools for creating virtual machines.
+
+- virt-manager - an easy-to-use GUI interface and supporting command-line utilities for managing virtual machines through libvirt.
+
+
+To be able to create and manage virtual machines, you’ll need to add your user to the “libvirt” and “kvm” groups. To do that, enter:
+```
+sudo usermod -aG libvirt $USER
+sudo usermod -aG kvm $USER
+```
+
+After that you are all set, to run the emulator:
+```
+make qemu-nox
+```
+
+
+
+
