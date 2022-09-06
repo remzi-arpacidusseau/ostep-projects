@@ -1,54 +1,44 @@
 
-# Memcached
+# Introduction
 
-Memcached is a high performance multithreaded event-based key/value cache
-store intended to be used in a distributed system.
+**Before beginning:** Read this [lab tutorial](http://pages.cs.wisc.edu/~remzi/OSTEP/lab-tutorial.pdf); it has some useful tips for programming in the C environment.
 
-See: https://memcached.org/about
+This project is a warm-up for operating systems class. It serves to get you into the mindset of a C programmer, something you will become quite familiar with over the next few months. It also gets you familliar with poking around large code bases, which is useful post-school. Finally, it's fun!
 
-A fun story explaining usage: https://memcached.org/tutorial
+The basic idea is to work with [memcached](https://memcached.org/), a widely-used networked caching system. Many distributed services in the world are built on top of it.
 
-If you're having trouble, try the wiki: https://memcached.org/wiki
+You'll be adding a small feature to `memcached` for this project. Read below for details!
 
-If you're trying to troubleshoot odd behavior or timeouts, see:
-https://memcached.org/timeouts
+# Background
 
-https://memcached.org/ is a good resource in general. Please use the mailing
-list to ask questions, github issues aren't seen by everyone!
 
-## Dependencies
 
-* libevent - https://www.monkey.org/~provos/libevent/ (libevent-dev)
-* libseccomp (optional, experimental, linux) - enables process restrictions for
-  better security. Tested only on x86-64 architectures.
-* openssl (optional) - enables TLS support. need relatively up to date
-  version. pkg-config is needed to find openssl dependencies (such as -lz).
 
-## Environment
 
-Be warned that the -k (mlockall) option to memcached might be
-dangerous when using a large cache. Just make sure the memcached machines
-don't swap.  memcached does non-blocking network I/O, but not disk.  (it
-should never go to disk, or you've lost the whole point of it)
 
-## Build status
+# Feature
 
-See https://build.memcached.org/ for multi-platform regression testing status.
 
-## Bug reports
+## Tips
 
-Feel free to use the issue tracker on github.
+Here are some tips:
 
-**If you are reporting a security bug** please contact a maintainer privately.
-We follow responsible disclosure: we handle reports privately, prepare a
-patch, allow notifications to vendor lists. Then we push a fix release and your
-bug can be posted publicly with credit in our release notes and commit
-history.
+- **Start small, and get things working incrementally.** 
 
-## Website
+- **Testing is critical.** A great programmer we once knew said you have to
+write five to ten lines of test code for every line of code you produce;
+testing your code to make sure it works is crucial. Write tests to see if your
+code handles all the cases you think it should. Be as comprehensive as you can
+be. Of course, when grading your projects, we will be. Thus, it is better if
+you find your bugs first, before we do.
 
-* https://www.memcached.org
+- **Keep old versions around.** Keep copies of older versions of your
+program around, as you may introduce bugs and not be able to easily
+undo them. A simple way to do this is to keep copies around, by
+explicitly making copies of the file at various points during
+development. For example, let's say you get a simple version of `kv.c`
+working (say, that just reads in the file); type `cp kv.c kv.v1.c` to
+make a copy into the file `kv.v1.c`. More sophisticated
+developers use version control systems such as git; such a tool is
+well worth learning, so do it! 
 
-## Contributing
-
-See https://github.com/memcached/memcached/wiki/DevelopmentRepos
