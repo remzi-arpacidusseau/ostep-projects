@@ -30,6 +30,40 @@ prompt> make
 
 At this point, a lot of stuff will happen to build `memcached`, but hopefully it just works and you are ready to try it out!
 
+## Run
+
+Now we will run `memcached`. For this, it is best to have two terminal windows open; we will assume these are on the same computer (they can be on different ones - this is a network server after all! - but then the instructions will be slightly different).
+
+In the first terminal, we will run `memcached`. To do so, from the build directory, type the following:
+
+```sh
+prompt> ./memcached
+```
+
+To stop running it at any time, just hit `control c` (i.e., hold down the `control` key and hit the `c` key). This will send a `SIGINT` signal to `memcached`, which it will catch but in response it will exit. Try it!
+
+Now, let's assume that `memcached` is running. In the second terminal window, we will attach to it and put some data into it, using a simple `telnet` session (if you don't know what `telnet` is, look it up!). We can do so as follows:
+
+```sh
+telnet 127.0.0.1 11211
+```
+
+If this is successful, it will say something like this:
+```
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+```
+
+If not, it will say:
+```
+Trying 127.0.0.1...
+telnet: connect to address 127.0.0.1: Connection refused
+telnet: Unable to connect to remote host
+```
+(in which case, `memcached` probably isn't running).
+
+Hopefully, it works! If so, we're now ready to type something into this second window, to send `memcached` a command. How exciting!
 
 
 
