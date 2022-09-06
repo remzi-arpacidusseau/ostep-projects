@@ -48,20 +48,22 @@ Now, let's assume that `memcached` is running. In the second terminal window, we
 telnet 127.0.0.1 11211
 ```
 
-If this is successful, it will say something like this:
+This command line tells `telnet` to connect to the machine specified by IP address `127.0.0.1` (which is just a way to refer to the machine you're running on, or, in networking parlance, `localhost`) and a port number `11211` which is the default port that `memcached` binds to. Port numbers, for those not familiar, are there to allow multiple different programs, running on the same machine, to be communicating at the same time. You can think of it (approximately) like the IP address tells you which machine you are communicating with, and the port tells you which process running on that machine to send the message to. If you don't understand all of this, it's ok! You don't really need to for this project.
+
+If this effort is successful, you will see:
 ```
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
 ```
 
-If not, it will say:
+If not, you will see:
 ```
 Trying 127.0.0.1...
 telnet: connect to address 127.0.0.1: Connection refused
 telnet: Unable to connect to remote host
 ```
-(in which case, `memcached` probably isn't running).
+(in which case, `memcached` probably isn't running; so, run it!).
 
 Hopefully, it works! If so, we're now ready to type something into this second window, to send `memcached` a command. How exciting!
 
@@ -82,16 +84,47 @@ STORED
 
 which means you have successfully stored a value into your running server. Well done!
 
+Now, let's look up the key. To do so, we just issue a get command, by typing:
 
+```
+get firstname
+```
 
+If successful, this will output:
+```
+VALUE firstname 0 5
+Remzi
+END
+```
 
+which is what we stored. That's it!
 
+Now, let's end the `telnet` session. You can do so by typing `quit`.
 
+```
+quit
+Connection closed by foreign host.
+prompt>
+```
 
+`memcached` has many other commands, including ones that work only on integer values. For example, if you store the value `9` into the firstname key, you can not only look it up with get but also do math commands like `incr` to increment it or `decr` to decrement it. For example:
 
+```
+set x 0 3600 1
+9
+STORED
+incr x 1
+10
+decr x 2
+8
+quit
+```
 
+A little weirdly, `x` here is stored as a string, but converted to an integer to do this math and then stored back as a string.
 
 # Feature
+
+Now, 
 
 
 ## Tips
