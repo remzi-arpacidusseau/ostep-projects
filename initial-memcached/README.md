@@ -124,29 +124,21 @@ A little weirdly, `x` here is stored as a string, but converted to an integer to
 
 # Feature
 
-Now, 
+Now, we get to the feature set to add. It is small but to implement it you will have to understand the `memcached` code a bit. The features to add:
 
+- A `mult` command. This should look like `incr` and `decr` but do a multiply instead, e.g., if `x` was `10` to begin, `mult x 2` should result in `x` being set to `20`.
+
+- A `div` command. Same as above, but performing integer division, e.g., if `x` was `10` to begin, `div x 2` should result in `x` being set to `5`.
+
+That's it! 
 
 ## Tips
 
 Here are some tips:
 
-- **Start small, and get things working incrementally.** 
+- *Understand the `incr` code path first*. Do this by finding where in the code an `incr` text command is processed (`grep` for `incr` in `*.c` files is a good place to start) and then read the code. Reading and understanding code is the first key step!
 
-- **Testing is critical.** A great programmer we once knew said you have to
-write five to ten lines of test code for every line of code you produce;
-testing your code to make sure it works is crucial. Write tests to see if your
-code handles all the cases you think it should. Be as comprehensive as you can
-be. Of course, when grading your projects, we will be. Thus, it is better if
-you find your bugs first, before we do.
+- *Do little changes to test your understanding*. For example, make some changes to the `incr` command (not because you need to) just to see if your changes work. For example, change `incr` to act like `decr` and then see if your change does what you expect.
 
-- **Keep old versions around.** Keep copies of older versions of your
-program around, as you may introduce bugs and not be able to easily
-undo them. A simple way to do this is to keep copies around, by
-explicitly making copies of the file at various points during
-development. For example, let's say you get a simple version of `kv.c`
-working (say, that just reads in the file); type `cp kv.c kv.v1.c` to
-make a copy into the file `kv.v1.c`. More sophisticated
-developers use version control systems such as git; such a tool is
-well worth learning, so do it! 
+- *Determine what you can copy to make `mult` and `div` work*. Much of the code will be similar to `incr` and `decr`. What can you re-use to make it as easy as possible to realize the new features?
 
