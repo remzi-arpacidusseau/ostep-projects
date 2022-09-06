@@ -65,6 +65,24 @@ telnet: Unable to connect to remote host
 
 Hopefully, it works! If so, we're now ready to type something into this second window, to send `memcached` a command. How exciting!
 
+Let's put a key/value pair into `memcached` and then retrieve it. To put a value in, we type the following into the active `telnet` session:
+
+```
+set firstname 0 3600 5
+Remzi
+```
+
+The important parts are the name of the key (`firstname`), the length parameter (`5`) which says how long the value will be, the actual value itself (in this case, `Remzi`). There are two other parameters which we will basically ignore but they are a flag (`0`) to associate with the key and an expiry (`3600`) which is the number of seconds to keep this key/value pair in the cache.
+
+Once you have typed in those things and hit `return` (actually you have hit `return` twice, once after the `5` and once after `Remzi`), if successful, `memcached` will print out the following:
+
+```
+STORED
+```
+
+which means you have successfully stored a value into your running server. Well done!
+
+
 
 
 
