@@ -11,6 +11,29 @@ You'll be adding a small feature to `memcached` for this project. Read below for
 
 # Background
 
+## Download and Build
+
+To start using `memcached`, first you have to download it. This is readily done as follows:
+
+```sh
+prompt> curl -O http://www.memcached.org/files/memcached-1.6.17.tar.gz
+```
+
+Now you have obtained the tar'd and gzip'd source code. To build `memcached`, just follow these steps:
+
+```sh
+prompt> tar xvzf memcached-1.6.17.tar.gz
+prompt> cd memcached-1.6.17
+prompt> ./configure
+prompt> make
+```
+
+At this point, a lot of stuff will happen to build `memcached`, but hopefully it just works and you are ready to try it out!
+
+
+
+
+
 
 
 
