@@ -126,9 +126,9 @@ A little weirdly, `x` here is stored as a string, but converted to an integer to
 
 Now, we get to the feature set to add. It is small but to implement it you will have to understand the `memcached` code a bit. The features to add:
 
-- A `mult` command. This should look like `incr` and `decr` but do a multiply instead, e.g., if `x` was `10` to begin, `mult x 2` should result in `x` being set to `20`.
+- A `mult` command. This should look like `incr` and `decr` but do a multiply instead, e.g., if `x` was `10` to begin, `mult x 2` should result in `x` being set to `20` (this is standard C integer multiplication, which is implemented wit the `*` operator). The first argument should be an existing key, and the second argument an integer; anything else should fail in the same manner that `incr` fails. 
 
-- A `div` command. Same as above, but performing integer division, e.g., if `x` was `10` to begin, `div x 2` should result in `x` being set to `5`.
+- A `div` command. Same as above, but performing integer division, e.g., if `x` was `11` to begin, `div x 2` should result in `x` being set to `5` (this is standard C integer division, which is implemented with the `/` operator). The first argument should be an existing key, and the second argument an integer; anything else should fail in the same manner that `incr` fails. 
 
 That's it! 
 
@@ -141,4 +141,6 @@ Here are some tips:
 - *Do little changes to test your understanding*. For example, make some changes to the `incr` command (not because you need to) just to see if your changes work. For example, change `incr` to act like `decr` and then see if your change does what you expect.
 
 - *Determine what you can copy to make `mult` and `div` work*. Much of the code will be similar to `incr` and `decr`. What can you re-use to make it as easy as possible to realize the new features?
+
+
 
