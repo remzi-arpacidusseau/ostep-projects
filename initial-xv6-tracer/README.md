@@ -74,6 +74,11 @@ the tracing. Then finally figure out how to do the tracing.
 
 **cprintf()** can be used in the kernel to print out debugging info.
 
+You may need to implement some routines in the kernel, such as **strcmp()**
+and **strcpy()**, to implement these system calls. You can always copy
+the definitions of these routines from **ulib.c** (this is where they
+are defined for user processes).
+
 Using gdb (the debugger) may be helpful in understanding code, doing code
 traces, and is helpful for later projects too. Get familiar with this fine
 tool!
