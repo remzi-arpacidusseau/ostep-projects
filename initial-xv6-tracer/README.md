@@ -38,14 +38,14 @@ int trace(const char *pathname)
 int getcount(void)
 ```
 
-The first, **trace()**, simply records the pathname specified by the parameter **pathname**, into
-some known location (e.g., an array of characters called **trace_pathname**). 
+The first, `trace()`, simply records the pathname specified by the parameter `pathname`, into
+some known location (e.g., an array of characters called `trace_pathname`). 
 It should also reset the trace counter to 0, and enable tracing (i.e., set some kernel
-internal integer, such as **trace_enabled**, to 1). 
+internal integer, such as `trace_enabled`, to 1). 
 
-The second, **getcount()**, returns the value of a counter (perhaps called **trace_counter** 
+The second, `getcount()`, returns the value of a counter (perhaps called `trace_counter`
 or something like that). This counter should be incremented every time any process calls the
-**open()** system call if the pathname passed to open matches the pathname being traced. 
+`open()` system call if the pathname passed to open matches the pathname being traced. 
 
 ## Tips
 
@@ -55,12 +55,12 @@ unpack xv6, build it, and modify it to make this project successful.
 
 One good way to start hacking inside a large code base is to find something
 similar to what you want to do and to carefully copy/modify that. Here, you
-should find some other system call, like **getpid()** (or any other simple
+should find some other system call, like `getpid()` (or any other simple
 call). Copy it in all the ways you think are needed, and then modify it to do
 what you need.
 
-Most of your code should be in the file **sysfile.c**, which is where the
-system call **open()** is defined (it's actually called **sys_open()** inside
+Most of your code should be in the file `sysfile.c`, which is where the
+system call `open()` is defined (it's actually called `sys_open()` inside
 the kernel). Thus, you should add your two system call definitions in here
 (of course, other code has to change in order to add those two system calls).
 
@@ -69,14 +69,14 @@ be a whole lot of code added.
 
 Start slowly. For example, at first, just make very simple system calls
 that just return the value 0 (but don't do anything new). Then add a trace
-counter and have **getcount()** return its value, but don't yet implement
+counter and have `getcount()` return its value, but don't yet implement
 the tracing. Then finally figure out how to do the tracing.
 
-**cprintf()** can be used in the kernel to print out debugging info.
+`cprintf()` can be used in the kernel to print out debugging info.
 
-You may need to implement some routines in the kernel, such as **strcmp()**
-and **strcpy()**, to implement these system calls. You can always copy
-the definitions of these routines from **ulib.c** (this is where they
+You may need to implement some routines in the kernel, such as `strcmp()`
+and `strcpy()`, to implement these system calls. You can always copy
+the definitions of these routines from `ulib.c` (this is where they
 are defined for user processes).
 
 Using gdb (the debugger) may be helpful in understanding code, doing code
