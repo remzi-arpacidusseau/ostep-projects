@@ -9,9 +9,9 @@ understandable OS and thus an excellent focus for simple projects.
 
 This first project is just a warmup, and thus relatively light on work. The
 goal of the project is simple: to add some system calls to xv6. The first
-system call is called **trace(const char *pathname)** and the second is **getcount()**.
+system call is called `trace(const char *pathname)` and the second is `getcount()`.
 The first simply tells the OS to track how many times a particular file,
-specified by the name **pathname**, has been opened. The second returns
+specified by the name `pathname`, has been opened. The second returns
 that count. 
 
 ## Background
