@@ -41,11 +41,16 @@ int getcount(void)
 The first, `trace()`, simply records the pathname specified by the parameter `pathname`, into
 some known location (e.g., an array of characters called `trace_pathname`). 
 It should also reset the trace counter to 0, and enable tracing (i.e., set some kernel
-internal integer, such as `trace_enabled`, to 1). 
+internal integer, such as `trace_enabled`, to 1).
+
+It should return 0 upon success, and -1 upon failure (e.g., if someone passes in a null pointer).
+Note: assume for simplicity that the max pathname is 256 bytes. Also, it is ok to trace
+a file that does not yet exist, so no need to check that.
 
 The second, `getcount()`, returns the value of a counter (perhaps called `trace_counter`
 or something like that). This counter should be incremented every time any process calls the
-`open()` system call if the pathname passed to open matches the pathname being traced. 
+`open()` system call if the pathname passed to open matches the pathname being traced.
+If tracing has not yet been enabled, it should simply return 0.
 
 ## Tips
 
