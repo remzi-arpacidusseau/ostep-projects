@@ -52,6 +52,9 @@ or something like that). This counter should be incremented every time any proce
 `open()` system call if the pathname passed to open matches the pathname being traced.
 If tracing has not yet been enabled, it should simply return 0.
 
+The trace count is *global*, which means there is one trace counter that gets enabled,
+and it traces activity across all processes.
+
 ## Tips
 
 Watch this [discussion video](https://www.youtube.com/watch?v=vR6z2QGcoo8) --
