@@ -13,7 +13,7 @@ The goals of this project are:
 
 Useful reading from [OSTEP](http://ostep.org) includes:
 - [Intro to threads](http://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf)
-- [Using locks](http://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf)
+- [Using locks](https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf)
 - [Producer-consumer relationships](http://pages.cs.wisc.edu/~remzi/OSTEP/threads-cv.pdf)
 - [Server concurrency architecture](http://pages.cs.wisc.edu/~remzi/OSTEP/threads-events.pdf)
 
