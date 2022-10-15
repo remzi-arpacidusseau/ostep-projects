@@ -1,0 +1,3 @@
+**/tests-out/*
+.vscode/settings.json
+concurrency-bank/bank*
