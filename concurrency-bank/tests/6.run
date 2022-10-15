@@ -1,1 +1,1 @@
-./bank null no_transactions.txt
+./bank 300 null no_transactions.txt
