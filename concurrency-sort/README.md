@@ -42,6 +42,8 @@ fixed-size, and are each 100 bytes (which includes the key).
 A successful sort will read all the records into memory from the input
 file, sort them, and then write them out to the output file.
 
+You also have to force writes to disk by calling `fsync()` on the output file before finishing.
+
 ## Considerations
 
 Doing so effectively and with high performance will require you to address (at
