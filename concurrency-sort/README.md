@@ -44,6 +44,9 @@ file, sort them, and then write them out to the output file.
 
 You also have to force writes to disk by calling `fsync()` on the output file before finishing.
 
+You can assume that this is a one-pass sort, i.e., the data can fit
+into memory. You do not have to implement a multi-pass sort.
+
 ## Considerations
 
 Doing so effectively and with high performance will require you to address (at
