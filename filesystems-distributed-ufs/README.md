@@ -26,7 +26,7 @@ your file server will link with it and call its various routines.
 
 Your on-disk file system structures should roughly follow that of the
 very simple file system discussed
-[here](https://pages.cs.wisc.edu/~remzi/OSTEP/file-implement.pdf). On-disk,
+[here](https://pages.cs.wisc.edu/~remzi/OSTEP/file-implementation.pdf). On-disk,
 the structures should be as follows:
 - A single block (4KB) super block
 - An inode bitmap (can be one or more 4KB blocks, depending on the number of inodes)
@@ -154,7 +154,7 @@ timeout of some kind (default: five second timeout).
 ## Relevant Chapters
 
 Read these:
-- [File System Implementation](https://pages.cs.wisc.edu/~remzi/OSTEP/file-implement.pdf)
+- [File System Implementation](https://pages.cs.wisc.edu/~remzi/OSTEP/file-implementation.pdf)
 - [Distributed Systems](https://pages.cs.wisc.edu/~remzi/OSTEP/dist-intro.pdf)
 - [Distributed File System: NFS](https://pages.cs.wisc.edu/~remzi/OSTEP/dist-nfs.pdf)
 
