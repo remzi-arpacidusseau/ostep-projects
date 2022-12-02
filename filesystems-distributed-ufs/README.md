@@ -24,10 +24,10 @@ your file server will link with it and call its various routines.
 
 ## On-Disk File System: A Basic Unix File System
 
-Your on-disk file system structures should roughly follow that of the
+The on-disk file system structures follow that of the
 very simple file system discussed
 [here](https://pages.cs.wisc.edu/~remzi/OSTEP/file-implementation.pdf). On-disk,
-the structures should be as follows:
+the structures are as follows:
 - A single block (4KB) super block
 - An inode bitmap (can be one or more 4KB blocks, depending on the number of inodes)
 - A data bitmap (can be one or more 4KB blocks, depending on the number of data blocks)
@@ -60,7 +60,9 @@ It is pretty self-explanatory and can be found
 When booting off of an existing image, your server should read in the
 superblock, bitmaps, and inode table, and keep in-memory versions of
 these. When writing to the image, you should update these on-disk
-structures accordingly. 
+structures accordingly.
+
+Importantly, you cannot change the file-system on-disk format. 
 
 ## Client library
 
