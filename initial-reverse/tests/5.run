@@ -1,1 +1,1 @@
-./reverse tests/5.in tests-out/5.in
+./reverse tests/5.in tests/5.in
