@@ -143,7 +143,7 @@ int main(int argc, char *argv[]) {
 
     inode_block itable;
     itable.inodes[0].type = UFS_DIRECTORY;
-    itable.inodes[0].size = sizeof(dir_ent_t); // in bytes
+    itable.inodes[0].size = 2 * sizeof(dir_ent_t); // in bytes
     itable.inodes[0].direct[0] = s.data_region_addr;
     for (i = 1; i < DIRECT_PTRS; i++)
 	itable.inodes[0].direct[i] = -1;
