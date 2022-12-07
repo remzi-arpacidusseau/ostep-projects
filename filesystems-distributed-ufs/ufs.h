@@ -29,6 +29,8 @@ typedef struct __super {
     int inode_region_len;  // in blocks
     int data_region_addr;  // block address (in blocks)
     int data_region_len;   // in blocks
+    int num_inodes;        // just the number of inodes
+    int num_data;          // and data blocks...
 } super_t;
 
 

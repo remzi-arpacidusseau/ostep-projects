@@ -62,16 +62,22 @@ int main(int argc, char *argv[]) {
     // presumed: block 0 is the super block
     super_t s;
 
+    // totals
+    s.num_inodes = num_inodes;
+    s.num_data = num_data;
+
     // inode bitmap
+    int bits_per_block = (8 * UFS_BLOCK_SIZE); // remember, there are 8 bits per byte
+
     s.inode_bitmap_addr = 1;
-    s.inode_bitmap_len = num_inodes / UFS_BLOCK_SIZE;
-    if (num_inodes % UFS_BLOCK_SIZE != 0)
+    s.inode_bitmap_len = num_inodes / bits_per_block;
+    if (num_inodes % bits_per_block != 0)
 	s.inode_bitmap_len++;
 
     // data bitmap
     s.data_bitmap_addr = s.inode_bitmap_addr + s.inode_bitmap_len;
-    s.data_bitmap_len = num_data / UFS_BLOCK_SIZE;
-    if (num_data % UFS_BLOCK_SIZE != 0)
+    s.data_bitmap_len = num_data / bits_per_block;
+    if (num_data % bits_per_block != 0)
 	s.data_bitmap_len++;
 
     // inode table
