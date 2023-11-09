@@ -7,6 +7,8 @@ consistent. When it isn't, the checker takes steps to repair the problems it
 sees; however, you won't be doing any repairs to keep this project a little
 simpler. 
 
+Patrick Sharp created a better version of this project [here](https://github.com/patrick-sharp/ostep-projects/tree/master/filesystems-checker); when we get unlazy we will incorporate what he has done here. Thanks Patrick!
+
 ## Background
 
 Some basic background about file system consistency is found here:
