@@ -1,5 +1,5 @@
 path /bin tests
-p5.sh > /tmp/output22 & p4.sh > /tmp/output22
-cat /tmp/output22
-rm -f /tmp/output22
+p5.sh > output22 & p4.sh > output22
+cat output22
+rm -f output22
 exit
