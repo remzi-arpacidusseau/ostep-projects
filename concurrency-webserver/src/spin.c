@@ -34,19 +34,19 @@ int main(int argc, char *argv[]) {
     while ((get_seconds() - t1) < spin_for)
 	sleep(1);
     double t2 = get_seconds();
-    
+
     /* Make the response body */
     char content[MAXBUF];
-    sprintf(content, "<p>Welcome to the CGI program (%s)</p>\r\n", buf);
-    sprintf(content, "%s<p>My only purpose is to waste time on the server!</p>\r\n", content);
-    sprintf(content, "%s<p>I spun for %.2f seconds</p>\r\n", content, t2 - t1);
-    
+    sprintf(content, "<p>Welcome to the CGI program (%s)</p>\r\n"
+                     "<p>My only purpose is to waste time on the server!</p>\r\n"
+                     "<p>I spun for %.2f seconds</p>\r\n", buf, t2 - t1);
+
     /* Generate the HTTP response */
     printf("Content-Length: %lu\r\n", strlen(content));
     printf("Content-Type: text/html\r\n\r\n");
     printf("%s", content);
     fflush(stdout);
-    
+
     exit(0);
 }
 
