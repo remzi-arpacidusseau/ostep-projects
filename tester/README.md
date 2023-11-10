@@ -1,4 +1,3 @@
-
 The `run-tests.sh` script is called by various testers to do the work of
 testing. Each test is actually fairly simple: it is a comparison of standard
 output and standard error, as per the program specification.
@@ -12,6 +11,7 @@ tests is easy; just add the relevant files to the tests directory at the
 lowest available number.
 
 The files needed to describe a test number `n` are:
+
 - `n.rc`: The return code the program should return (usually 0 or 1)
 - `n.out`: The standard output expected from the test
 - `n.err`: The standard error expected from the test
@@ -20,7 +20,7 @@ The files needed to describe a test number `n` are:
 - `n.pre` (optional): Code to run before the test, to set something up
 - `n.post` (optional): Code to run after the test, to clean something up
 
-There is also a single file called `pre` which gets run once at the 
+There is also a single file called `pre` which gets run once at the
 beginning of testing; this is often used to do a more complex build
 of a code base, for example. To prevent repeated time-wasting pre-test
 activity, suppress this with the `-s` flag (as described below).
@@ -29,12 +29,13 @@ In most cases, a wrapper script is used to call `run-tests.sh` to do the
 necessary work.
 
 The options for `run-tests.sh` include:
-* `-h` (the help message)
-* `-v` (verbose: print what each test is doing)
-* `-t n` (run only test `n`)
-* `-c` (continue even after a test fails)
-* `-d` (run tests not from `tests/` directory but from this directory instead)
-* `-s` (suppress running the one-time set of commands in `pre` file)
+
+- `-h` (the help message)
+- `-v` (verbose: print what each test is doing)
+- `-t n` (run only test `n`)
+- `-c` (continue even after a test fails)
+- `-d` (run tests not from `tests/` directory but from this directory instead)
+- `-s` (suppress running the one-time set of commands in `pre` file)
 
 There is also another script used in testing of `xv6` projects, called
 `run-xv6-command.exp`. This is an
@@ -43,5 +44,8 @@ qemu emulator and runs the relevant testing command in the xv6 environment
 before automatically terminating the test. It is used by the `run-tests.sh`
 script as described above and thus not generally called by users directly.
 
-
-
+The `xv6-edit-makefile.sh` script requires the command line utility `gawk`.
+Unfortunately, `gawk` does not come pre-installed on recent MacOS distributions.
+To install `gawk` on MacOS, first install [homebrew](https://brew.sh/)and type `brew install gawk`.
+Brew may throw an error, typically related to file permissions - if this occurs,
+simply re-run the command in sudo mode.
