@@ -133,6 +133,28 @@ CPUS := 1
 Now, time to go do the projects!
 
 
-## Linux
+## Linux distributions
 
-TBD.
+*[Prerequisite for Makefile script]* 
+- **Perl programming language** must be installed. https://learn.perl.org/installing/unix_linux.html
+ 
+**QEMU package** installation for simulating x86 architecture hardware:
+- *e.g. Debian package `qemu-system-i386`, which will install `qemu-system-x86_64` command too.*
+   ```sh 
+     sudo apt update -y && sudo apt upgrade -y 
+     sudo apt install -y qemu-system-i386
+   ```
+ - To test QEMU emulator installation:
+   *This will run the emulator with the default BIOS and no OS kernel to boot.*
+   ```sh
+   prompt> qemu-system-x86_64 -nographic
+   ```
+
+**Compile & Run** xv6 code using Makefile: *It will detect the correct gcc cross-compilation toolchain (e.g. `elf32-i386`)*
+```sh
+ make qemu-nox
+```
+
+## Windows 
+Your option is more envolving and time consuming. 
+This would involve install WSL2 (which creates a hyper-v VM running Linux kernel that is integrated into Widnows OS), and then following the instruction for Linux installation. 
