@@ -65,8 +65,8 @@ Sounds easy, right? It should. But there are a few details...
 ## Assumptions and Errors
 
 - **Input is the same as output:** If the input file and output file are the
-same file, you should print out an error message "Input and output file must
-differ" and exit with return code 1.
+same file, you should print out an error message "reverse: input and output
+file must differ" and exit with return code 1.
 
 - **String length:** You may not assume anything about how long a line should
 be. Thus, you may have to read in a very long input line...
@@ -76,7 +76,7 @@ file, i.e., it may be **VERY** long.
 
 - **Invalid files:** If the user specifies an input file or output file, and
 for some reason, when you try to open said file (e.g., `input.txt`) and
-fail, you should print out the following exact error message: `error:
+fail, you should print out the following exact error message: `reverse:
 cannot open file 'input.txt'` and then exit with return code 1 (i.e., call
 `exit(1);`).
 
