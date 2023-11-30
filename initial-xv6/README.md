@@ -29,7 +29,7 @@ thus the book may not match our code base exactly.
 
 ## Your System Call
 
-Your new system call should look have the following return codes and
+Your new system call should look like this and have the following return codes and
 parameters: 
 
 ```c
