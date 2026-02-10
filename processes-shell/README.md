@@ -116,10 +116,11 @@ the user types a command.
 commands (except built-ins). All it does is find those executables in one of
 the directories specified by `path` and create a new process to run them.
 
-To check if a particular file exists in a directory and is executable,
-consider the `access()` system call. For example, when the user types `ls`,
-and when path is set to include both `/bin` and `/usr/bin`, try `access("/bin/ls",
-X_OK)`. If that fails, try "/usr/bin/ls". If that fails too, it is an error.
+To check if a particular file exists in a directory and is executable, consider
+the `access()` system call. For example, when the user types `ls`, and when
+path is set to include both `/bin` and `/usr/bin`, your shell will first try
+`access("/bin/ls", X_OK)`. If that fails, try "/usr/bin/ls". If that fails too,
+it is an error.
 
 Your initial shell path should contain one directory: `/bin`
 
